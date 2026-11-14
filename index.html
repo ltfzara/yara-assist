@@ -3045,6 +3045,22 @@ input:-webkit-autofill,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 40p
  #dashboard>.stats .stat{border-top:0}
  #dashboard>.stats .stat:nth-child(3){border-inline-start:1px solid var(--line)}
 }
+
+/* V8.3 header + account access (desktop) */
+.nav button.active{box-shadow:none}
+.nav button:focus-visible{outline-offset:-2px}
+#dashboard>.stats{grid-template-columns:repeat(2,1fr)}
+@media(min-width:701px){
+ .nav .nav-account{display:flex}
+ .top-actions{gap:8px}
+ .top-actions #shop-select{display:none!important}
+ .top-actions .shop-chip,body.single-shop .shop-chip{display:inline-flex;align-items:center;height:42px;min-width:0;max-width:240px;padding:0 14px;border-radius:10px;background:#fff;border:1px solid var(--line);font-weight:600;font-size:14px}
+ .top-actions .shop-chip:hover{border-color:var(--primary)}
+ .top-actions .help-btn{width:42px;min-width:42px;height:42px;padding:0;border-radius:10px;display:grid;place-items:center;background:transparent;border-color:transparent;color:var(--muted)}
+ .top-actions .help-btn:hover{background:var(--primary2);color:var(--primary)}
+ .top-actions .help-btn .hl{display:none}
+ .top-actions #new-order-btn{height:42px;padding:0 18px;border-radius:10px;box-shadow:none}
+}
 </style>
 </head>
 
@@ -3681,7 +3697,7 @@ input:-webkit-autofill,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 40p
       <div class="acct-user" id="acct-email"></div>
       <div class="acct-label" id="acct-shops-label">فروشگاه</div>
       <div class="acct-shops" id="acct-shops"></div>
-      <div class="acct-actions"><button class="btn secondary" type="button" onclick="startTour(true)">❓ راهنمای استفاده
+      <div class="acct-actions"><button class="btn secondary" type="button" onclick="startTour(true)">راهنمای استفاده
           از یارا</button><button class="btn secondary" type="button"
           onclick="closeAccountSheet();openShopManager()">مدیریت فروشگاه‌ها و افزودن فروشگاه</button><button
           class="btn secondary" type="button" onclick="closeAccountSheet();openProfile()">پروفایل من</button><button
@@ -4249,7 +4265,7 @@ input:-webkit-autofill,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 40p
       { sel: '#customer-tab-leads', page: 'customers', tab: 'leads', title: 'مشتری‌های در حال پیگیری', text: 'هر کسی که در دایرکت درباره محصولت سؤال می‌پرسد، هنوز سفارش قطعی نداده. از همین‌جا با آیدی اینستاگرام ثبتش کن؛ لازم نیست همه اطلاعات را از اول بدانی. هر بار می‌توانی یادداشت تازه‌ای به تاریخچه مکالمه اضافه کنی.' },
       { sel: '.nav [data-page=finance]', title: 'هوش مالی', text: 'اینجا فروش، هزینه‌ها و سود تقریبی کسب‌وکارت را می‌بینی.' },
       { sel: '.nav [data-page=dashboard]', title: 'خانه', text: 'در صفحه خانه فقط کارهای مهم و سفارش‌هایی که نیاز به توجه دارند را دنبال کن.' },
-      { title: 'آماده‌ای!', text: 'هر وقت گیج شدی، دکمه‌ی «❓ راهنما» بالای صفحه را بزن تا این راهنما دوباره نشان داده شود.' }
+      { title: 'آماده‌ای!', text: 'هر وقت گیج شدی، دکمه‌ی «راهنما» بالای صفحه را بزن تا این راهنما دوباره نشان داده شود.' }
     ];
     let tourIdx = 0;
     function tourKey() { return 'yara_tour_done_v2_' + (user?.id || '') }
