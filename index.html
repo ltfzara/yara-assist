@@ -21,7 +21,7 @@
 .auth-tabs button{flex:1;padding:9px;border-radius:8px;background:transparent;color:var(--muted);font-weight:700}
 .auth-tabs button.active{background:#fff;color:var(--primary);box-shadow:0 2px 8px #2221}
 .auth-card label{display:block;font-size:11px;color:#687283;margin:12px 0 6px}.auth-card input{width:100%}
-.auth-note{display:none}.auth-link{display:block;background:transparent;color:var(--primary);font-size:12px;font-weight:700;padding:10px 0 0;text-align:center;width:100%}.auth-hint{font-size:11px;color:var(--muted);line-height:1.9;margin:12px 0 0}.auth-hidden{display:none!important}
+.auth-note{display:none}.auth-link{display:block;background:transparent;color:var(--primary);font-size:12px;font-weight:700;padding:10px 0 0;text-align:center;width:100%}.auth-hint{font-size:12px;color:var(--muted);line-height:1.9;margin:12px 0 0}.auth-hint.error{display:block;color:#b42318;background:#fff1f0;border:1px solid #f2b8b5;border-radius:10px;padding:10px 12px;font-weight:600}.auth-hint.success{display:block;color:#18794e;background:#ecfdf3;border:1px solid #abefc6;border-radius:10px;padding:10px 12px}.auth-hidden{display:none!important}
 .app{display:none}.app.authenticated{display:flex}
 .price-hint{line-height:1.9}.stat strong{font-variant-numeric:tabular-nums}#products .table td,#expenses .table td{vertical-align:middle}@media(max-width:700px){.nav{overflow-x:auto}.nav button{min-width:65px;font-size:10px}.nav .ico{font-size:15px}}
 
@@ -483,6 +483,15 @@ function chooseCalendarDate(greg,holiday){let d=new Date(greg+'T12:00:00');let p
 document.getElementById('today').textContent=new Date().toLocaleDateString('fa-IR',{weekday:'long',day:'numeric',month:'long'});
 function showAuth(){document.getElementById('auth-screen').classList.add('show');document.querySelector('.app').classList.remove('authenticated')}
 function showApp(){document.getElementById('auth-screen').classList.remove('show');document.querySelector('.app').classList.add('authenticated');renderAll()}
+function setAuthMessage(message,type='error'){
+ const el=document.getElementById('auth-hint');
+ el.textContent=message||'';
+ el.classList.toggle('error',!!message&&type==='error');
+ el.classList.toggle('success',!!message&&type==='success');
+ el.setAttribute('role',type==='error'?'alert':'status');
+}
+document.getElementById('auth-email').addEventListener('input',()=>setAuthMessage(''));
+document.getElementById('auth-password').addEventListener('input',()=>setAuthMessage(''));
 function setAuthMode(mode){
  authMode=mode;
  document.getElementById('auth-login-tab').classList.toggle('active',mode==='login');
@@ -492,7 +501,7 @@ function setAuthMode(mode){
  document.getElementById('auth-submit').textContent=mode==='login'?'ورود به حساب':'ساخت حساب';
  document.getElementById('auth-password').autocomplete=mode==='login'?'current-password':'new-password';
  document.getElementById('forgot-link').classList.toggle('auth-hidden',mode!=='login');
- document.getElementById('auth-form').classList.remove('auth-hidden');document.getElementById('reset-password-form').classList.add('auth-hidden');document.getElementById('back-login-link').classList.add('auth-hidden');document.getElementById('auth-tabs').classList.remove('auth-hidden');document.getElementById('auth-hint').textContent='';
+ document.getElementById('auth-form').classList.remove('auth-hidden');document.getElementById('reset-password-form').classList.add('auth-hidden');document.getElementById('back-login-link').classList.add('auth-hidden');document.getElementById('auth-tabs').classList.remove('auth-hidden');setAuthMessage('');
 }
 function showResetPassword(){
  recoveryMode=true;showAuth();
@@ -539,10 +548,12 @@ async function submitNewPassword(e){
  }catch(err){toast(friendlyError(err.message))}finally{authBusy=false;btn.disabled=false}
 }
 function friendlyError(message){
- if(/Invalid login credentials/i.test(message))return'ایمیل یا رمز عبور درست نیست.';
- if(/Email not confirmed/i.test(message))return'تأیید ایمیل در تنظیمات Supabase فعال است؛ آن را غیرفعال کن.';
+ if(/Invalid login credentials/i.test(message))return'ایمیل یا رمز عبور اشتباه است. ایمیل و رمز عبور را بررسی کن و دوباره تلاش کن.';
+ if(/Email not confirmed/i.test(message))return'ایمیلت هنوز تأیید نشده است. صندوق ورودی و پوشه هرزنامه را بررسی کن و روی لینک تأیید بزن.';
+ if(/invalid email/i.test(message))return'فرمت ایمیل درست نیست. آدرس ایمیلت را بررسی کن.';
+ if(/network|fetch failed|failed to fetch|load failed/i.test(message))return'اتصال اینترنت برقرار نیست یا سرور پاسخ نمی‌دهد. اتصال را بررسی کن و دوباره تلاش کن.';
  if(/duplicate key/i.test(message))return'این مورد از قبل ثبت شده است.';
- return message||'مشکلی پیش آمد؛ دوباره تلاش کن.';
+ return message||'مشکلی پیش آمد. دوباره تلاش کن.';
 }
 // Supabase Auth نشست را مدیریت می‌کند؛ ثبت‌نام بدون تأیید ایمیل باید در تنظیمات پروژه فعال شده باشد.
 async function submitAuth(e){
@@ -570,13 +581,13 @@ async function submitAuth(e){
    }
    sessionUser=loginResult.data.session?.user||null;
   }
-  if(sessionUser){user=sessionUser;await afterLogin();}
+  if(sessionUser){setAuthMessage('');user=sessionUser;await afterLogin();}
   else if(authMode==='signup'){
    throw new Error('حساب ساخته شد، اما نشست ورود دریافت نشد. تنظیم Confirm email و آدرس پروژه Supabase را بررسی کن.');
   }else{
    throw new Error('ورود انجام نشد؛ Supabase نشست معتبر برنگرداند. دوباره تلاش کن.');
   }
- }catch(err){toast(friendlyError(err.message))}
+ }catch(err){setAuthMessage(friendlyError(err.message),'error')}
  finally{authBusy=false;btn.disabled=false}
 }
 // Each authenticated user owns shops; all data reads/writes are scoped to the active shop.
