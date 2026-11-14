@@ -3061,6 +3061,17 @@ input:-webkit-autofill,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 40p
  .top-actions .help-btn .hl{display:none}
  .top-actions #new-order-btn{height:42px;padding:0 18px;border-radius:10px;box-shadow:none}
 }
+
+/* V8.4 phone polish */
+#dashboard>.stats .stat:nth-child(2){border-inline-start:0}
+select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-start:38px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b6b6e' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat left 14px center/14px}
+@media(max-width:700px){
+ #dashboard>.stats .stat{text-align:center;padding:14px 10px}
+ #dashboard>.stats .stat strong{min-height:38px;display:flex;align-items:center;justify-content:center;margin:6px 0 0}
+ #stat-sales{font-size:16px}
+ .panel-head .btn.secondary{border:0;background:transparent;color:var(--primary);min-height:36px;padding:0 4px;font-size:13px}
+ .modal-actions .btn.secondary{flex:0 0 34%}
+}
 </style>
 </head>
 
@@ -3572,7 +3583,7 @@ input:-webkit-autofill,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 40p
           <div class="form-item"><label>شماره تماس</label><input class="field" id="f-phone" inputmode="tel"
               placeholder="09xxxxxxxxx"></div>
           <div class="form-item full"><label>محصولات سفارش *</label>
-            <div class="order-help">هر سفارش می‌تواند چند محصول داشته باشد. محصول کاتالوگ را انتخاب کن تا قیمت و هزینه‌ها خودکار پر شود؛ برای محصول بیرون از کاتالوگ، نام و قیمت را خودت بنویس.</div>
+            <div class="order-help">محصول را از کاتالوگ انتخاب کن تا قیمت خودکار پر شود، یا نام و قیمتش را خودت بنویس.</div>
             <div id="order-lines" class="order-lines"></div><button type="button" class="btn secondary small"
               onclick="addOrderLine()">＋ افزودن محصول دیگر</button>
             <div class="order-summary"><span>جمع اقلام سفارش</span><strong id="order-items-total">۰ تومان</strong></div>
