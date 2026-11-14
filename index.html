@@ -208,6 +208,19 @@ body{font-size:15px;line-height:1.75}
  #dashboard .content-grid{gap:10px}
  #dashboard .panel{padding:14px}
 }
+
+/* V8.2 — calm, intentional page header */
+.topbar{align-items:center;gap:24px;margin-bottom:26px;padding:2px 0 18px;border-bottom:1px solid #eceef3}
+.hello{min-width:220px}.hello h1{margin:0 0 3px;font-size:23px;letter-spacing:-.35px}.hello p{margin:0;color:var(--muted);font-size:12px}
+.hello .date-chip{display:inline-flex;margin-top:9px;padding:3px 0;background:transparent;border:0;color:#8a91a1;font-size:11px;font-weight:600}
+.top-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.top-actions .shop-select{width:auto;min-width:145px;max-width:210px;height:42px;padding:8px 34px 8px 12px;border-radius:12px;background:#fff;font-size:12px;font-weight:700;border-color:#e8e9f0}
+.top-actions .shop-chip{height:42px;min-width:145px;max-width:210px;padding:8px 12px;border-radius:12px}
+.top-actions .help-btn{height:42px;min-width:42px;padding:0 13px;border-radius:12px;color:#596174;border-color:#e8e9f0;background:#fff}
+.top-actions #new-order-btn{height:42px;padding:0 17px;border-radius:12px;white-space:nowrap;box-shadow:0 5px 14px #6256d91c}
+@media(max-width:1050px){.topbar{align-items:flex-start;flex-direction:column;gap:13px}.top-actions{width:100%}}
+@media(max-width:700px){.topbar{padding-bottom:14px;margin-bottom:18px}.hello{width:100%}.hello h1{font-size:19px}.hello .date-chip{display:inline-flex;width:auto;margin-top:5px}.top-actions{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:7px}.top-actions .shop-select,.top-actions .shop-chip{min-width:0;max-width:none;width:100%;height:40px}.top-actions .help-btn{height:40px;min-width:40px;padding:0 10px}.top-actions .help-btn .hl{display:none}.top-actions #new-order-btn{height:40px;padding:0 11px;font-size:11px}.top-actions .desk-only{display:none!important}}
+
 </style></head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -245,7 +258,7 @@ body{font-size:15px;line-height:1.75}
  <button class="logout-btn" onclick="signOut()">↪ خروج از حساب</button><div class="side-note">✨ <b>یک کار کمتر برای امروز</b><br>سفارش‌ها را یک‌جا ثبت کن تا چیزی از قلم نیفتد.</div>
 </aside>
 <main class="main">
- <header class="topbar"><div class="hello"><h1 id="greeting">سلام، روزت بخیر 👋</h1><p id="subheading">وضعیت سفارش‌های کسب‌وکارت در یک نگاه</p></div><div class="top-actions"><div class="date-chip" id="today"></div><button type="button" class="shop-chip" id="shop-chip" onclick="openAccountSheet()" aria-label="فروشگاه و حساب"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5 5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 12.5V20h13v-7.5"/></svg><span id="shop-chip-name"></span></button><select class="field" id="shop-select" aria-label="انتخاب فروشگاه" onchange="switchShop(this.value)"></select><button class="btn secondary small desk-only" onclick="createShop()">＋ فروشگاه</button><button class="btn secondary small desk-only" onclick="openProfile()">پروفایل</button><button class="btn secondary small desk-only" onclick="signOut()">خروج از حساب</button><button class="btn secondary help-btn" type="button" onclick="startTour(true)" aria-label="راهنمای استفاده">❓<span class="hl"> راهنما</span></button><button class="btn" id="new-order-btn" onclick="openOrderModal()">＋ سفارش جدید</button></div></header>
+ <header class="topbar"><div class="hello"><h1 id="greeting">سلام، روزت بخیر 👋</h1><p id="subheading">وضعیت سفارش‌های کسب‌وکارت در یک نگاه</p><div class="date-chip" id="today"></div></div><div class="top-actions"><button type="button" class="shop-chip" id="shop-chip" onclick="openAccountSheet()" aria-label="فروشگاه و حساب"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5 5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 12.5V20h13v-7.5"/></svg><span id="shop-chip-name"></span></button><select class="field shop-select" id="shop-select" aria-label="انتخاب فروشگاه" onchange="switchShop(this.value)"></select><button class="btn secondary help-btn" type="button" onclick="startTour(true)" aria-label="راهنمای استفاده"><span aria-hidden="true">❓</span><span class="hl"> راهنما</span></button><button class="btn" id="new-order-btn" onclick="openOrderModal()">＋ سفارش جدید</button></div></header>
  <section id="dashboard" class="page active">
   <div id="onboard-card" class="onboard" style="display:none"></div>
   <div class="quick">
