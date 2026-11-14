@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>یارا | همراه کسب‌وکار خانگی — نسخه ۶.۱</title>
+<title>یارا | همراه کسب‌وکار خانگی — نسخه ۷ موبایل</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 :root{--bg:#f6f7f9;--panel:#fff;--ink:#202735;--muted:#788292;--line:#e8ebf0;--primary:#6256d9;--primary2:#eeeaff;--green:#17865b;--greenbg:#e6f6ee;--orange:#b96a18;--orangebg:#fff2df;--red:#c34d55;--redbg:#ffeaeb;--blue:#3674bc;--bluebg:#eaf3ff;--shadow:0 8px 28px rgba(27,38,59,.06)}
@@ -24,6 +24,40 @@
 .auth-note{display:none}.auth-link{display:block;background:transparent;color:var(--primary);font-size:12px;font-weight:700;padding:10px 0 0;text-align:center;width:100%}.auth-hint{font-size:11px;color:var(--muted);line-height:1.9;margin:12px 0 0}.auth-hidden{display:none!important}
 .app{display:none}.app.authenticated{display:flex}
 .price-hint{line-height:1.9}.stat strong{font-variant-numeric:tabular-nums}#products .table td,#expenses .table td{vertical-align:middle}@media(max-width:700px){.nav{overflow-x:auto}.nav button{min-width:65px;font-size:10px}.nav .ico{font-size:15px}}
+
+/* V7 mobile-first store journey */
+.mobile-store-picker,.mobile-store-switch,.mobile-bottom-nav{display:none}
+@media(max-width:700px){
+ .mobile-store-picker{display:none;position:fixed;inset:0;z-index:100;background:#f6f7fb;padding:calc(20px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));overflow:auto}
+ .mobile-store-picker.show{display:flex;flex-direction:column}
+ .picker-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+ .picker-brand{display:flex;align-items:center;gap:10px}.picker-brand b{display:block;font-size:18px}.picker-brand small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+ .picker-logo{width:42px;height:42px;border-radius:14px;background:var(--primary);color:white;display:grid;place-items:center;font-weight:800;font-size:22px}
+ .picker-profile{background:#fff;border:1px solid var(--line);border-radius:11px;padding:9px 13px;color:var(--ink);font-size:12px}
+ .picker-intro{margin:34px 0 22px}.picker-eyebrow{font-size:11px;color:var(--primary);font-weight:800}.picker-intro h1{font-size:24px;line-height:1.7;margin:8px 0}.picker-intro p{font-size:13px;line-height:2;color:var(--muted);margin:0}
+ .mobile-shop-list{display:grid;gap:12px}
+ .mobile-shop-card{display:flex;align-items:center;gap:13px;width:100%;padding:16px;background:white;border:1px solid var(--line);border-radius:17px;text-align:right;color:var(--ink);box-shadow:var(--shadow)}
+ .mobile-shop-icon{width:48px;height:48px;border-radius:15px;background:var(--primary2);color:var(--primary);display:grid;place-items:center;font-size:22px;flex-shrink:0}
+ .mobile-shop-info{flex:1;min-width:0}.mobile-shop-info b{display:block;font-size:14px}.mobile-shop-info small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.mobile-shop-arrow{color:var(--primary);font-size:22px}
+ .picker-add{display:flex;align-items:center;gap:12px;text-align:right;background:#fff;border:1px dashed #bcb5f4;border-radius:16px;padding:15px;margin-top:14px;color:var(--primary)}.picker-add>span:first-child{font-size:25px}.picker-add b{display:block;font-size:13px}.picker-add small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+ .picker-logout{margin:20px auto 0;background:transparent;color:var(--muted);font-size:12px;padding:10px}
+ .app.mobile-awaiting-shop{display:none!important}.sidebar{display:none!important}.modal-back{z-index:120}
+ .main{margin:0!important;width:100%!important;max-width:none;padding:calc(14px + env(safe-area-inset-top)) 14px calc(100px + env(safe-area-inset-bottom))!important}
+ .topbar{display:flex;flex-direction:column;align-items:stretch;gap:12px;margin-bottom:18px}
+ .hello{width:100%;text-align:right}.hello h1{font-size:21px;line-height:1.6}.hello p{font-size:12px;line-height:1.8}
+ .top-actions{display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+ .top-actions .mobile-store-switch{display:flex;align-items:center;justify-content:center;width:auto;min-height:38px;padding:8px 12px;border-radius:11px;background:#fff;border:1px solid var(--line);color:var(--primary);font-size:12px;font-weight:700}
+ .top-actions .date-chip,.top-actions #shop-select,.top-actions button[onclick="createShop()"],.top-actions button[onclick="openProfile()"],.top-actions button[onclick="signOut()"]{display:none!important}
+ .top-actions button[onclick="openOrderModal()"]{display:inline-flex;min-height:40px;padding:9px 13px;font-size:12px}
+ .mobile-bottom-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;z-index:15;right:10px;left:10px;bottom:calc(8px + env(safe-area-inset-bottom));height:68px;padding:6px 5px;background:#fff;border:1px solid var(--line);border-radius:19px;box-shadow:0 8px 30px #17203318}
+ .mobile-bottom-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;border-radius:13px;background:transparent;color:#8791a1;padding:4px 1px}
+ .mobile-bottom-nav button span{font-size:19px;line-height:1.1}.mobile-bottom-nav button small{font-size:9px;white-space:nowrap}.mobile-bottom-nav button.active{background:var(--primary2);color:var(--primary);font-weight:800}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.content-grid{grid-template-columns:1fr}.quick{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .section-tabs{display:flex;flex-wrap:wrap}.section-tabs button{flex:1 1 auto}
+ .toast{bottom:calc(88px + env(safe-area-inset-bottom))}
+}
+@media(min-width:701px){.mobile-store-picker,.mobile-bottom-nav{display:none!important}}
+
 </style>
 <style id="yara-mobile-v62">
 /* V6.2: dedicated phone layout; desktop rules remain unchanged */
@@ -109,6 +143,13 @@
   <p class="auth-hint" id="auth-hint"></p>
  </div>
 </div>
+<div id="mobile-store-picker" class="mobile-store-picker" dir="rtl" aria-hidden="true">
+ <div class="picker-top"><div class="picker-brand"><span class="picker-logo">ی</span><div><b>یارا</b><small>همراه کسب‌وکار خانگی</small></div></div><button class="picker-profile" type="button" onclick="openProfile()">پروفایل</button></div>
+ <div class="picker-intro"><span class="picker-eyebrow">فضای کاری شما</span><h1>سلام! امروز کدام فروشگاه را مدیریت می‌کنی؟</h1><p>با انتخاب فروشگاه، سفارش‌ها، مشتری‌ها و گزارش‌های همان فروشگاه نمایش داده می‌شود.</p></div>
+ <div id="mobile-shop-list" class="mobile-shop-list"><div class="picker-loading">در حال بارگذاری فروشگاه‌ها…</div></div>
+ <button class="picker-add" type="button" onclick="createShop()"><span>＋</span><span><b>افزودن فروشگاه جدید</b><small>برای یک کسب‌وکار دیگر فضای جدا بساز</small></span></button>
+ <button class="picker-logout" type="button" onclick="signOut()">خروج از حساب</button>
+</div>
 <div class="app">
 <aside class="sidebar">
  <div class="brand"><div class="logo">ی</div><div><b>یارا</b><small>همراه کسب‌وکار خانگی</small></div></div>
@@ -117,12 +158,13 @@
  <button data-page="customers"><span class="ico">♙</span>مشتریان و سفارش‌ها</button>
  <button data-page="products"><span class="ico">▣</span>محصولات</button>
  <button data-page="finance"><span class="ico">▥</span>هوش مالی</button>
+ <button data-page="reminders"><span class="ico">◷</span>یادآورها</button>
  </nav></div>
  <button class="btn secondary small" type="button" onclick="openShopManager()">▣ مدیریت فروشگاه‌ها</button>
  <button class="logout-btn" onclick="signOut()">↪ خروج از حساب</button><div class="side-note">✨ <b>یک کار کمتر برای امروز</b><br>سفارش‌ها را یک‌جا ثبت کن تا چیزی از قلم نیفتد.</div>
 </aside>
 <main class="main">
- <header class="topbar"><div class="hello"><h1 id="greeting">سلام، روزت بخیر 👋</h1><p id="subheading">وضعیت سفارش‌های کسب‌وکارت در یک نگاه</p></div><div class="top-actions"><div class="date-chip" id="today"></div><select class="field" id="shop-select" aria-label="انتخاب فروشگاه" onchange="switchShop(this.value)"></select><button class="btn secondary small" onclick="createShop()">＋ فروشگاه</button><button class="btn secondary small" onclick="openProfile()">پروفایل</button><button class="btn secondary small" onclick="signOut()">خروج از حساب</button><button class="btn" onclick="openOrderModal()">＋ سفارش جدید</button></div></header>
+ <header class="topbar"><div class="hello"><h1 id="greeting">سلام، روزت بخیر 👋</h1><p id="subheading">وضعیت سفارش‌های کسب‌وکارت در یک نگاه</p></div><div class="top-actions"><button class="mobile-store-switch" type="button" onclick="showMobileStorePicker()"><span id="mobile-current-shop">انتخاب فروشگاه</span>　⌄</button><div class="date-chip" id="today"></div><select class="field" id="shop-select" aria-label="انتخاب فروشگاه" onchange="switchShop(this.value)"></select><button class="btn secondary small" onclick="createShop()">＋ فروشگاه</button><button class="btn secondary small" onclick="openProfile()">پروفایل</button><button class="btn secondary small" onclick="signOut()">خروج از حساب</button><button class="btn" onclick="openOrderModal()">＋ سفارش جدید</button></div></header>
  <section id="dashboard" class="page active">
   <div class="stats">
    <div class="stat"><div class="stat-top"><span>کل سفارش‌ها</span><span class="stat-icon">▤</span></div><strong id="stat-total">۰</strong><small>همه سفارش‌های ثبت‌شده</small></div>
@@ -235,7 +277,14 @@
   </div>
 
  </section>
-</main></div>
+</main>
+<nav class="mobile-bottom-nav" aria-label="ناوبری اصلی">
+ <button type="button" data-page="dashboard" onclick="showPage('dashboard')"><span>▦</span><small>خانه</small></button>
+ <button type="button" data-page="customers" onclick="showPage('customers')"><span>♙</span><small>مشتریان</small></button>
+ <button type="button" data-page="products" onclick="showPage('products')"><span>▣</span><small>محصولات</small></button>
+ <button type="button" data-page="finance" onclick="showPage('finance')"><span>▥</span><small>هوش مالی</small></button>
+ <button type="button" data-page="reminders" onclick="showPage('reminders')"><span>◷</span><small>یادآورها</small></button>
+</nav></div>
 <div class="modal-back" id="order-modal" onclick="if(event.target===this)closeOrderModal()"><div class="modal">
  <div class="modal-head"><h2 id="modal-title">ثبت سفارش جدید</h2><button class="close" onclick="closeOrderModal()">×</button></div>
  <form id="order-form" onsubmit="saveOrder(event)"><input type="hidden" id="edit-id">
@@ -320,7 +369,7 @@ function dateFa(s){if(!s)return '—';try{return new Date(s+'T12:00:00').toLocal
 function statusPill(s){return `<span class="pill s-${s}">${labels[s]||s}</span>`}
 function initials(n){return (n||'؟').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('')}
 function toast(t){let el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2300)}
-function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));const page=document.getElementById(p);if(!page)return;page.classList.add('active');const navPage=p==='orders'?'customers':p==='expenses'?'finance':p==='reminders'?'dashboard':p;document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===navPage));let titles={dashboard:'وضعیت سفارش‌ها و کارهای مهم فروشگاه',orders:'سفارش‌های مشتریان',customers:'مشتریان و سابقه خرید',reminders:'پیگیری‌های مهم فروشگاه',finance:'تصویر مالی و تحلیل عملکرد فروشگاه',products:'کاتالوگ و دسته‌بندی محصولات',expenses:'هزینه‌های عمومی فروشگاه'};document.getElementById('subheading').textContent=titles[p]||titles.dashboard;renderAll();if(['finance','products','expenses'].includes(p))loadFinancialData();if(p==='finance')applyFinanceTab('overview');if(p==='expenses')applyFinanceTab('expenses')}
+function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));const page=document.getElementById(p);if(!page)return;page.classList.add('active');const navPage=p==='orders'?'customers':p==='expenses'?'finance':p;document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===navPage));let titles={dashboard:'وضعیت سفارش‌ها و کارهای مهم فروشگاه',orders:'سفارش‌های مشتریان',customers:'مشتریان و سابقه خرید',reminders:'پیگیری‌های مهم فروشگاه',finance:'تصویر مالی و تحلیل عملکرد فروشگاه',products:'کاتالوگ و دسته‌بندی محصولات',expenses:'هزینه‌های عمومی فروشگاه'};document.getElementById('subheading').textContent=titles[p]||titles.dashboard;renderAll();if(['finance','products','expenses'].includes(p))loadFinancialData();if(p==='finance')applyFinanceTab('overview');if(p==='expenses')applyFinanceTab('expenses')}
 function applyFinanceTab(tab){document.querySelectorAll('.finance-tabs [data-fin-tab]').forEach(b=>b.classList.toggle('active',b.dataset.finTab===tab));const overview=document.getElementById('finance-overview-panel'),settings=document.getElementById('finance-settings-panel'),learn=document.getElementById('finance-learn-panel');if(overview)overview.style.display=tab==='overview'?'':'none';if(settings)settings.style.display=tab==='settings'?'':'none';if(learn)learn.style.display=tab==='learn'?'':'none'}
 function showFinanceTab(tab){if(tab==='expenses'){showPage('expenses');return}showPage('finance');applyFinanceTab(tab)}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
@@ -506,13 +555,18 @@ async function submitAuth(e){
 }
 // Each authenticated user owns shops; all data reads/writes are scoped to the active shop.
 let shops=[],activeShopId=null;
+// Mobile always starts with an explicit store choice; shop records load only after selection.
+function isMobileYara(){return window.matchMedia&&window.matchMedia('(max-width: 700px)').matches}
+function renderMobileShopPicker(){const host=document.getElementById('mobile-shop-list');if(!host)return;host.innerHTML=shops.length?shops.map((shop,i)=>`<button class="mobile-shop-card" type="button" onclick="chooseMobileShop('${shop.id}')"><span class="mobile-shop-icon">${i%2?'◇':'✧'}</span><span class="mobile-shop-info"><b>${esc(shop.name)}</b><small>ورود به فضای کاری این فروشگاه</small></span><span class="mobile-shop-arrow">‹</span></button>`).join(''):'<div class="empty">هنوز فروشگاهی ثبت نشده است.</div>'}
+function showMobileStorePicker(){if(!isMobileYara()){openShopManager();return}const picker=document.getElementById('mobile-store-picker');if(!picker)return;orders=[];financialProducts=[];financialExpenses=[];financialOrderItems=[];activeShopId=null;renderAll();const select=document.getElementById('shop-select');if(select)select.value='';document.querySelector('.app').classList.add('mobile-awaiting-shop');picker.classList.add('show');picker.setAttribute('aria-hidden','false');renderMobileShopPicker()}
+async function chooseMobileShop(id){if(!shops.some(x=>x.id===id))return;activeShopId=id;document.getElementById('mobile-store-picker').classList.remove('show');document.getElementById('mobile-store-picker').setAttribute('aria-hidden','true');const app=document.querySelector('.app');app.classList.remove('mobile-awaiting-shop');app.classList.add('authenticated');const select=document.getElementById('shop-select');if(select)select.value=id;const current=document.getElementById('mobile-current-shop');if(current)current.textContent=shops.find(x=>x.id===id)?.name||'فروشگاه';categoryOptions=[...DEFAULT_CATEGORIES];refreshCategoryMenus();orders=[];financialProducts=[];financialExpenses=[];financialOrderItems=[];renderAll();try{await loadCategories();await loadOrders();await loadFinancialData();if(document.getElementById('expense-date')){document.getElementById('expense-date').dataset.iso=iso(new Date());document.getElementById('expense-date').value=dateFa(iso(new Date()))}showPage('dashboard')}catch(err){toast('بارگذاری فروشگاه انجام نشد: '+friendlyError(err.message));showMobileStorePicker()}}
 // فهرست فروشگاه‌ها فقط برای کاربر واردشده بارگذاری می‌شود.
 async function loadShops(){
  const {data,error}=await sb.from('businesses').select('id,name').eq('user_id',user.id).order('created_at');
  if(error)throw error; shops=data||[];
  if(!shops.length){const {data:created,error:createError}=await sb.from('businesses').insert({user_id:user.id,name:'فروشگاه من'}).select('id,name').single();if(createError)throw createError;shops=[created];}
  if(!shops.some(x=>x.id===activeShopId))activeShopId=shops[0].id;
- const select=document.getElementById('shop-select');select.innerHTML=shops.map(x=>`<option value="${x.id}">${esc(x.name)}</option>`).join('');select.value=activeShopId;
+ const select=document.getElementById('shop-select');select.innerHTML=shops.map(x=>`<option value="${x.id}">${esc(x.name)}</option>`).join('');if(select)select.value=activeShopId;renderMobileShopPicker();
 }
 function openShopManager(){renderShopList();document.getElementById('shop-modal').classList.add('show')}
 function closeShopManager(){document.getElementById('shop-modal').classList.remove('show')}
@@ -524,7 +578,7 @@ function renderShopList(){
 async function submitCreateShop(e){
  e.preventDefault();const input=document.getElementById('new-shop-name'),clean=input.value.trim();if(!clean){toast('نام فروشگاه را وارد کن');return}
  const {data,error}=await sb.from('businesses').insert({user_id:user.id,name:clean}).select('id,name').single();
- if(error){toast(friendlyError(error.message));return}shops.push(data);activeShopId=data.id;await loadShops();categoryOptions=[...DEFAULT_CATEGORIES];refreshCategoryMenus();orders=[];await loadCategories();await loadOrders();input.value='';renderShopList();toast('فروشگاه جدید ساخته شد و خالی است.');
+ if(error){toast(friendlyError(error.message));return}shops.push(data);activeShopId=data.id;await loadShops();input.value='';renderShopList();if(isMobileYara()&&document.getElementById('mobile-store-picker')?.classList.contains('show')){closeShopManager();renderMobileShopPicker();toast('فروشگاه ساخته شد؛ حالا آن را انتخاب کن.');return;}categoryOptions=[...DEFAULT_CATEGORIES];refreshCategoryMenus();orders=[];await loadCategories();await loadOrders();toast('فروشگاه جدید ساخته شد و خالی است.');
 }
 async function createShop(){openShopManager();document.getElementById('new-shop-name').focus()}
 async function renameShop(id){
@@ -548,12 +602,12 @@ async function deleteShop(id){
  await loadShops();renderShopList();toast('فروشگاه و داده‌های وابسته به آن حذف شدند.');
 }
 async function switchShopFromManager(id){await switchShop(id);renderShopList();toast('فروشگاه فعال تغییر کرد.');}
-async function switchShop(id){if(!shops.some(x=>x.id===id))return;activeShopId=id;categoryOptions=[...DEFAULT_CATEGORIES];refreshCategoryMenus();orders=[];financialProducts=[];financialExpenses=[];financialOrderItems=[];renderAll();await loadCategories();await loadOrders();await loadFinancialData();}
+async function switchShop(id){if(!shops.some(x=>x.id===id))return;if(isMobileYara()){showMobileStorePicker();return;}activeShopId=id;const current=document.getElementById('mobile-current-shop');if(current)current.textContent=shops.find(x=>x.id===id)?.name||'فروشگاه';categoryOptions=[...DEFAULT_CATEGORIES];refreshCategoryMenus();orders=[];financialProducts=[];financialExpenses=[];financialOrderItems=[];renderAll();await loadCategories();await loadOrders();await loadFinancialData();}
 async function openProfile(){document.getElementById('profile-email').value=user.email||'';const {data,error}=await sb.from('profiles').select('full_name,phone').eq('user_id',user.id).maybeSingle();if(error){toast(friendlyError(error.message));return;}document.getElementById('profile-name').value=data?.full_name||'';document.getElementById('profile-phone').value=data?.phone||'';document.getElementById('profile-modal').classList.add('show');}
 function closeProfile(){document.getElementById('profile-modal').classList.remove('show')}
 async function saveProfile(e){e.preventDefault();const payload={user_id:user.id,full_name:document.getElementById('profile-name').value.trim(),phone:document.getElementById('profile-phone').value.trim(),updated_at:new Date().toISOString()};const {error}=await sb.from('profiles').upsert(payload,{onConflict:'user_id'});if(error){toast(friendlyError(error.message));return;}closeProfile();toast('پروفایل ذخیره شد.');}
 // پس از ورود، فروشگاه انتخاب‌شده و داده‌های همان فروشگاه بارگذاری می‌شوند.
-async function afterLogin(){if(!user||lastLoadedUserId===user.id)return;lastLoadedUserId=user.id;orders=[];showApp();try{await loadShops();await loadCategories();await loadOrders();await loadFinancialData();if(document.getElementById('expense-date'))document.getElementById('expense-date').dataset.iso=iso(new Date());document.getElementById('expense-date').value=dateFa(document.getElementById('expense-date').dataset.iso);}catch(err){lastLoadedUserId=null;toast('آماده‌سازی فضای کار ناموفق بود: '+friendlyError(err.message));}}
+async function afterLogin(){if(!user||lastLoadedUserId===user.id)return;lastLoadedUserId=user.id;orders=[];showApp();try{await loadShops();if(isMobileYara()){document.querySelector('.app').classList.add('mobile-awaiting-shop');showMobileStorePicker();return;}await loadCategories();await loadOrders();await loadFinancialData();if(document.getElementById('expense-date'))document.getElementById('expense-date').dataset.iso=iso(new Date());document.getElementById('expense-date').value=dateFa(document.getElementById('expense-date').dataset.iso);}catch(err){lastLoadedUserId=null;toast('آماده‌سازی فضای کار ناموفق بود: '+friendlyError(err.message));}}
 async function loadOrders(){
  if(!sb||!user)return;
  const {data,error}=await sb.from('orders').select('*').eq('user_id',user.id).eq('shop_id',activeShopId).order('created_at',{ascending:false});
