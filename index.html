@@ -155,6 +155,25 @@ body{font-size:15px;line-height:1.75}
 .price-hint{font-size:13px}
 .ob-step{flex-wrap:wrap}.ob-step div{min-width:140px}.ob-step .btn{min-height:44px;padding:0 14px;font-size:14px;margin-right:auto}
 @media(max-width:700px){.ob-step .btn{width:100%;margin-right:0}}
+
+/* V8.1: calmer mobile home */
+@media(max-width:700px){
+ #new-order-btn{display:none}
+ .help-btn .hl{display:none}.help-btn{min-width:48px;flex:0 0 48px;padding:0}
+ .quick{display:block;margin-bottom:14px}
+ .quick button:not(.main-action){display:none}
+ .quick button.main-action{width:100%;min-height:60px;flex-direction:row;align-items:center;justify-content:center;gap:10px;padding:12px;border-radius:14px}
+ .quick button.main-action span{display:inline;margin:0;font-size:22px}
+ .quick button.main-action small{display:none}
+ .quick button.main-action b{font-size:17px}
+ .stats{grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+ .stat{padding:10px 6px;text-align:center;border-radius:12px;box-shadow:none}
+ .stat-top{justify-content:center;font-size:12px}.stat-icon,.stat small{display:none}
+ .stat strong{font-size:18px;margin:4px 0 0}
+ #stat-sales{font-size:13px}
+ .stats .stat:nth-child(1){display:none}
+ .onboard{padding:14px;margin-bottom:14px}
+}
 </style></head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -192,7 +211,7 @@ body{font-size:15px;line-height:1.75}
  <button class="logout-btn" onclick="signOut()">↪ خروج از حساب</button><div class="side-note">✨ <b>یک کار کمتر برای امروز</b><br>سفارش‌ها را یک‌جا ثبت کن تا چیزی از قلم نیفتد.</div>
 </aside>
 <main class="main">
- <header class="topbar"><div class="hello"><h1 id="greeting">سلام، روزت بخیر 👋</h1><p id="subheading">وضعیت سفارش‌های کسب‌وکارت در یک نگاه</p></div><div class="top-actions"><div class="date-chip" id="today"></div><button type="button" class="shop-chip" id="shop-chip" onclick="openAccountSheet()" aria-label="فروشگاه و حساب"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5 5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 12.5V20h13v-7.5"/></svg><span id="shop-chip-name"></span></button><select class="field" id="shop-select" aria-label="انتخاب فروشگاه" onchange="switchShop(this.value)"></select><button class="btn secondary small desk-only" onclick="createShop()">＋ فروشگاه</button><button class="btn secondary small desk-only" onclick="openProfile()">پروفایل</button><button class="btn secondary small desk-only" onclick="signOut()">خروج از حساب</button><button class="btn secondary help-btn" type="button" onclick="startTour(true)" aria-label="راهنمای استفاده">❓ راهنما</button><button class="btn" id="new-order-btn" onclick="openOrderModal()">＋ سفارش جدید</button></div></header>
+ <header class="topbar"><div class="hello"><h1 id="greeting">سلام، روزت بخیر 👋</h1><p id="subheading">وضعیت سفارش‌های کسب‌وکارت در یک نگاه</p></div><div class="top-actions"><div class="date-chip" id="today"></div><button type="button" class="shop-chip" id="shop-chip" onclick="openAccountSheet()" aria-label="فروشگاه و حساب"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5 5.5 4h13L20 9.5"/><path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 12.5V20h13v-7.5"/></svg><span id="shop-chip-name"></span></button><select class="field" id="shop-select" aria-label="انتخاب فروشگاه" onchange="switchShop(this.value)"></select><button class="btn secondary small desk-only" onclick="createShop()">＋ فروشگاه</button><button class="btn secondary small desk-only" onclick="openProfile()">پروفایل</button><button class="btn secondary small desk-only" onclick="signOut()">خروج از حساب</button><button class="btn secondary help-btn" type="button" onclick="startTour(true)" aria-label="راهنمای استفاده">❓<span class="hl"> راهنما</span></button><button class="btn" id="new-order-btn" onclick="openOrderModal()">＋ سفارش جدید</button></div></header>
  <section id="dashboard" class="page active">
   <div id="onboard-card" class="onboard" style="display:none"></div>
   <div class="quick">
@@ -772,7 +791,7 @@ function dismissOnboard(){try{localStorage.setItem('yara_onboard_off_'+(user?.id
 // ===== V8: guided tour =====
 const TOUR_STEPS=[
  {title:'خوش آمدی به یارا 👋',text:'در چند قدم نشانت می‌دهم هر بخش کجاست. فقط روی «بعدی» بزن.'},
- {sel:'#new-order-btn',title:'ثبت سفارش',text:'هر وقت مشتری خرید کرد، این دکمه را بزن و اسمش، محصول و مبلغ را بنویس.'},
+ {sel:'.quick .main-action',title:'ثبت سفارش',text:'هر وقت مشتری خرید کرد، این دکمه را بزن و اسمش، محصول و مبلغ را بنویس.'},
  {sel:'.nav [data-page=products]',title:'محصولات',text:'اول محصولاتت را اینجا اضافه کن: اسم و قیمت. بعد در سفارش‌ها فقط انتخابشان می‌کنی.'},
  {sel:'.nav [data-page=customers]',title:'مشتریان',text:'لیست همه مشتری‌هایت و سفارش‌هایشان اینجاست.'},
  {sel:'.nav [data-page=dashboard]',title:'صفحه اصلی',text:'خلاصه‌ی کارهای امروز و سفارش‌هایی که باید پیگیری کنی.'},
