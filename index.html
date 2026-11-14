@@ -174,6 +174,17 @@ body{font-size:15px;line-height:1.75}
  .stats .stat:nth-child(1){display:none}
  .onboard{padding:14px;margin-bottom:14px}
 }
+
+/* V8.2: month navigator + date on mobile */
+.month-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px;margin-bottom:14px}
+.month-nav>button{background:var(--primary2);color:var(--primary);font-weight:700;border-radius:10px;min-height:44px;padding:0 14px;font-size:14px}
+.month-nav>button:disabled{opacity:.35}
+.month-mid{text-align:center;flex:1}.month-mid b{display:block;font-size:17px}
+.month-now{background:transparent;color:var(--primary);font-size:13px;font-weight:700;padding:2px 8px}
+@media(max-width:700px){
+ .date-chip{display:block;width:100%;background:transparent;border:0;padding:0;font-size:14px;color:var(--muted);order:-1}
+ .month-nav>button{padding:0 10px;font-size:13px}
+}
 </style></head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -223,7 +234,7 @@ body{font-size:15px;line-height:1.75}
    <div class="stats">
    <div class="stat"><div class="stat-top"><span>کل سفارش‌ها</span><span class="stat-icon">▤</span></div><strong id="stat-total">۰</strong><small>همه سفارش‌های ثبت‌شده</small></div>
    <div class="stat"><div class="stat-top"><span>در حال انجام</span><span class="stat-icon" style="background:var(--orangebg);color:var(--orange)">◷</span></div><strong id="stat-active">۰</strong><small>نیازمند پیگیری</small></div>
-   <div class="stat"><div class="stat-top"><span>فروش ثبت‌شده</span><span class="stat-icon" style="background:var(--greenbg);color:var(--green)">ت</span></div><strong id="stat-sales">۰</strong><small>مجموع سفارش‌های پرداخت‌شده</small></div>
+   <div class="stat"><div class="stat-top"><span id="stat-sales-label">فروش ثبت‌شده</span><span class="stat-icon" style="background:var(--greenbg);color:var(--green)">ت</span></div><strong id="stat-sales">۰</strong><small id="stat-sales-sub">مجموع سفارش‌های پرداخت‌شده</small></div>
    <div class="stat"><div class="stat-top"><span>مشتری‌ها</span><span class="stat-icon" style="background:var(--bluebg);color:var(--blue)">♙</span></div><strong id="stat-customers">۰</strong><small>مشتری یکتا</small></div>
   </div>
   <div class="content-grid">
@@ -251,10 +262,11 @@ body{font-size:15px;line-height:1.75}
  <section id="finance" class="page">
   <div class="section-tabs finance-tabs"><button type="button" data-fin-tab="overview" onclick="showFinanceTab('overview')">نمای کلی</button><button type="button" data-fin-tab="expenses" onclick="showFinanceTab('expenses')">هزینه‌ها</button><button type="button" data-fin-tab="settings" onclick="showFinanceTab('settings')">تنظیمات</button><button type="button" data-fin-tab="learn" onclick="showFinanceTab('learn')">آموزش مالی</button></div>
   <div id="finance-overview-panel" class="finance-panel">
+<div class="month-nav"><button type="button" onclick="changeFinMonth(-1)">→ ماه قبل</button><div class="month-mid"><b id="fin-month-label"></b><button type="button" class="month-now" onclick="resetFinMonth()">این ماه</button></div><button type="button" id="fin-month-next" onclick="changeFinMonth(1)">ماه بعد ←</button></div>
   <div class="panel" style="margin-bottom:16px"><div class="panel-head"><h2>نمای کلی مالی فروشگاه</h2><span class="muted" id="finance-currency-label">واحد پول فروشگاه</span></div>
    <div class="form-grid" style="margin-bottom:15px"><div class="form-item"><label>واحد پول این فروشگاه</label><select class="field" id="shop-currency" disabled aria-label="واحد پول ثابت"><option value="IRR" selected>تومان (IRR)</option></select></div><div class="form-item"><label>توضیح گزارش</label><div class="field" style="background:#f8f8fb">برای محاسبه سود دقیق، هزینه خرید یا ساخت محصولاتت را ثبت کن.</div></div></div>
    <div class="stats" style="margin-bottom:0"><div class="stat"><div class="stat-top">فروش اقلام</div><strong id="fin-revenue">—</strong><small>بدون هزینه ارسال دریافتی</small></div><div class="stat"><div class="stat-top">سود محصولات</div><strong id="fin-gross">—</strong><small>فروش اقلام منهای هزینه خرید یا ساخت</small></div><div class="stat"><div class="stat-top">سود پس از هزینه سفارش</div><strong id="fin-contribution">—</strong><small>پس از ارسال پرداختی و کمیسیون</small></div><div class="stat"><div class="stat-top">سود نهایی تخمینی</div><strong id="fin-profit">—</strong><small>پس از هزینه‌های عمومی فروشگاه</small></div><div class="stat"><div class="stat-top">حاشیه سود محصولات</div><strong id="fin-margin">—</strong><small>برای سفارش‌های دارای هزینه مشخص</small></div></div>
-   <div class="settings-note" style="margin-top:12px">تعداد محصولات فعال: <b id="fin-products">۰</b> · مجموع هزینه‌های عمومی ثبت‌شده: <b id="fin-expenses">—</b></div>
+   <div class="settings-note" style="margin-top:12px">تعداد محصولات فعال: <b id="fin-products">۰</b> · هزینه‌های عمومی این ماه: <b id="fin-expenses">—</b></div>
   </div>
   <div class="panel" style="margin-bottom:16px"><div class="panel-head"><h2>نگاه ماهانه یارا</h2><span class="muted" id="monthly-insight-period">این ماه</span></div><div id="monthly-insights" class="muted" style="line-height:2;font-size:12px">در حال آماده‌سازی جمع‌بندی ماهانه…</div></div>
   <div class="panel"><div class="panel-head"><h2>وضعیت اطلاعات مالی</h2></div><div id="finance-data-note" class="muted" style="line-height:2;font-size:12px">در حال بررسی اطلاعات…</div></div>
@@ -373,6 +385,14 @@ let orders=[];
 let financialProducts=[],financialExpenses=[],financialOrderItems=[],editingOrderItemRecords=[],editingLegacyOrder=false,shopCurrency='IRR',shopCurrencySymbol='تومان',shopFinancialDefaults={shipping_cost:0,shipping_charged:0,commission_type:'fixed',commission_value:0};
 function fa(n){return Number(n||0).toLocaleString('fa-IR')}
 function money(n){return fa(n)+' تومان'}
+let finMonthAnchor=new Date();
+function pKey(d){const p=persianParts(d);return p.year*12+p.month}
+function monthLabel(d){return d.toLocaleDateString('fa-IR',{month:'long',year:'numeric'})}
+function shiftMonth(anchor,dir){const key=pKey(anchor),d=new Date(anchor);d.setHours(12);for(let i=0;i<40&&pKey(d)===key;i++)d.setDate(d.getDate()+(dir>0?1:-1));return d}
+function changeFinMonth(dir){finMonthAnchor=shiftMonth(finMonthAnchor,dir);renderFinancial()}
+function resetFinMonth(){finMonthAnchor=new Date();renderFinancial()}
+function updateMonthNav(){const el=document.getElementById('fin-month-label');if(el)el.textContent=monthLabel(finMonthAnchor);const nxt=document.getElementById('fin-month-next');if(nxt)nxt.disabled=pKey(finMonthAnchor)>=pKey(new Date())}
+function inFinMonth(ms){return pKey(new Date(ms))===pKey(finMonthAnchor)}
 function dateFa(s){if(!s)return '—';try{return new Date(s+'T12:00:00').toLocaleDateString('fa-IR-u-ca-persian',{year:'numeric',month:'short',day:'numeric'})}catch(e){return s}}
 function statusPill(s){return `<span class="pill s-${s}">${labels[s]||s}</span>`}
 function initials(n){return (n||'؟').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('')}
@@ -385,7 +405,7 @@ function getReminders(){let today=future(0);return orders.filter(o=>!['done','ca
 function renderDashboard(){
  document.getElementById('stat-total').textContent=fa(orders.length);
  document.getElementById('stat-active').textContent=fa(orders.filter(o=>!['done','cancel'].includes(o.status)).length);
- document.getElementById('stat-sales').textContent=money(orders.filter(o=>!['new','cancel'].includes(o.status)).reduce((s,o)=>s+Number(o.price||0),0));
+ {const nowD=new Date();document.getElementById('stat-sales').textContent=money(orders.filter(o=>!['new','cancel'].includes(o.status)&&pKey(new Date(o.created))===pKey(nowD)).reduce((s,o)=>s+Number(o.price||0),0));const sl=document.getElementById('stat-sales-label');if(sl)sl.textContent='فروش '+nowD.toLocaleDateString('fa-IR',{month:'long'});const ss=document.getElementById('stat-sales-sub');if(ss)ss.textContent='این ماه · '+nowD.toLocaleDateString('fa-IR',{year:'numeric',month:'long'})}
  document.getElementById('stat-customers').textContent=fa(new Set(orders.map(o=>o.phone||o.name)).size);
  let recent=[...orders].sort((a,b)=>b.created-a.created).slice(0,5);
  document.getElementById('recent-orders').innerHTML=recent.length?recent.map(o=>`<div class="order-row"><div class="customer"><b>${esc(o.name)}</b><small>${esc(o.phone||'سفارش ثبت‌شده')}</small>${o.notes?`<small class="note-line">${esc(o.notes)}</small>`:''}</div><div class="product">${esc(o.product)}<br><small>${fa(o.qty)} عدد</small></div><div>${statusPill(o.status)}</div><div class="money">${money(o.price)}</div></div>`).join(''):'<div class="empty">هنوز سفارشی ثبت نشده است.</div>';
@@ -650,7 +670,8 @@ async function loadFinancialData(){if(!sb||!user||!activeShopId)return;try{
  updateExpenseAmountHint();updateProductPreview();renderFinancial();
  }catch(err){toast('بارگذاری بخش مالی ناموفق بود: '+friendlyError(err.message))}}
 function renderFinancial(){
- const eligible=orders.filter(o=>['paid','making','ready','sent','done'].includes(o.status));
+ updateMonthNav();
+ const eligible=orders.filter(o=>['paid','making','ready','sent','done'].includes(o.status)&&inFinMonth(o.created));
  const itemMap=new Map();financialOrderItems.forEach(x=>{if(!itemMap.has(x.order_id))itemMap.set(x.order_id,[]);itemMap.get(x.order_id).push(x)});
  const known=eligible.filter(o=>{const lines=itemMap.get(o.id)||[];return lines.length>0&&lines.every(x=>x.cost_recorded)});
  const unknown=eligible.length-known.length;
@@ -662,7 +683,7 @@ function renderFinancial(){
  const gross=knownItemRevenue-cogs;
  const direct=known.reduce((sum,o)=>sum+Number(o.shipping_cost||0)+Number(o.commission_amount||0)-Number(o.shipping_charged||0),0);
  const contribution=gross-direct;
- const exp=financialExpenses.reduce((sum,x)=>sum+Number(x.amount||0),0);
+ const exp=financialExpenses.filter(x=>x.expense_date&&inFinMonth(new Date(x.expense_date+'T12:00:00').getTime())).reduce((sum,x)=>sum+Number(x.amount||0),0);
  const net=contribution-exp;
  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
  const partial=unknown>0;
@@ -675,7 +696,7 @@ function renderFinancial(){
  if(pb)pb.innerHTML=financialProducts.length?financialProducts.map(p=>{let c=productCost(p),profit=Number(p.sale_price||0)-c,active=p.is_active!==false;return `<tr class="${active?'':'product-inactive'}"><td><b>${esc(p.name)}</b>${Number(p.labor_minutes||0)>0?`<br><small class="muted">زمان ساخت: ${fmtMinutes(p.labor_minutes)}</small>`:''}<br><span class="pill ${active?'status-active':'status-inactive'}">${active?'فعال':'غیرفعال'}</span></td><td>${finMoney(p.sale_price)}</td><td>${p.costs_complete?finMoney(c):'ثبت نشده'}<br><small class="muted">${p.costs_complete?'هزینه ثبت شده':'هزینه نیاز به تکمیل دارد'}</small></td><td>${p.costs_complete?finMoney(profit)+' ('+(Number(p.sale_price)>0?(profit/Number(p.sale_price)*100).toFixed(1)+'٪':'—')+')':'—'}</td><td><button class="act" onclick="editProduct('${p.id}')">ویرایش</button> ${active?`<button class="delete-btn" onclick="deactivateProduct('${p.id}')">غیرفعال‌سازی</button>`:`<button class="act" onclick="reactivateProduct('${p.id}')">فعال‌سازی</button>`} <button class="delete-btn" onclick="permanentlyDeleteProduct('${p.id}')">حذف</button></td></tr>`}).join(''):'<tr><td colspan="5"><div class="empty"><strong>هنوز محصولی ثبت نکرده‌ای</strong>برای شروع، دکمه «＋ محصول جدید» را بزن.</div></td></tr>';
  const eb=document.getElementById('expenses-body');if(eb)eb.innerHTML=financialExpenses.length?financialExpenses.map(x=>`<tr><td>${esc(x.title)}</td><td>${({advertising:'تبلیغات',fixed:'هزینه ثابت',salary:'حقوق',internet:'اینترنت و قبوض',shipping:'ارسال عمومی (غیرسفارشی)',equipment:'تجهیزات',other:'سایر'})[x.category]||x.category}</td><td>${finMoney(x.amount)}</td><td>${dateFa(x.expense_date)}</td><td>${x.expense_type==='fixed'?'ثابت':'متغیر'}</td><td><button class="act" onclick="editExpense('${x.id}')">ویرایش</button> <button class="delete-btn" onclick="deleteExpense('${x.id}')">حذف</button></td></tr>`).join(''):'<tr><td colspan="6"><div class="empty">هزینه‌ای ثبت نشده است.</div></td></tr>';
 }
-function renderMonthlyInsights(){const host=document.getElementById('monthly-insights');if(!host)return;const now=new Date(),year=now.getFullYear(),month=now.getMonth(),eligible=orders.filter(o=>['paid','making','ready','sent','done'].includes(o.status)&&new Date(o.created).getFullYear()===year&&new Date(o.created).getMonth()===month);const period=document.getElementById('monthly-insight-period');if(period)period.textContent=now.toLocaleDateString('fa-IR',{year:'numeric',month:'long'});if(!eligible.length){host.textContent='هنوز سفارش پرداخت‌شده‌ای در این ماه ثبت نشده است. با ثبت سفارش‌ها، این بخش پرفروش‌ترین محصول و مشتریان تکراری را به تو نشان می‌دهد.';return}const ids=new Set(eligible.map(o=>o.id)),stats=new Map(),buyers=new Map(),withItems=new Set();eligible.forEach(o=>{const key=o.phone||o.name;buyers.set(key,(buyers.get(key)||0)+1)});financialOrderItems.filter(x=>ids.has(x.order_id)).forEach(x=>{withItems.add(x.order_id);const name=x.product_name_snapshot||'محصول بدون نام';if(!stats.has(name))stats.set(name,{qty:0,revenue:0,profit:0,complete:true});const a=stats.get(name),q=Number(x.quantity||0),sale=Number(x.unit_sale_price||0),cost=Number(x.unit_purchase_cost||0)+Number(x.unit_production_cost||0)+Number(x.unit_packaging_cost||0)+Number(x.unit_labor_cost||0);a.qty+=q;a.revenue+=q*sale;if(x.cost_recorded)a.profit+=q*(sale-cost);else a.complete=false});eligible.filter(o=>!withItems.has(o.id)).forEach(o=>{const name=o.product||'محصول ثبت‌شده در سفارش قدیمی';if(!stats.has(name))stats.set(name,{qty:0,revenue:0,profit:0,complete:false});stats.get(name).qty+=Number(o.qty||1)});const ranked=[...stats.entries()].sort((a,b)=>b[1].qty-a[1].qty),top=ranked[0],profitable=[...stats.entries()].filter(x=>x[1].complete).sort((a,b)=>b[1].profit-a[1].profit)[0],repeat=[...buyers.values()].filter(n=>n>1).length,sales=eligible.reduce((a,o)=>a+Number(o.price||0),0);host.innerHTML=`<div class="stats" style="margin:0 0 12px"><div class="stat"><div class="stat-top">فروش این ماه</div><strong>${finMoney(sales)}</strong><small>${fa(eligible.length)} سفارش پرداخت‌شده یا در حال انجام</small></div><div class="stat"><div class="stat-top">مشتریان تکراری</div><strong>${fa(repeat)}</strong><small>بیش از یک سفارش در این ماه</small></div><div class="stat"><div class="stat-top">پرفروش‌ترین محصول</div><strong style="font-size:18px">${top?esc(top[0]):'—'}</strong><small>${top?fa(top[1].qty)+' عدد':'هنوز اطلاعاتی نیست'}</small></div><div class="stat"><div class="stat-top">بیشترین سود محصول</div><strong style="font-size:18px">${profitable?esc(profitable[0]):'—'}</strong><small>${profitable?finMoney(profitable[1].profit):'پس از ثبت هزینه محصولات مشخص می‌شود'}</small></div></div><div class="muted">این جمع‌بندی بر اساس سفارش‌های همین ماه است. سود محصول فقط وقتی نمایش داده می‌شود که هزینه‌های آن ثبت شده باشد.</div>`}
+function renderMonthlyInsights(){const host=document.getElementById('monthly-insights');if(!host)return;const now=new Date(),year=now.getFullYear(),month=now.getMonth(),eligible=orders.filter(o=>['paid','making','ready','sent','done'].includes(o.status)&&inFinMonth(o.created));const period=document.getElementById('monthly-insight-period');if(period)period.textContent=monthLabel(finMonthAnchor);if(!eligible.length){host.textContent='هنوز سفارش پرداخت‌شده‌ای در این ماه ثبت نشده است. با ثبت سفارش‌ها، این بخش پرفروش‌ترین محصول و مشتریان تکراری را به تو نشان می‌دهد.';return}const ids=new Set(eligible.map(o=>o.id)),stats=new Map(),buyers=new Map(),withItems=new Set();eligible.forEach(o=>{const key=o.phone||o.name;buyers.set(key,(buyers.get(key)||0)+1)});financialOrderItems.filter(x=>ids.has(x.order_id)).forEach(x=>{withItems.add(x.order_id);const name=x.product_name_snapshot||'محصول بدون نام';if(!stats.has(name))stats.set(name,{qty:0,revenue:0,profit:0,complete:true});const a=stats.get(name),q=Number(x.quantity||0),sale=Number(x.unit_sale_price||0),cost=Number(x.unit_purchase_cost||0)+Number(x.unit_production_cost||0)+Number(x.unit_packaging_cost||0)+Number(x.unit_labor_cost||0);a.qty+=q;a.revenue+=q*sale;if(x.cost_recorded)a.profit+=q*(sale-cost);else a.complete=false});eligible.filter(o=>!withItems.has(o.id)).forEach(o=>{const name=o.product||'محصول ثبت‌شده در سفارش قدیمی';if(!stats.has(name))stats.set(name,{qty:0,revenue:0,profit:0,complete:false});stats.get(name).qty+=Number(o.qty||1)});const ranked=[...stats.entries()].sort((a,b)=>b[1].qty-a[1].qty),top=ranked[0],profitable=[...stats.entries()].filter(x=>x[1].complete).sort((a,b)=>b[1].profit-a[1].profit)[0],repeat=[...buyers.values()].filter(n=>n>1).length,sales=eligible.reduce((a,o)=>a+Number(o.price||0),0);host.innerHTML=`<div class="stats" style="margin:0 0 12px"><div class="stat"><div class="stat-top">فروش این ماه</div><strong>${finMoney(sales)}</strong><small>${fa(eligible.length)} سفارش پرداخت‌شده یا در حال انجام</small></div><div class="stat"><div class="stat-top">مشتریان تکراری</div><strong>${fa(repeat)}</strong><small>بیش از یک سفارش در این ماه</small></div><div class="stat"><div class="stat-top">پرفروش‌ترین محصول</div><strong style="font-size:18px">${top?esc(top[0]):'—'}</strong><small>${top?fa(top[1].qty)+' عدد':'هنوز اطلاعاتی نیست'}</small></div><div class="stat"><div class="stat-top">بیشترین سود محصول</div><strong style="font-size:18px">${profitable?esc(profitable[0]):'—'}</strong><small>${profitable?finMoney(profitable[1].profit):'پس از ثبت هزینه محصولات مشخص می‌شود'}</small></div></div><div class="muted">این جمع‌بندی بر اساس سفارش‌های همین ماه است. سود محصول فقط وقتی نمایش داده می‌شود که هزینه‌های آن ثبت شده باشد.</div>`}
 function populateShopFinancialSettings(){
  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.value=String(v??'')};
  set('setting-shipping-cost',shopFinancialDefaults.shipping_cost);set('setting-shipping-charged',shopFinancialDefaults.shipping_charged);set('setting-commission-type',shopFinancialDefaults.commission_type);set('setting-commission-value',shopFinancialDefaults.commission_value);updateCommissionSettingLabel();
