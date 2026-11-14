@@ -256,18 +256,22 @@ function showResetPassword(){
  document.getElementById('reset-password-form').classList.remove('auth-hidden');
  document.getElementById('back-login-link').classList.remove('auth-hidden');
  document.getElementById('auth-hint').textContent='رمز عبور باید دقیقاً ۶ کاراکتر باشد.';
+ document.getElementById('new-password').focus();
 }
 function backToLogin(){recoveryMode=false;setAuthMode('login');}
 async function sendPasswordReset(){
  if(!sb){toast('اتصال Supabase بارگذاری نشد');return}
  const email=document.getElementById('auth-email').value.trim();
  if(!email){toast('ابتدا ایمیلت را وارد کن.');document.getElementById('auth-email').focus();return}
- const btn=document.getElementById('forgot-link');btn.disabled=true;
+ const btn=document.getElementById('forgot-link');btn.disabled=true;btn.textContent='در حال ارسال درخواست…';
+ const hint=document.getElementById('auth-hint');hint.textContent='در حال ثبت درخواست بازیابی رمز…';
  try{
-  const redirectTo=window.location.origin+window.location.pathname+'?reset-password=1';
-  const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo});if(error)throw error;
-  document.getElementById('auth-hint').textContent='اگر این ایمیل در یارا ثبت شده باشد، لینک بازیابی رمز برایت ارسال می‌شود. صندوق ورودی و پوشه هرزنامه را بررسی کن.';
- }catch(err){toast(friendlyError(err.message))}finally{btn.disabled=false}
+  const redirectTo=new URL(window.location.pathname,window.location.origin);redirectTo.searchParams.set('reset-password','1');
+  const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:redirectTo.toString()});if(error)throw error;
+  hint.textContent='درخواست بازیابی ثبت شد. اگر این ایمیل در یارا حساب داشته باشد، لینک تغییر رمز برایت ارسال می‌شود. صندوق ورودی و پوشه هرزنامه را بررسی کن.';
+  toast('درخواست بازیابی ثبت شد؛ ایمیلت را بررسی کن.');
+ }catch(err){hint.textContent='ارسال درخواست انجام نشد. دوباره تلاش کن.';toast(friendlyError(err.message))}
+ finally{btn.disabled=false;btn.textContent='رمز عبورت را فراموش کرده‌ای؟'}
 }
 async function submitNewPassword(e){
  e.preventDefault();if(!sb||authBusy)return;
@@ -277,8 +281,13 @@ async function submitNewPassword(e){
  authBusy=true;const btn=document.getElementById('reset-submit');btn.disabled=true;
  try{
   const {data,error}=await sb.auth.updateUser({password});if(error)throw error;
-  recoveryMode=false;user=data.user||user;document.getElementById('reset-password-form').reset();
-  if(user){lastLoadedUserId=null;await afterLogin();toast('رمز عبورت با موفقیت تغییر کرد.')}else{backToLogin();toast('رمز عبور تغییر کرد؛ حالا وارد شو.')}
+  const updatedEmail=data.user?.email||user?.email||'';
+  await sb.auth.signOut({scope:'local'});
+  recoveryMode=false;user=null;lastLoadedUserId=null;orders=[];shops=[];activeShopId=null;
+  document.getElementById('reset-password-form').reset();showAuth();setAuthMode('login');
+  if(updatedEmail)document.getElementById('auth-email').value=updatedEmail;
+  document.getElementById('auth-hint').textContent='رمز عبورت با موفقیت تغییر کرد. حالا با رمز جدید وارد شو.';
+  toast('رمز عبور با موفقیت تغییر کرد.');
  }catch(err){toast(friendlyError(err.message))}finally{authBusy=false;btn.disabled=false}
 }
 function friendlyError(message){
@@ -337,7 +346,7 @@ function closeShopManager(){document.getElementById('shop-modal').classList.remo
 function renderShopList(){
  const list=document.getElementById('shop-list');
  if(!shops.length){list.innerHTML='<div class="empty">هنوز فروشگاهی ثبت نشده است.</div>';return}
- list.innerHTML=shops.map(shop=>`<div style="display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--line);border-radius:11px"><div style="flex:1;min-width:0"><b style="font-size:13px">${esc(shop.name)}</b><small class="muted" style="display:block;font-size:10px">${shop.id===activeShopId?'فروشگاه فعال':'فروشگاه'}</small></div><button class="btn secondary small" type="button" onclick="switchShopFromManager('${shop.id}')">${shop.id===activeShopId?'فعال':'انتخاب'}</button><button class="btn secondary small" type="button" onclick="renameShop('${shop.id}')">تغییر نام</button></div>`).join('');
+ list.innerHTML=shops.map(shop=>`<div style="display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--line);border-radius:11px"><div style="flex:1;min-width:0"><b style="font-size:13px">${esc(shop.name)}</b><small class="muted" style="display:block;font-size:10px">${shop.id===activeShopId?'فروشگاه فعال':'فروشگاه'}</small></div><button class="btn secondary small" type="button" onclick="switchShopFromManager('${shop.id}')">${shop.id===activeShopId?'فعال':'انتخاب'}</button><button class="btn secondary small" type="button" onclick="renameShop('${shop.id}')">تغییر نام</button><button class="delete-btn" type="button" onclick="deleteShop('${shop.id}')">حذف</button></div>`).join('');
 }
 async function submitCreateShop(e){
  e.preventDefault();const input=document.getElementById('new-shop-name'),clean=input.value.trim();if(!clean){toast('نام فروشگاه را وارد کن');return}
@@ -349,6 +358,21 @@ async function renameShop(id){
  const shop=shops.find(x=>x.id===id);if(!shop)return;const name=prompt('نام جدید فروشگاه را وارد کن:',shop.name);if(name===null)return;const clean=name.trim();if(!clean){toast('نام فروشگاه نمی‌تواند خالی باشد.');return}
  const {data,error}=await sb.from('businesses').update({name:clean}).eq('id',id).eq('user_id',user.id).select('id,name').single();if(error){toast(friendlyError(error.message));return}
  shops=shops.map(x=>x.id===id?data:x);await loadShops();renderShopList();toast('نام فروشگاه تغییر کرد.');
+}
+async function deleteShop(id){
+ const shop=shops.find(x=>x.id===id);if(!shop)return;
+ if(shops.length<=1){toast('برای حفظ فضای کاری، آخرین فروشگاه را نمی‌توان حذف کرد.');return}
+ const approved=confirm(`فروشگاه «${shop.name}» حذف شود؟\n\nتمام سفارش‌ها و دسته‌بندی‌های وابسته به این فروشگاه نیز برای همیشه حذف می‌شوند. این کار برگشت‌پذیر نیست.`);
+ if(!approved)return;
+ const wasActive=id===activeShopId;
+ const {error}=await sb.from('businesses').delete().eq('id',id).eq('user_id',user.id);
+ if(error){toast('حذف فروشگاه انجام نشد: '+friendlyError(error.message));return}
+ shops=shops.filter(x=>x.id!==id);
+ if(wasActive){
+  activeShopId=shops[0].id;categoryOptions=[...DEFAULT_CATEGORIES];refreshCategoryMenus();orders=[];renderAll();
+  try{await loadCategories();await loadOrders()}catch(err){toast(friendlyError(err.message))}
+ }
+ await loadShops();renderShopList();toast('فروشگاه و داده‌های وابسته به آن حذف شدند.');
 }
 async function switchShopFromManager(id){await switchShop(id);renderShopList();toast('فروشگاه فعال تغییر کرد.');}
 async function switchShop(id){if(!shops.some(x=>x.id===id))return;activeShopId=id;categoryOptions=[...DEFAULT_CATEGORIES];refreshCategoryMenus();orders=[];renderAll();await loadCategories();await loadOrders();}
@@ -378,15 +402,23 @@ async function signOut(){
 }
 async function init(){
  if(!sb){showAuth();toast('اتصال Supabase بارگذاری نشد');return}
- const {data:{session},error}=await sb.auth.getSession();
- if(error)toast(friendlyError(error.message));
- if(session?.user){user=session.user;await afterLogin()}else showAuth();
+ const recoveryRequested=new URLSearchParams(window.location.search).get('reset-password')==='1';
+ // Register the listener before reading the session so a fast recovery event is not missed.
  sb.auth.onAuthStateChange((event,session)=>{
   user=session?.user||null;
   if(event==='PASSWORD_RECOVERY'){setTimeout(showResetPassword,0);return}
   // Auth callbacks run under Supabase's auth lock; defer data queries until it is released.
-  if(user&&!recoveryMode){setTimeout(()=>afterLogin(),0)}else if(!user){lastLoadedUserId=null;orders=[];showAuth()}
+  if(user&&!recoveryMode){setTimeout(()=>afterLogin(),0)}else if(!user){lastLoadedUserId=null;orders=[];if(!recoveryMode)showAuth()}
  });
+ const {data:{session},error}=await sb.auth.getSession();
+ if(error)toast(friendlyError(error.message));
+ if(recoveryRequested){
+  if(session?.user){user=session.user;showResetPassword()}
+  else{
+   showAuth();setAuthMode('login');
+   document.getElementById('auth-hint').textContent='نشست بازیابی رمز معتبر نیست یا لینک منقضی شده است. دوباره درخواست لینک بازیابی بده.';
+  }
+ }else if(session?.user){user=session.user;await afterLogin()}else showAuth();
 }
 refreshCategoryMenus();
 init();
