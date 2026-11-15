@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
-  <title>یارا | همراه کسب‌وکار خانگی — نسخه ۸٫۲</title>
+  <title>یارا | همراه کسب‌وکار خانگی — نسخه ۸٫۳</title>
   <style>
     @font-face {
       font-family: 'Vazirmatn';
@@ -2160,30 +2160,54 @@
     }
 
 
-    /* V8.2: welcome screen for a brand-new shop */
-    .wl{display:grid;grid-template-columns:1.05fr 1fr;gap:26px;align-items:center;background:linear-gradient(135deg,#eef6f5,#fff 70%);border:1px solid #d9ebe8;border-radius:20px;padding:28px;margin-bottom:20px}
-    .wl h2{margin:0 0 8px;font-size:23px;line-height:1.5}
-    .wl .wl-lead{margin:0 0 16px;color:#4a5566;font-size:14px;line-height:2}
+    /* V8.3: welcome screen with an Instagram-DM style demo */
+    .wl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);grid-template-areas:"head demo" "body demo";column-gap:36px;row-gap:6px;align-items:center;background:linear-gradient(135deg,#eef6f5,#fff 70%);border:1px solid #d9ebe8;border-radius:22px;padding:30px;margin-bottom:20px}
+    .wl-head{grid-area:head;align-self:end}.wl-body{grid-area:body;align-self:start;margin-top:12px}.wl-demo{grid-area:demo}
+    .wl h2{margin:0 0 8px;font-size:24px;line-height:1.5}
+    .wl-lead{margin:0 0 14px;color:#4a5566;font-size:14px;line-height:2}
     .wl-points{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:9px}
     .wl-points li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.8}
     .wl-points i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--primary2);color:var(--primary);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;margin-top:2px}
-    .wl-cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
-    .wl-cta .btn{padding:13px 22px;font-size:15px}
+    .wl-cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+    .wl-cta .btn{padding:14px 24px;font-size:15px}
     .wl-link{background:none;color:var(--primary);font-weight:700;font-size:13px;padding:6px 2px;text-decoration:underline;text-underline-offset:4px}
-    .wl-demo{display:grid;gap:10px;justify-items:stretch}
-    .wl-tag{font-size:11px;color:var(--muted);text-align:center}
-    .wl-bubble{background:#fff;border:1px solid var(--line);border-radius:16px 16px 16px 4px;padding:12px 14px;font-size:13px;line-height:1.9;box-shadow:var(--shadow)}
-    .wl-bubble small{display:block;color:var(--muted);font-size:11px;margin-bottom:2px}
-    .wl-arrow{justify-self:center;background:var(--primary);color:#fff;border-radius:999px;padding:4px 13px;font-size:12px;font-weight:700}
-    .wl-draft{background:#fff;border:1.5px solid var(--primary);border-radius:14px;padding:12px 14px;font-size:13px;box-shadow:var(--shadow)}
-    .wl-draft b.t{display:block;margin-bottom:6px;font-size:12px;color:var(--primary)}
-    .wl-draft div.r{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid var(--line)}
-    .wl-draft div.r span{color:var(--muted)}
-    .wl-skip{margin-top:12px;background:none;color:var(--muted);font-size:12px;padding:4px 0}
-    @media(max-width:860px){.wl{grid-template-columns:1fr;padding:18px;gap:18px}.wl h2{font-size:20px}.wl-cta .btn{width:100%}}
-
+    .wl-skip{margin-top:10px;background:none;color:var(--muted);font-size:12px;padding:4px 0}
+    /* phone */
+    .wl-demo{display:grid;gap:12px}
+    .wl-tag{text-align:center;font-size:11.5px;color:var(--muted)}
+    .ph{background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:0 14px 40px rgba(27,38,59,.12);overflow:hidden}
+    .ph-top{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line)}
+    .ph-av{width:34px;height:34px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#f9a03f,#dd2a7b 55%,#7b3fe4);flex:none}
+    .ph-av span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#fff;font-size:15px}
+    .ph-top b{font-size:13px;direction:ltr;unicode-bidi:plaintext}.ph-top small{display:block;color:var(--muted);font-size:10.5px}
+    .ph-chat{padding:14px 12px;display:grid;gap:7px;background:#fafbfc}
+    .m{max-width:82%;padding:8px 12px;border-radius:18px;font-size:13px;line-height:1.9}
+    .m.c{background:#eceff3;justify-self:start;border-bottom-right-radius:5px}
+    .m.s{background:var(--primary);color:#fff;justify-self:end;border-bottom-left-radius:5px}
+    .m mark{background:none;color:inherit;border-radius:5px;padding:1px 3px;font-weight:700;background-image:linear-gradient(#bfe9df,#bfe9df);background-repeat:no-repeat;background-position:right;background-size:0 100%;animation:wlmark .5s ease forwards;animation-delay:var(--d)}
+    .ph-read{display:flex;align-items:center;justify-content:center;gap:8px;padding:9px;background:#f1f7f6;border-top:1px solid #d9ebe8;border-bottom:1px solid #d9ebe8;color:var(--primary);font-size:12px;font-weight:800}
+    .ph-read i{width:6px;height:6px;border-radius:50%;background:var(--primary);display:inline-block;animation:wldot 1s infinite}
+    .ph-read i:nth-child(3){animation-delay:.15s}.ph-read i:nth-child(4){animation-delay:.3s}
+    .ph-draft{padding:12px 14px 14px;background:#fff}
+    .ph-draft>b{display:block;margin-bottom:6px;font-size:12px;color:var(--primary)}
+    .dr{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--line);font-size:13px;opacity:0;transform:translateY(5px);animation:wlrow .45s ease forwards;animation-delay:var(--d)}
+    .dr span{color:var(--muted)}
+    .dr b{background:#e6f6ee;border-radius:6px;padding:0 6px}
+    .ph-ok{margin-top:8px;text-align:center;font-size:11.5px;color:var(--muted);opacity:0;animation:wlrow .4s ease forwards;animation-delay:var(--d)}
+    @keyframes wlmark{to{background-size:100% 100%}}
+    @keyframes wlrow{to{opacity:1;transform:none}}
+    @keyframes wldot{50%{opacity:.25}}
+    @media(prefers-reduced-motion:reduce){.m mark{animation:none;background-size:100% 100%}.dr,.ph-ok{animation:none;opacity:1;transform:none}.ph-read i{animation:none}}
+    @media(max-width:860px){
+      .wl{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "demo" "body";}.wl-head,.wl-body{align-self:auto;margin-top:0}.wl{padding:18px 14px;row-gap:16px;border-radius:18px}
+      .wl h2{font-size:20px}.wl-lead{font-size:13.5px;margin:0}
+      .wl-points{margin-bottom:16px}
+      .wl-cta{flex-direction:column;align-items:stretch;gap:6px}.wl-cta .btn{width:100%;padding:15px}
+      .wl-cta .wl-link{text-align:center;padding:10px}.wl-skip{display:block;margin:6px auto 0}
+      .m{font-size:12.5px}
+    }
     .onboard:has(.wl){background:none;border:0;padding:0}
-    .onboard:has(.wl)~.quick{display:none}
+    .onboard:has(.wl)~.quick{display:none!important}
     /* getting-started card */
     .onboard {
       background: linear-gradient(135deg, #f1f7f6, #fff);
@@ -3688,7 +3712,7 @@
               id="stat-customers">۰</strong><small>مشتری یکتا</small>
           </div>
         </div>
-        <div class="content-grid">
+        <div class="content-grid" id="dash-grid">
           <div class="panel">
             <div class="panel-head">
               <h2>آخرین سفارش‌ها</h2><button class="btn secondary small" onclick="showPage('orders')">همه سفارش‌ها
@@ -4833,20 +4857,47 @@
       const hasOrder = orders.length > 0;
 
       const chatBtn = document.getElementById('dash-chat-btn'), statsEl = document.getElementById('dash-stats');
+      const gridEl = document.getElementById('dash-grid');
       if (statsEl) statsEl.style.display = hasOrder ? '' : 'none';
+      if (gridEl) gridEl.style.display = (hasOrder || (typeof leads !== 'undefined' && leads.length)) ? '' : 'none';
       if (dismissed || (hasProduct && hasOrder)) {
-        box.style.display = 'none';
+        box.style.display = 'none'; box.dataset.mode = '';
         if (chatBtn) chatBtn.style.display = '';
         return;
       }
       if (chatBtn) chatBtn.style.display = 'none';
+      if (hasProduct || hasOrder) box.dataset.mode = 'steps';
       if (!hasProduct && !hasOrder) {
+        if (box.dataset.mode === 'welcome') { box.style.display = 'block'; return; }
         const pt = t => `<li><i>✓</i><span>${t}</span></li>`;
-        box.innerHTML = `<div class="wl"><div>
+        box.innerHTML = `<div class="wl">
+          <div class="wl-head">
             <h2>یارا، دستیار فروشگاه اینستاگرامی تو</h2>
             <p class="wl-lead">اگر سفارش‌هایت لابه‌لای دایرکت‌ها گم می‌شود، یارا برای همین ساخته شده. مشتری‌ها، سفارش‌ها و پیگیری‌هایت را یک‌جا نگه می‌دارد تا بدانی چه کسی چه خواسته، چی آماده است و چی عقب مانده.</p>
+          </div>
+          <div class="wl-demo" aria-hidden="true">
+            <div class="wl-tag">نمونه از یک فروشگاه دستبند · این‌طوری کار می‌کند</div>
+            <div class="ph">
+              <div class="ph-top"><div class="ph-av"><span>👤</span></div><div><b>maryam.shell</b><small>دایرکت</small></div></div>
+              <div class="ph-chat">
+                <div class="m c">سلام وقت بخیر 👋 <mark style="--d:.4s">دستبند صدفی آبی</mark> دارید؟</div>
+                <div class="m s">سلام عزیزم، بله موجوده ✨ قیمتش ۲۶۰ هزار تومنه</div>
+                <div class="m c">عالیه! <mark style="--d:1.2s">دو تا</mark> لازم دارم. من <mark style="--d:1.8s">مریم</mark>ام، آدرسم <mark style="--d:2.4s">تهران، ونک</mark>، شمارهٔ <mark style="--d:3s">۰۹۱۲۱۲۳۴۵۶۷</mark></div>
+              </div>
+              <div class="ph-read"><i></i><i></i><i></i> یارا گفتگو را می‌خواند</div>
+              <div class="ph-draft"><b>پیش‌نویس سفارش</b>
+                <div class="dr" style="--d:3.6s"><span>مشتری</span><b>مریم</b></div>
+                <div class="dr" style="--d:3.9s"><span>محصول</span><b>دستبند صدفی آبی</b></div>
+                <div class="dr" style="--d:4.2s"><span>تعداد</span><b>۲</b></div>
+                <div class="dr" style="--d:4.5s"><span>تلفن</span><b>۰۹۱۲۱۲۳۴۵۶۷</b></div>
+                <div class="dr" style="--d:4.8s"><span>آدرس</span><b>تهران، ونک</b></div>
+                <div class="ph-ok" style="--d:5.2s">تو یک‌بار نگاه می‌کنی و ذخیره می‌کنی. بدون تایپ دوباره</div>
+              </div>
+            </div>
+          </div>
+          <div class="wl-body">
             <ul class="wl-points">
-              ${pt('<b>گفتگوی دایرکت را بچسبان</b>؛ یارا اسم، محصول، تعداد و آدرس را از آن درمی‌آورد و سفارش را آماده می‌کند.')}
+              ${pt('<b>گفتگوی دایرکت را بچسبان</b>؛ یارا اسم، محصول، تعداد و آدرس را درمی‌آورد و سفارش را آماده می‌کند.')}
               ${pt('<b>برای مشتری لینک پیگیری بفرست</b> تا هر بار نپرسد «سفارشم کجاست؟».')}
               ${pt('<b>سفارش‌های گیرکرده را ببین</b> قبل از اینکه مشتری ناراضی شود.')}
             </ul>
@@ -4857,16 +4908,8 @@
             </div>
             <button class="wl-skip" type="button" onclick="dismissOnboard()">دیگر نشان نده</button>
           </div>
-          <div class="wl-demo" aria-hidden="true">
-            <div class="wl-tag">نمونه: فروشگاه دستبند</div>
-            <div class="wl-bubble"><small>مشتری در دایرکت</small>سلام 👋 دو تا دستبند صدفی آبی می‌خواستم. آدرسم تهران، ونک. شماره‌ام ۰۹۱۲۱۲۳۴۵۶۷، مریم هستم.</div>
-            <div class="wl-arrow">✦ یارا می‌خواند</div>
-            <div class="wl-draft"><b class="t">پیش‌نویس سفارش، تو بررسی و ذخیره می‌کنی</b>
-              <div class="r"><span>مشتری</span><b>مریم</b></div>
-              <div class="r"><span>محصول</span><b>دستبند صدفی آبی × ۲</b></div>
-              <div class="r"><span>تلفن</span><b>۰۹۱۲۱۲۳۴۵۶۷</b></div>
-              <div class="r"><span>آدرس</span><b>تهران، ونک</b></div>
-            </div></div></div>`;
+        </div>`;
+        box.dataset.mode = 'welcome';
         box.style.display = 'block';
         return;
       }
