@@ -3653,6 +3653,41 @@
       body .m { font-size: 12.5px; line-height: 1.85; padding: 7px 11px }
       body .dr { font-size: 12.5px; padding: 5px 0 }
     }
+
+    /* V9 mobile refinement: Instagram-first, quiet navigation, no feature removal */
+    .mobile-more-trigger { display: none; }
+    .mobile-more { display: none; }
+    @media(max-width:700px) {
+      .sidebar { padding-left: 10px; padding-right: 10px; }
+      .nav { height: 68px; display: grid; grid-template-columns: 1fr 1fr 1.18fr 1fr; align-items: center; justify-content: initial; gap: 2px; }
+      .nav button { min-width: 0; flex: initial; min-height: 58px; padding: 5px 2px; gap: 3px; }
+      .nav button .ico { width: 26px; height: 26px; margin: 0; border: 0; box-shadow: none; background: transparent; }
+      .nav button .lbl { font-size: 11px; white-space: nowrap; }
+      .nav [data-page=orders] { order: 1; }
+      .nav [data-page=customers] { order: 2; }
+      .nav [data-page=dashboard] { order: 3; }
+      .nav .mobile-more-trigger { display: flex; order: 4; }
+      .nav [data-page=products], .nav [data-page=finance], .nav .nav-account { display: none !important; }
+      .nav [data-page=dashboard] { transform: translateY(-5px); }
+      .nav [data-page=dashboard] .ico { width: 48px; height: 42px; margin: 0; border-radius: 15px; background: var(--primary2); color: var(--primary); border: 0; box-shadow: none; }
+      .nav [data-page=dashboard].active .ico { background: var(--primary); color: #fff; }
+      .nav [data-page=dashboard] .lbl { margin-top: 0; }
+      .nav button.active:not([data-page=dashboard]) { color: var(--primary); }
+      .mobile-more:not([hidden]) { display: grid; position: absolute; right: 12px; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); width: min(230px, calc(100vw - 24px)); padding: 8px; gap: 3px; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 12px 34px #17212b24; z-index: 20; }
+      .mobile-more button { min-height: 44px; padding: 9px 12px; border-radius: 10px; background: transparent; color: var(--ink); text-align: right; font-size: 14px; }
+      .mobile-more button:active { background: var(--primary2); color: var(--primary); }
+      .main { padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px)); }
+      /* Keep the getting-started actions, remove the long sales pitch and animated demo. */
+      #onboard-card[data-mode="welcome"] { padding: 16px; margin: 0 0 14px; border-radius: 18px; }
+      #onboard-card .wl-head p, #onboard-card .wl-demo, #onboard-card .wl-points, #onboard-card .wl-skip { display: none !important; }
+      #onboard-card .wl-head h2 { margin: 0 0 12px; font-size: 18px; line-height: 1.7; }
+      #onboard-card .wl-body { padding-top: 0; }
+      #onboard-card .wl-cta { display: grid; gap: 8px; }
+      #onboard-card .wl-cta .btn { min-height: 54px; border-radius: 13px; }
+      #onboard-card .wl-link { min-height: 42px; padding: 8px; }
+      .hello h1 { font-size: 20px; }
+      .hello p { font-size: 13px; }
+    }
   </style>
 </head>
 
@@ -3727,6 +3762,7 @@
                 <rect x="7.5" y="11" width="3" height="6" rx=".6" />
                 <rect x="13" y="7" width="3" height="10" rx=".6" />
               </svg></span><span class="lbl">هوش مالی</span></button>
+          <button type="button" class="mobile-more-trigger" aria-expanded="false" aria-controls="mobile-more" onclick="toggleMobileMore()"><span class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></span><span class="lbl">بیشتر</span></button>
           <button type="button" class="nav-account" onclick="openAccountSheet()"><span class="ico"><svg
                 viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -3734,6 +3770,15 @@
                 <path d="M4.5 20c.8-4 3.8-6 7.5-6s6.7 2 7.5 6" />
               </svg></span><span class="lbl">حساب</span></button>
         </nav>
+        <div class="mobile-more" id="mobile-more" hidden>
+          <button type="button" onclick="closeMobileMore();showPage('products')">محصولات</button>
+          <button type="button" onclick="closeMobileMore();showPage('finance')">هوش مالی</button>
+          <button type="button" onclick="closeMobileMore();showPage('expenses')">هزینه‌ها</button>
+          <button type="button" onclick="closeMobileMore();showPage('reminders')">پیگیری‌ها</button>
+          <button type="button" onclick="closeMobileMore();openAccountSheet()">حساب و فروشگاه</button>
+          <button type="button" onclick="closeMobileMore();startTour(true)">راهنما</button>
+          <button type="button" onclick="closeMobileMore();signOut()">خروج از حساب</button>
+        </div>
       </div>
       <button class="btn secondary small desk-only" type="button" onclick="openShopManager()">مدیریت فروشگاه‌ها</button>
       <button class="logout-btn" onclick="signOut()">↪ خروج از حساب</button>
@@ -5122,6 +5167,24 @@
         const ch = card.offsetHeight || 190, cw = card.offsetWidth || 320; card.style.top = Math.max(12, (vh - ch) / 2) + 'px'; if (vw > 700) { card.style.left = Math.max(12, (vw - cw) / 2) + 'px'; card.style.right = 'auto' }
       }
     }
+
+    function toggleMobileMore() {
+      const menu = document.getElementById('mobile-more');
+      const trigger = document.querySelector('.mobile-more-trigger');
+      if (!menu || !trigger) return;
+      const opening = menu.hasAttribute('hidden');
+      if (opening) menu.removeAttribute('hidden'); else menu.setAttribute('hidden', '');
+      trigger.setAttribute('aria-expanded', opening ? 'true' : 'false');
+    }
+    function closeMobileMore() {
+      const menu = document.getElementById('mobile-more');
+      const trigger = document.querySelector('.mobile-more-trigger');
+      menu?.setAttribute('hidden', '');
+      trigger?.setAttribute('aria-expanded', 'false');
+    }
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.mobile-more') && !e.target.closest('.mobile-more-trigger')) closeMobileMore();
+    });
 
     init();
   </script>
