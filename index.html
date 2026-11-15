@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
-  <title>یارا | همراه کسب‌وکارهای کوچک — نسخه ۸٫۳</title>
+  <title>یارا | همراه کسب‌وکار خانگی — نسخه ۹</title>
   <style>
     @font-face {
       font-family: 'Vazirmatn';
@@ -3549,10 +3549,114 @@
       line-height: 1.8;
       margin: 0 0 8px
     }
+
+    /* =====================================================================
+       V9 — MOBILE LAYER (final word for phones; no feature changes)
+       Goals: compact header, one consistent bottom bar, calm spacing,
+       first screen explains the app like the desktop version does.
+       Scale: 4 / 8 / 12 / 16 px. Type: 20 title · 16 section · 14 body · 12 note · 11 tab label.
+       ===================================================================== */
+    @media (max-width:700px) {
+      body { font-size: 14px; line-height: 1.7 }
+      body .main { padding: 12px 16px calc(86px + env(safe-area-inset-bottom, 0px)) }
+
+      /* ---- Header: one compact row instead of a 200px block ---- */
+      body .topbar { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 14px; padding: 0 0 12px; border-bottom: 1px solid var(--line) }
+      body .topbar .hello { flex: 1 1 auto; width: auto; min-width: 0 }
+      body .topbar .hello h1 { font-size: 20px; line-height: 1.4; margin: 0; font-weight: 800; letter-spacing: 0 }
+      body .topbar .hello p { margin: 2px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--muted) }
+      body .topbar .hello .date-chip { display: none }
+      body[data-page=dashboard] .topbar .hello .date-chip { display: block; width: auto; margin: 2px 0 0; padding: 0; font-size: 12px; background: none; border: 0; color: var(--muted) }
+      /* inside pages the page name IS the title (the greeting stays on Home) */
+      body:not([data-page=dashboard]) .topbar .hello h1 { display: none }
+      body:not([data-page=dashboard]) .topbar .hello p#subheading { margin: 0; font-size: 18px; line-height: 1.5; font-weight: 800; color: var(--ink) }
+      body .topbar .top-actions { display: flex; grid-template-columns: none; width: auto; flex: 0 0 auto; gap: 8px; align-items: center }
+      body .top-actions .shop-chip, body.single-shop .top-actions .shop-chip { width: auto; flex: 0 1 auto; min-width: 0; max-width: 132px; height: 40px; min-height: 40px; padding: 0 12px; gap: 6px; border-radius: 12px }
+      body .top-actions .shop-chip:has(#shop-chip-name:empty) { max-width: 40px; width: 40px; padding: 0; justify-content: center }
+      body .top-actions .shop-chip span { max-width: 84px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px }
+      body .top-actions .help-btn { width: 40px; min-width: 40px; height: 40px; min-height: 40px; padding: 0; border-radius: 12px; display: grid; place-items: center }
+      body .top-actions .help-btn .hl { display: none }
+
+      @media (max-width:380px) {
+        body .top-actions .shop-chip, body.single-shop .top-actions .shop-chip { max-width: 40px; width: 40px; padding: 0; justify-content: center }
+        body .top-actions .shop-chip span { display: none }
+      }
+
+      /* ---- Bottom bar: five equal tabs, nothing floating ---- */
+      body .sidebar { padding: 0 6px env(safe-area-inset-bottom, 0px); border: 0; border-top: 1px solid var(--line); border-radius: 0; background: #fff; box-shadow: 0 -2px 12px rgba(27, 38, 59, .06) }
+      body .sidebar .nav { height: 60px; align-items: center; gap: 0 }
+      body .sidebar .nav button { flex: 1 1 0; height: 100%; padding: 6px 0 4px; gap: 3px; font-size: 11px; font-weight: 600; color: #6f7886; border-radius: 0; background: none }
+      body .sidebar .nav button .lbl { font-size: 11px; line-height: 1.2; white-space: nowrap }
+      body .sidebar .nav button .ico,
+      body .sidebar .nav [data-page=dashboard] .ico { width: 52px; height: 30px; margin: 0; border-radius: 15px; background: transparent; border: 0; box-shadow: none; display: grid; place-items: center; color: inherit; transition: background .15s }
+      body .sidebar .nav button .ico svg,
+      body .sidebar .nav [data-page=dashboard] .ico svg { width: 22px; height: 22px }
+      body .sidebar .nav [data-page=dashboard] .lbl { margin: 0 }
+      body .sidebar .nav button.active,
+      body .sidebar .nav button:hover { background: none; color: var(--primary); font-weight: 800 }
+      body .sidebar .nav button.active .ico,
+      body .sidebar .nav [data-page=dashboard].active .ico { background: var(--primary2); color: var(--primary); border: 0; box-shadow: none }
+      body .toast { bottom: calc(72px + env(safe-area-inset-bottom, 0px)) }
+
+      /* ---- Section tabs: one segmented control ---- */
+      body .section-tabs { display: flex; gap: 4px; padding: 4px; margin: 0 0 12px; background: #eceff3; border-radius: 14px; border: 0 }
+      body .section-tabs button { flex: 1 1 0; min-width: 0; min-height: 40px; padding: 0 6px; border: 0; border-radius: 11px; background: transparent; color: #5d6676; font-size: 14px; font-weight: 700; white-space: nowrap; box-shadow: none }
+      body .section-tabs button.active { background: #fff; color: var(--primary); box-shadow: 0 1px 4px rgba(27, 38, 59, .12) }
+      body .finance-tabs button { font-size: 13px; padding: 0 2px }
+      body .customer-tabs { display: flex; gap: 8px; margin: 0 0 12px; overflow-x: auto; scrollbar-width: none }
+      body .customer-tabs::-webkit-scrollbar { display: none }
+      body .customer-tabs button { flex: 0 0 auto; min-height: 36px; padding: 0 14px; border-radius: 18px; font-size: 13px; font-weight: 700; white-space: nowrap }
+
+      /* ---- Page intro line + its actions ---- */
+      body .subpage-note { display: flex; flex-direction: column; align-items: stretch; gap: 10px; margin: 0 0 12px; font-size: 13px; line-height: 1.7; color: var(--muted) }
+      body .subpage-note > span:last-child:not(:only-child) { display: flex; gap: 8px }
+      body .subpage-note .btn { flex: 1 1 0; min-height: 44px; font-size: 14px; justify-content: center }
+      body .subpage-note > .btn { width: 100% }
+      body .subpage-note > span:last-child .btn:last-child { background: var(--primary); color: #fff }
+
+      /* ---- Panels, lists, inputs ---- */
+      body .panel { padding: 14px; border-radius: 16px; margin-bottom: 12px; box-shadow: none; border: 1px solid var(--line) }
+      body .panel-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 10px; margin-bottom: 12px }
+      body .panel-head h2 { font-size: 16px; line-height: 1.5; margin: 0 }
+      body .panel-head .muted { font-size: 12px }
+      body .toolbar { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 12px }
+      body .toolbar .field, body .toolbar input, body .toolbar select { width: 100%; min-height: 46px; font-size: 16px; border-radius: 12px }
+      body .empty { padding: 28px 16px; font-size: 14px; line-height: 1.9; text-align: center; color: var(--muted); border-radius: 14px }
+      body .empty strong { display: block; margin-bottom: 4px; font-size: 15px; color: var(--ink) }
+
+      /* ---- Finance month switcher ---- */
+      body .month-nav { padding: 8px; gap: 8px; margin-bottom: 12px; border-radius: 16px }
+      body .month-nav > button { min-height: 40px; padding: 0 12px; font-size: 13px; border-radius: 11px }
+
+      /* ---- Home: stats + quick actions ---- */
+      body .stats { gap: 10px; margin-bottom: 14px }
+      body .stat { padding: 12px 14px; border-radius: 14px }
+      body .stat strong { font-size: 21px }
+      body .stat small { font-size: 11.5px }
+      body .quick { gap: 10px; margin-bottom: 12px }
+      body .quick button { padding: 14px 12px; border-radius: 14px; min-height: 0 }
+      body .quick button b { font-size: 14px }
+      body .quick button small { font-size: 11.5px }
+
+      /* ---- Home welcome (empty state): headline → action → how it works ---- */
+      body .wl { grid-template-areas: "head" "body" "demo"; row-gap: 14px; padding: 16px 14px; border-radius: 18px; margin-bottom: 14px }
+      body .wl h2 { font-size: 19px; line-height: 1.55; margin: 0 0 4px }
+      body .wl-lead { font-size: 13px; line-height: 1.9; margin: 0 }
+      body .wl-points { gap: 8px; margin: 0 0 14px }
+      body .wl-points li { font-size: 13px; line-height: 1.75 }
+      body .wl-cta { gap: 4px }
+      body .wl-cta .btn { min-height: 48px; padding: 0 16px; font-size: 15px }
+      body .wl-cta .wl-link { padding: 10px; font-size: 13px }
+      body .wl-demo { gap: 8px }
+      body .ph { border-radius: 20px }
+      body .ph-chat { padding: 12px 10px; gap: 6px }
+      body .m { font-size: 12.5px; line-height: 1.85; padding: 7px 11px }
+      body .dr { font-size: 12.5px; padding: 5px 0 }
+    }
   </style>
 </head>
 
-<body>
+<body data-page="dashboard">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <div id="auth-screen" class="auth-screen show" dir="rtl">
     <div class="auth-card">
@@ -4291,7 +4395,7 @@
     function statusPill(s) { return `<span class="pill s-${s}">${labels[s] || s}</span>` }
     function initials(n) { return (n || '؟').trim().split(/\s+/).slice(0, 2).map(x => x[0]).join('') }
     function toast(t) { let el = document.getElementById('toast'); el.textContent = t; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 2300) }
-    function showPage(p) { document.querySelectorAll('.page').forEach(x => x.classList.remove('active')); const page = document.getElementById(p); if (!page) return; page.classList.add('active'); const navPage = p === 'expenses' ? 'finance' : p === 'reminders' ? 'dashboard' : p; document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('active', x.dataset.page === navPage)); let titles = { dashboard: 'پیشخوان مشتری‌ها و سفارش‌های تو', orders: 'سفارش‌های مشتریان', customers: 'مشتریان و سابقه خرید', reminders: 'پیگیری‌های مهم فروشگاه', finance: 'تصویر مالی و تحلیل عملکرد فروشگاه', products: 'کاتالوگ محصولات', expenses: 'هزینه‌های عمومی فروشگاه' }; document.getElementById('subheading').textContent = titles[p] || titles.dashboard; renderAll(); if (['finance', 'products', 'expenses'].includes(p)) loadFinancialData(); if (p === 'finance') applyFinanceTab('overview'); if (p === 'expenses') applyFinanceTab('expenses') }
+    function showPage(p) { document.querySelectorAll('.page').forEach(x => x.classList.remove('active')); const page = document.getElementById(p); if (!page) return; page.classList.add('active'); document.body.dataset.page = p; const navPage = p === 'expenses' ? 'finance' : p === 'reminders' ? 'dashboard' : p; document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('active', x.dataset.page === navPage)); let titles = { dashboard: 'پیشخوان مشتری‌ها و سفارش‌های تو', orders: 'سفارش‌های مشتریان', customers: 'مشتریان و سابقه خرید', reminders: 'پیگیری‌های مهم فروشگاه', finance: 'تصویر مالی و تحلیل عملکرد فروشگاه', products: 'کاتالوگ محصولات', expenses: 'هزینه‌های عمومی فروشگاه' }; document.getElementById('subheading').textContent = titles[p] || titles.dashboard; renderAll(); if (['finance', 'products', 'expenses'].includes(p)) loadFinancialData(); if (p === 'finance') applyFinanceTab('overview'); if (p === 'expenses') applyFinanceTab('expenses') }
     function showCustomerTab(tab) { const list = tab === 'customers'; document.getElementById('customer-list-panel').style.display = list ? '' : 'none'; document.getElementById('customer-leads-panel').style.display = list ? 'none' : ''; document.getElementById('customer-tab-list').classList.toggle('active', list); document.getElementById('customer-tab-leads').classList.toggle('active', !list); if (!list) loadLeads(); }
     function applyFinanceTab(tab) { document.querySelectorAll('.finance-tabs [data-fin-tab]').forEach(b => b.classList.toggle('active', b.dataset.finTab === tab)); const overview = document.getElementById('finance-overview-panel'), settings = document.getElementById('finance-settings-panel'), learn = document.getElementById('finance-learn-panel'); if (overview) overview.style.display = tab === 'overview' ? '' : 'none'; if (settings) settings.style.display = tab === 'settings' ? '' : 'none'; if (learn) learn.style.display = tab === 'learn' ? '' : 'none' }
     function showFinanceTab(tab) { if (tab === 'expenses') { showPage('expenses'); return } showPage('finance'); applyFinanceTab(tab) }
