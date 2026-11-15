@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
-  <title>یارا | همراه کسب‌وکار خانگی — نسخه ۸</title>
+  <title>یارا | همراه کسب‌وکارهای کوچک — نسخه ۸٫۳</title>
   <style>
     @font-face {
       font-family: 'Vazirmatn';
@@ -2159,6 +2159,55 @@
       color: #f5f8f7
     }
 
+
+    /* V8.3: welcome screen with an Instagram-DM style demo */
+    .wl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);grid-template-areas:"head demo" "body demo";column-gap:36px;row-gap:6px;align-items:center;background:linear-gradient(135deg,#eef6f5,#fff 70%);border:1px solid #d9ebe8;border-radius:22px;padding:30px;margin-bottom:20px}
+    .wl-head{grid-area:head;align-self:end}.wl-body{grid-area:body;align-self:start;margin-top:12px}.wl-demo{grid-area:demo}
+    .wl h2{margin:0 0 8px;font-size:24px;line-height:1.5}
+    .wl-lead{margin:0 0 14px;color:#4a5566;font-size:14px;line-height:2}
+    .wl-points{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:9px}
+    .wl-points li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.8}
+    .wl-points i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--primary2);color:var(--primary);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;margin-top:2px}
+    .wl-cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+    .wl-cta .btn{padding:14px 24px;font-size:15px}
+    .wl-link{background:none;color:var(--primary);font-weight:700;font-size:13px;padding:6px 2px;text-decoration:underline;text-underline-offset:4px}
+    .wl-skip{margin-top:10px;background:none;color:var(--muted);font-size:12px;padding:4px 0}
+    /* phone */
+    .wl-demo{display:grid;gap:12px}
+    .wl-tag{text-align:center;font-size:11.5px;color:var(--muted)}
+    .ph{background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:0 14px 40px rgba(27,38,59,.12);overflow:hidden}
+    .ph-top{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line)}
+    .ph-av{width:34px;height:34px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#f9a03f,#dd2a7b 55%,#7b3fe4);flex:none}
+    .ph-av span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#fff;font-size:15px}
+    .ph-top b{font-size:13px;direction:ltr;unicode-bidi:plaintext}.ph-top small{display:block;color:var(--muted);font-size:10.5px}
+    .ph-chat{padding:14px 12px;display:grid;gap:7px;background:#fafbfc}
+    .m{max-width:82%;padding:8px 12px;border-radius:18px;font-size:13px;line-height:1.9}
+    .m.c{background:#eceff3;justify-self:start;border-bottom-right-radius:5px}
+    .m.s{background:var(--primary);color:#fff;justify-self:end;border-bottom-left-radius:5px}
+    .m mark{background:none;color:inherit;border-radius:5px;padding:1px 3px;font-weight:700;background-image:linear-gradient(#bfe9df,#bfe9df);background-repeat:no-repeat;background-position:right;background-size:0 100%;animation:wlmark .5s ease forwards;animation-delay:var(--d)}
+    .ph-read{display:flex;align-items:center;justify-content:center;gap:8px;padding:9px;background:#f1f7f6;border-top:1px solid #d9ebe8;border-bottom:1px solid #d9ebe8;color:var(--primary);font-size:12px;font-weight:800}
+    .ph-read i{width:6px;height:6px;border-radius:50%;background:var(--primary);display:inline-block;animation:wldot 1s infinite}
+    .ph-read i:nth-child(3){animation-delay:.15s}.ph-read i:nth-child(4){animation-delay:.3s}
+    .ph-draft{padding:12px 14px 14px;background:#fff}
+    .ph-draft>b{display:block;margin-bottom:6px;font-size:12px;color:var(--primary)}
+    .dr{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--line);font-size:13px;opacity:0;transform:translateY(5px);animation:wlrow .45s ease forwards;animation-delay:var(--d)}
+    .dr span{color:var(--muted)}
+    .dr b{background:#e6f6ee;border-radius:6px;padding:0 6px}
+    .ph-ok{margin-top:8px;text-align:center;font-size:11.5px;color:var(--muted);opacity:0;animation:wlrow .4s ease forwards;animation-delay:var(--d)}
+    @keyframes wlmark{to{background-size:100% 100%}}
+    @keyframes wlrow{to{opacity:1;transform:none}}
+    @keyframes wldot{50%{opacity:.25}}
+    @media(prefers-reduced-motion:reduce){.m mark{animation:none;background-size:100% 100%}.dr,.ph-ok{animation:none;opacity:1;transform:none}.ph-read i{animation:none}}
+    @media(max-width:860px){
+      .wl{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "demo" "body";}.wl-head,.wl-body{align-self:auto;margin-top:0}.wl{padding:18px 14px;row-gap:16px;border-radius:18px}
+      .wl h2{font-size:20px}.wl-lead{font-size:13.5px;margin:0}
+      .wl-points{margin-bottom:16px}
+      .wl-cta{flex-direction:column;align-items:stretch;gap:6px}.wl-cta .btn{width:100%;padding:15px}
+      .wl-cta .wl-link{text-align:center;padding:10px}.wl-skip{display:block;margin:6px auto 0}
+      .m{font-size:12.5px}
+    }
+    .onboard:has(.wl){background:none;border:0;padding:0}
+    .onboard:has(.wl)~.quick{display:none!important}
     /* getting-started card */
     .onboard {
       background: linear-gradient(135deg, #f1f7f6, #fff);
@@ -3520,16 +3569,16 @@
         <label for="auth-email">ایمیل</label><input class="field" id="auth-email" type="email" required
           autocomplete="email" placeholder="name@example.com">
         <label for="auth-password">رمز عبور</label><input class="field" id="auth-password" type="password" required
-          minlength="6" maxlength="6" autocomplete="current-password" placeholder="دقیقاً ۶ کاراکتر">
+          minlength="6" maxlength="64" autocomplete="current-password" placeholder="حداقل ۶ کاراکتر">
         <button class="btn" id="auth-submit" type="submit" style="width:100%;margin-top:14px">ورود به حساب</button>
       </form>
       <button class="auth-link" id="forgot-link" type="button" onclick="sendPasswordReset()">رمز عبورت را فراموش
         کرده‌ای؟</button>
       <form id="reset-password-form" class="auth-hidden" onsubmit="submitNewPassword(event)">
         <label for="new-password">رمز عبور جدید</label><input class="field" id="new-password" type="password" required
-          minlength="6" maxlength="6" autocomplete="new-password" placeholder="دقیقاً ۶ کاراکتر">
+          minlength="6" maxlength="64" autocomplete="new-password" placeholder="حداقل ۶ کاراکتر">
         <label for="confirm-password">تکرار رمز عبور جدید</label><input class="field" id="confirm-password"
-          type="password" required minlength="6" maxlength="6" autocomplete="new-password"
+          type="password" required minlength="6" maxlength="64" autocomplete="new-password"
           placeholder="رمز را دوباره وارد کن">
         <button class="btn" id="reset-submit" type="submit" style="width:100%;margin-top:14px">ذخیره رمز جدید</button>
       </form>
@@ -3553,6 +3602,7 @@
                 <path d="M5.5 10v9.5h13V10" />
                 <path d="M10 19.5v-5h4v5" />
               </svg></span><span class="lbl">خانه</span></button>
+          <button data-page="orders"><span class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2.5" /><path d="M9 4.5h6M9 10h6M9 14h6" /></svg></span><span class="lbl">سفارش‌ها</span></button>
           <button data-page="customers"><span class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"
                 stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="9" cy="8" r="3.2" />
@@ -3639,9 +3689,9 @@
               </svg></span><b>پیگیری‌ها</b><small>کارهای
               باقی‌مانده</small></button>
         </div>
-        <button class="btn" style="width:100%;margin:0 0 14px" onclick="openChatModal()">✦ گفتگوی دایرکت را بچسبان و
+        <button id="dash-chat-btn" class="btn secondary" style="width:100%;margin:0 0 14px" onclick="openChatModal()">✦ گفتگوی دایرکت را بچسبان و
           سفارش بساز</button>
-        <div class="stats">
+        <div class="stats" id="dash-stats">
           <div class="stat">
             <div class="stat-top"><span>کل سفارش‌ها</span><span class="stat-icon">▤</span></div><strong
               id="stat-total">۰</strong><small>همه سفارش‌های ثبت‌شده</small>
@@ -3662,7 +3712,7 @@
               id="stat-customers">۰</strong><small>مشتری یکتا</small>
           </div>
         </div>
-        <div class="content-grid">
+        <div class="content-grid" id="dash-grid">
           <div class="panel">
             <div class="panel-head">
               <h2>آخرین سفارش‌ها</h2><button class="btn secondary small" onclick="showPage('orders')">همه سفارش‌ها
@@ -4241,7 +4291,7 @@
     function statusPill(s) { return `<span class="pill s-${s}">${labels[s] || s}</span>` }
     function initials(n) { return (n || '؟').trim().split(/\s+/).slice(0, 2).map(x => x[0]).join('') }
     function toast(t) { let el = document.getElementById('toast'); el.textContent = t; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 2300) }
-    function showPage(p) { document.querySelectorAll('.page').forEach(x => x.classList.remove('active')); const page = document.getElementById(p); if (!page) return; page.classList.add('active'); const navPage = p === 'orders' ? 'customers' : p === 'expenses' ? 'finance' : p === 'reminders' ? 'dashboard' : p; document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('active', x.dataset.page === navPage)); let titles = { dashboard: 'پیشخوان مشتری‌ها و سفارش‌های تو', orders: 'سفارش‌های مشتریان', customers: 'مشتریان و سابقه خرید', reminders: 'پیگیری‌های مهم فروشگاه', finance: 'تصویر مالی و تحلیل عملکرد فروشگاه', products: 'کاتالوگ محصولات', expenses: 'هزینه‌های عمومی فروشگاه' }; document.getElementById('subheading').textContent = titles[p] || titles.dashboard; renderAll(); if (['finance', 'products', 'expenses'].includes(p)) loadFinancialData(); if (p === 'finance') applyFinanceTab('overview'); if (p === 'expenses') applyFinanceTab('expenses') }
+    function showPage(p) { document.querySelectorAll('.page').forEach(x => x.classList.remove('active')); const page = document.getElementById(p); if (!page) return; page.classList.add('active'); const navPage = p === 'expenses' ? 'finance' : p === 'reminders' ? 'dashboard' : p; document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('active', x.dataset.page === navPage)); let titles = { dashboard: 'پیشخوان مشتری‌ها و سفارش‌های تو', orders: 'سفارش‌های مشتریان', customers: 'مشتریان و سابقه خرید', reminders: 'پیگیری‌های مهم فروشگاه', finance: 'تصویر مالی و تحلیل عملکرد فروشگاه', products: 'کاتالوگ محصولات', expenses: 'هزینه‌های عمومی فروشگاه' }; document.getElementById('subheading').textContent = titles[p] || titles.dashboard; renderAll(); if (['finance', 'products', 'expenses'].includes(p)) loadFinancialData(); if (p === 'finance') applyFinanceTab('overview'); if (p === 'expenses') applyFinanceTab('expenses') }
     function showCustomerTab(tab) { const list = tab === 'customers'; document.getElementById('customer-list-panel').style.display = list ? '' : 'none'; document.getElementById('customer-leads-panel').style.display = list ? 'none' : ''; document.getElementById('customer-tab-list').classList.toggle('active', list); document.getElementById('customer-tab-leads').classList.toggle('active', !list); if (!list) loadLeads(); }
     function applyFinanceTab(tab) { document.querySelectorAll('.finance-tabs [data-fin-tab]').forEach(b => b.classList.toggle('active', b.dataset.finTab === tab)); const overview = document.getElementById('finance-overview-panel'), settings = document.getElementById('finance-settings-panel'), learn = document.getElementById('finance-learn-panel'); if (overview) overview.style.display = tab === 'overview' ? '' : 'none'; if (settings) settings.style.display = tab === 'settings' ? '' : 'none'; if (learn) learn.style.display = tab === 'learn' ? '' : 'none' }
     function showFinanceTab(tab) { if (tab === 'expenses') { showPage('expenses'); return } showPage('finance'); applyFinanceTab(tab) }
@@ -4496,7 +4546,7 @@
       document.getElementById('forgot-link').classList.add('auth-hidden');
       document.getElementById('reset-password-form').classList.remove('auth-hidden');
       document.getElementById('back-login-link').classList.remove('auth-hidden');
-      document.getElementById('auth-hint').textContent = 'رمز عبور باید دقیقاً ۶ کاراکتر باشد.';
+      document.getElementById('auth-hint').textContent = 'رمز عبور باید حداقل ۶ کاراکتر باشد.';
       document.getElementById('new-password').focus();
     }
     function backToLogin() { recoveryMode = false; setAuthMode('login'); }
@@ -4517,7 +4567,7 @@
     async function submitNewPassword(e) {
       e.preventDefault(); if (!sb || authBusy) return;
       const password = document.getElementById('new-password').value, confirmPassword = document.getElementById('confirm-password').value;
-      if (password.length !== 6) { toast('رمز عبور باید دقیقاً ۶ کاراکتر باشد.'); return }
+      if (password.length < 6) { toast('رمز عبور باید حداقل ۶ کاراکتر باشد.'); return }
       if (password !== confirmPassword) { toast('تکرار رمز عبور با رمز جدید یکسان نیست.'); return }
       authBusy = true; const btn = document.getElementById('reset-submit'); btn.disabled = true;
       try {
@@ -4543,7 +4593,7 @@
       authBusy = true; const btn = document.getElementById('auth-submit'); btn.disabled = true;
       try {
         const email = document.getElementById('auth-email').value.trim(), password = document.getElementById('auth-password').value;
-        if (password.length !== 6) { toast('رمز عبور باید دقیقاً ۶ کاراکتر باشد.'); return; }
+        if (password.length < 6) { toast('رمز عبور باید حداقل ۶ کاراکتر باشد.'); return; }
         const result = authMode === 'signup'
           ? await sb.auth.signUp({ email, password })
           : await sb.auth.signInWithPassword({ email, password });
@@ -4578,7 +4628,7 @@
     // فهرست فروشگاه‌ها فقط برای کاربر واردشده بارگذاری می‌شود.
     async function loadShops() {
       const { data, error } = await sb.from('businesses').select('id,name').eq('user_id', user.id).order('created_at');
-      if (error) throw error; shops = data || [];
+      if (error) throw error; shops = (data || []).map(x => x.name === 'My Shop' ? { ...x, name: 'فروشگاه من' } : x);
       if (!shops.length) { const { data: created, error: createError } = await sb.from('businesses').insert({ user_id: user.id, name: 'فروشگاه من' }).select('id,name').single(); if (createError) throw createError; shops = [created]; }
       if (!shops.some(x => x.id === activeShopId)) activeShopId = shops[0].id;
       const select = document.getElementById('shop-select'); select.innerHTML = shops.map(x => `<option value="${x.id}">${esc(x.name)}</option>`).join(''); select.value = activeShopId; renderShopUI();
@@ -4622,7 +4672,7 @@
     function closeProfile() { document.getElementById('profile-modal').classList.remove('show') }
     async function saveProfile(e) { e.preventDefault(); const payload = { user_id: user.id, full_name: document.getElementById('profile-name').value.trim(), phone: document.getElementById('profile-phone').value.trim(), updated_at: new Date().toISOString() }; const { error } = await sb.from('profiles').upsert(payload, { onConflict: 'user_id' }); if (error) { toast(friendlyError(error.message)); return; } closeProfile(); toast('پروفایل ذخیره شد.'); }
     // پس از ورود، فروشگاه انتخاب‌شده و داده‌های همان فروشگاه بارگذاری می‌شوند.
-    async function afterLogin() { if (!user || lastLoadedUserId === user.id) return; lastLoadedUserId = user.id; orders = []; showApp(); try { await loadShops(); await loadOrders(); await loadLeads(); await loadFinancialData(); if (document.getElementById('expense-date')) document.getElementById('expense-date').dataset.iso = iso(new Date()); document.getElementById('expense-date').value = dateFa(document.getElementById('expense-date').dataset.iso); refreshHints(); renderOnboard(); setTimeout(() => startTour(false), 900); } catch (err) { lastLoadedUserId = null; toast('آماده‌سازی فضای کار ناموفق بود: ' + friendlyError(err.message)); } }
+    async function afterLogin() { if (!user || lastLoadedUserId === user.id) return; lastLoadedUserId = user.id; orders = []; showApp(); try { await loadShops(); await loadOrders(); await loadLeads(); await loadFinancialData(); if (document.getElementById('expense-date')) document.getElementById('expense-date').dataset.iso = iso(new Date()); document.getElementById('expense-date').value = dateFa(document.getElementById('expense-date').dataset.iso); refreshHints(); renderOnboard();  } catch (err) { lastLoadedUserId = null; toast('آماده‌سازی فضای کار ناموفق بود: ' + friendlyError(err.message)); } }
     async function loadOrders() {
       if (!sb || !user) return;
       const { data, error } = await sb.from('orders').select('*').eq('user_id', user.id).eq('shop_id', activeShopId).order('created_at', { ascending: false });
@@ -4806,8 +4856,61 @@
       const hasProduct = financialProducts.length > 0;
       const hasOrder = orders.length > 0;
 
+      const chatBtn = document.getElementById('dash-chat-btn'), statsEl = document.getElementById('dash-stats');
+      const gridEl = document.getElementById('dash-grid');
+      if (statsEl) statsEl.style.display = hasOrder ? '' : 'none';
+      if (gridEl) gridEl.style.display = (hasOrder || (typeof leads !== 'undefined' && leads.length)) ? '' : 'none';
       if (dismissed || (hasProduct && hasOrder)) {
-        box.style.display = 'none';
+        box.style.display = 'none'; box.dataset.mode = '';
+        if (chatBtn) chatBtn.style.display = '';
+        return;
+      }
+      if (chatBtn) chatBtn.style.display = 'none';
+      if (hasProduct || hasOrder) box.dataset.mode = 'steps';
+      if (!hasProduct && !hasOrder) {
+        if (box.dataset.mode === 'welcome') { box.style.display = 'block'; return; }
+        const pt = t => `<li><i>✓</i><span>${t}</span></li>`;
+        box.innerHTML = `<div class="wl">
+          <div class="wl-head">
+            <h2>یارا، دستیار فروشگاه اینستاگرامی تو</h2>
+            <p class="wl-lead">اگر سفارش‌هایت لابه‌لای دایرکت‌ها گم می‌شود، یارا برای همین ساخته شده. مشتری‌ها، سفارش‌ها و پیگیری‌هایت را یک‌جا نگه می‌دارد تا بدانی چه کسی چه خواسته، چی آماده است و چی عقب مانده.</p>
+          </div>
+          <div class="wl-demo" aria-hidden="true">
+            <div class="wl-tag">نمونه از یک فروشگاه دستبند · این‌طوری کار می‌کند</div>
+            <div class="ph">
+              <div class="ph-top"><div class="ph-av"><span>👤</span></div><div><b>maryam.shell</b><small>دایرکت</small></div></div>
+              <div class="ph-chat">
+                <div class="m c">سلام وقت بخیر 👋 <mark style="--d:.4s">دستبند صدفی آبی</mark> دارید؟</div>
+                <div class="m s">سلام عزیزم، بله موجوده ✨ قیمتش ۲۶۰ هزار تومنه</div>
+                <div class="m c">عالیه! <mark style="--d:1.2s">دو تا</mark> لازم دارم. من <mark style="--d:1.8s">مریم</mark>ام، آدرسم <mark style="--d:2.4s">تهران، ونک</mark>، شمارهٔ <mark style="--d:3s">۰۹۱۲۱۲۳۴۵۶۷</mark></div>
+              </div>
+              <div class="ph-read"><i></i><i></i><i></i> یارا گفتگو را می‌خواند</div>
+              <div class="ph-draft"><b>پیش‌نویس سفارش</b>
+                <div class="dr" style="--d:3.6s"><span>مشتری</span><b>مریم</b></div>
+                <div class="dr" style="--d:3.9s"><span>محصول</span><b>دستبند صدفی آبی</b></div>
+                <div class="dr" style="--d:4.2s"><span>تعداد</span><b>۲</b></div>
+                <div class="dr" style="--d:4.5s"><span>تلفن</span><b>۰۹۱۲۱۲۳۴۵۶۷</b></div>
+                <div class="dr" style="--d:4.8s"><span>آدرس</span><b>تهران، ونک</b></div>
+                <div class="ph-ok" style="--d:5.2s">تو یک‌بار نگاه می‌کنی و ذخیره می‌کنی. بدون تایپ دوباره</div>
+              </div>
+            </div>
+          </div>
+          <div class="wl-body">
+            <ul class="wl-points">
+              ${pt('<b>گفتگوی دایرکت را بچسبان</b>؛ یارا اسم، محصول، تعداد و آدرس را درمی‌آورد و سفارش را آماده می‌کند.')}
+              ${pt('<b>برای مشتری لینک پیگیری بفرست</b> تا هر بار نپرسد «سفارشم کجاست؟».')}
+              ${pt('<b>سفارش‌های گیرکرده را ببین</b> قبل از اینکه مشتری ناراضی شود.')}
+            </ul>
+            <div class="wl-cta">
+              <button class="btn" type="button" onclick="openChatModal()">✦ یک گفتگوی دایرکت را امتحان کن</button>
+              <button class="wl-link" type="button" onclick="goAddProduct()">اول محصولاتم را اضافه می‌کنم</button>
+              <button class="wl-link" type="button" onclick="openOrderModal()">ثبت دستی سفارش</button>
+            </div>
+            <button class="wl-skip" type="button" onclick="dismissOnboard()">دیگر نشان نده</button>
+          </div>
+        </div>`;
+        box.dataset.mode = 'welcome';
+        box.style.display = 'block';
         return;
       }
 
