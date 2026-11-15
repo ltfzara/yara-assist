@@ -4337,31 +4337,100 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
     });
 
     // ===== V8: getting-started card on the home page =====
-    function renderOnboard() {
-      const box = document.getElementById('onboard-card'); if (!box) return;
-      let dismissed = false; try { dismissed = localStorage.getItem('yara_onboard_off_' + (user?.id || '')) === '1' } catch (e) { }
-      const hasProduct = financialProducts.length > 0, hasOrder = orders.length > 0;
-      if (dismissed || (hasProduct && hasOrder)) { box.style.display = 'none'; return }
-      const step = (n, done, title, sub, btn, fn) => `<div class="ob-step ${done ? 'done' : ''}"><span class="ob-num">${done ? '✓' : fa(n)}</span><div><b>${title}</b><small>${sub}</small></div>${done ? '' : `<button class="btn small" type="button" onclick="${fn}">${btn}</button>`}</div>`;
-      box.innerHTML = `<h2>از اینجا شروع کن</h2><p>فقط دو قدم تا اولین سفارش ثبت‌شده:</p>` + step(1, hasProduct, 'محصولاتت را اضافه کن', 'نام و قیمت هر کالا، فقط یک بار', 'افزودن محصول', 'goAddProduct()') + step(2, hasOrder, 'اولین سفارش را ثبت کن', 'اسم مشتری، محصول و مبلغ', 'ثبت سفارش', 'openOrderModal()') + `<button class="ob-close" type="button" onclick="dismissOnboard()">دیگر نشان نده</button>`;
-      box.style.display = 'block';
-    }
+function renderOnboard() {
+  const box = document.getElementById('onboard-card');
+  if (!box) return;
+
+  let dismissed = false;
+  try {
+    dismissed = localStorage.getItem('yara_onboard_off_' + (user?.id || '')) === '1';
+  } catch (e) {}
+
+  const hasProduct = financialProducts.length > 0;
+  const hasOrder = orders.length > 0;
+
+  if (dismissed || (hasProduct && hasOrder)) {
+    box.style.display = 'none';
+    return;
+  }
+
+  const step = (n, done, title, sub, btn, fn) =>
+    `<div class="ob-step ${done ? 'done' : ''}">
+      <span class="ob-num">${done ? '✓' : fa(n)}</span>
+      <div><b>${title}</b><small>${sub}</small></div>
+      ${done ? '' : `<button class="btn small" type="button" onclick="${fn}">${btn}</button>`}
+    </div>`;
+
+  box.innerHTML =
+    `<h2>از اینجا شروع کن</h2>
+     <p>برای ثبت اولین سفارش، این مراحل را انجام بده:</p>` +
+    step(1, hasProduct, 'محصولاتت را اضافه کن',
+      'نام و قیمت هر محصول را یک بار وارد کن',
+      'افزودن محصول', 'goAddProduct()') +
+    step(2, false, 'از دایرکت پیش‌نویس سفارش بساز',
+      'گفتگوی اینستاگرام را کپی کن؛ یارا اطلاعات سفارش را آماده می‌کند و تو آن را بررسی می‌کنی.',
+      'ساخت سفارش از دایرکت', 'openChatModal()') +
+    step(3, hasOrder, 'یا سفارش را دستی ثبت کن',
+      'اگر خواستی، اطلاعات مشتری و سفارش را خودت وارد کن.',
+      'ثبت سفارش دستی', 'openOrderModal()') +
+    `<button class="ob-close" type="button" onclick="dismissOnboard()">دیگر نشان نده</button>`;
+
+  box.style.display = 'block';
+}
+
     function dismissOnboard() { try { localStorage.setItem('yara_onboard_off_' + (user?.id || ''), '1') } catch (e) { } renderOnboard() }
     ['renderDashboard', 'renderFinancial'].forEach(n => { const f = window[n]; if (typeof f !== 'function') return; window[n] = function (...a) { const r = f.apply(this, a); try { renderOnboard() } catch (e) { } return r } });
 
     // ===== V8: guided tour =====
     const TOUR_STEPS = [
-      { title: 'خوش آمدی به یارا', text: 'در چند قدم نشانت می‌دهم هر بخش کجاست. فقط روی «بعدی» بزن.' },
-      { sel: '#new-order-btn', title: 'ثبت سفارش', text: 'هر وقت مشتری خریدش را قطعی کرد، از این دکمه سفارش را ثبت کن.' },
-      { sel: '.nav [data-page=products]', title: 'محصولات', text: 'اول محصولاتت را اینجا اضافه کن: اسم و قیمت. بعد در سفارش‌ها فقط انتخابشان می‌کنی.' },
-      { sel: '.nav [data-page=customers]', title: 'مشتری‌ها', text: 'اینجا هم مشتری‌هایی را می‌بینی که از تو خرید کرده‌اند و هم کسانی را که هنوز در حال پرس‌وجو هستند.' },
-      { sel: '#customer-tab-leads', page: 'customers', tab: 'leads', title: 'مشتری‌های در حال پیگیری', text: 'هر کسی که در دایرکت درباره محصولت سؤال می‌پرسد، هنوز سفارش قطعی نداده. از همین‌جا با آیدی اینستاگرام ثبتش کن؛ لازم نیست همه اطلاعات را از اول بدانی. هر بار می‌توانی یادداشت تازه‌ای به تاریخچه مکالمه اضافه کنی.' },
-      { sel: '.nav [data-page=finance]', title: 'هوش مالی', text: 'اینجا فروش، هزینه‌ها و سود تقریبی کسب‌وکارت را می‌بینی.' },
-      { sel: '.nav [data-page=dashboard]', title: 'خانه', text: 'در صفحه خانه فقط کارهای مهم و سفارش‌هایی که نیاز به توجه دارند را دنبال کن.' },
-      { title: 'آماده‌ای!', text: 'هر وقت گیج شدی، دکمه‌ی «راهنما» بالای صفحه را بزن تا این راهنما دوباره نشان داده شود.' }
+      {
+        title: 'خوش آمدی به یارا',
+        text: 'یارا کمک می‌کند محصولات، سفارش‌ها، مشتری‌ها و وضعیت مالی فروشگاهت را مدیریت کنی. در این راهنما قدم‌به‌قدم با بخش‌های مهم آشنا می‌شوی.'
+      },
+      {
+        sel: '.nav [data-page=products]',
+        title: '۱. اول محصولاتت را اضافه کن',
+        text: 'نام و قیمت محصولاتت را اینجا ثبت کن. وقتی محصولات آماده باشند، یارا می‌تواند هنگام ساخت پیش‌نویس سفارش، آن‌ها را بهتر تشخیص دهد.'
+      },
+      {
+        sel: 'button[onclick="openChatModal()"]',
+        title: '۲. دستیار هوشمند دایرکت اینجاست',
+        text: 'گفتگوی مشتری را از دایرکت اینستاگرام کپی کن و اینجا بچسبان. یارا با هوش مصنوعی اطلاعات مشتری و محصولات را می‌خواند و یک پیش‌نویس سفارش می‌سازد. این قابلیت به‌صورت خودکار به اینستاگرام وصل نمی‌شود و به‌جای تو پیام نمی‌فرستد.'
+      },
+      {
+        sel: '#dashboard .quick button.main-action',
+        title: '۳. پیش‌نویس را بررسی و سفارش را ذخیره کن',
+        text: 'اطلاعاتی را که یارا از گفتگو پیدا کرده بررسی کن؛ نام مشتری، محصول، تعداد، قیمت و توضیحات را اصلاح کن و بعد سفارش را ذخیره کن. اگر خواستی، سفارش را هم می‌توانی دستی ثبت کنی.'
+      },
+      {
+        sel: '.nav [data-page=customers]',
+        title: '۴. مشتری‌ها و سفارش‌ها',
+        text: 'اینجا مشتری‌هایی را که خرید کرده‌اند و اطلاعات سفارش‌هایشان را می‌بینی.'
+      },
+      {
+        sel: '#customer-tab-leads',
+        page: 'customers',
+        tab: 'leads',
+        title: '۵. مشتری‌های در حال پیگیری',
+        text: 'کسی که در دایرکت سؤال می‌پرسد ولی هنوز خریدش قطعی نشده، می‌تواند اینجا ثبت شود. آیدی اینستاگرام و یادداشت‌های گفتگو را نگه دار و بعداً پیگیری کن. وقتی خرید قطعی شد، می‌توانی او را به سفارش تبدیل کنی.'
+      },
+      {
+        sel: '.nav [data-page=finance]',
+        title: '۶. هوش مالی',
+        text: 'فروش، هزینه‌ها و سود تقریبی کسب‌وکارت را اینجا دنبال کن. هرچه اطلاعات هزینه محصولات و سفارش‌ها دقیق‌تر باشد، گزارش‌ها هم مفیدتر می‌شوند.'
+      },
+      {
+        sel: '.nav [data-page=dashboard]',
+        title: '۷. همه‌چیز از خانه',
+        text: 'در صفحه خانه وضعیت کلی فروشگاه و کارهایی را که نیاز به توجه دارند می‌بینی. هر وقت خواستی این راهنما را دوباره ببینی، دکمه راهنما بالای صفحه را بزن.'
+      }
     ];
+
+
+
+    
     let tourIdx = 0;
-    function tourKey() { return 'yara_tour_done_v2_' + (user?.id || '') }
+    function tourKey() { return 'yara_tour_done_v3_' + (user?.id || '') }
     function startTour(force) {
       if (!force) { try { if (localStorage.getItem(tourKey()) === '1') return } catch (e) { } }
       closeAccountSheet(); document.querySelectorAll('.modal-back.show').forEach(m => m.classList.remove('show'));
