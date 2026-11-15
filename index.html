@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
-  <title>یارا | همراه کسب‌وکار خانگی — نسخه ۸٫۴</title>
+  <title>یارا | همراه کسب‌وکار خانگی — نسخه ۸</title>
   <style>
     @font-face {
       font-family: 'Vazirmatn';
@@ -2159,55 +2159,6 @@
       color: #f5f8f7
     }
 
-
-    /* V8.3: welcome screen with an Instagram-DM style demo */
-    .wl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);grid-template-areas:"head demo" "body demo";column-gap:36px;row-gap:6px;align-items:center;background:linear-gradient(135deg,#eef6f5,#fff 70%);border:1px solid #d9ebe8;border-radius:22px;padding:30px;margin-bottom:20px}
-    .wl-head{grid-area:head;align-self:end}.wl-body{grid-area:body;align-self:start;margin-top:12px}.wl-demo{grid-area:demo}
-    .wl h2{margin:0 0 8px;font-size:24px;line-height:1.5}
-    .wl-lead{margin:0 0 14px;color:#4a5566;font-size:14px;line-height:2}
-    .wl-points{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:9px}
-    .wl-points li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.8}
-    .wl-points i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--primary2);color:var(--primary);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;margin-top:2px}
-    .wl-cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
-    .wl-cta .btn{padding:14px 24px;font-size:15px}
-    .wl-link{background:none;color:var(--primary);font-weight:700;font-size:13px;padding:6px 2px;text-decoration:underline;text-underline-offset:4px}
-    .wl-skip{margin-top:10px;background:none;color:var(--muted);font-size:12px;padding:4px 0}
-    /* phone */
-    .wl-demo{display:grid;gap:12px}
-    .wl-tag{text-align:center;font-size:11.5px;color:var(--muted)}
-    .ph{background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:0 14px 40px rgba(27,38,59,.12);overflow:hidden}
-    .ph-top{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line)}
-    .ph-av{width:34px;height:34px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#f9a03f,#dd2a7b 55%,#7b3fe4);flex:none}
-    .ph-av span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#fff;font-size:15px}
-    .ph-top b{font-size:13px;direction:ltr;unicode-bidi:plaintext}.ph-top small{display:block;color:var(--muted);font-size:10.5px}
-    .ph-chat{padding:14px 12px;display:grid;gap:7px;background:#fafbfc}
-    .m{max-width:82%;padding:8px 12px;border-radius:18px;font-size:13px;line-height:1.9}
-    .m.c{background:#eceff3;justify-self:start;border-bottom-right-radius:5px}
-    .m.s{background:var(--primary);color:#fff;justify-self:end;border-bottom-left-radius:5px}
-    .m mark{background:none;color:inherit;border-radius:5px;padding:1px 3px;font-weight:700;background-image:linear-gradient(#bfe9df,#bfe9df);background-repeat:no-repeat;background-position:right;background-size:0 100%;animation:wlmark .5s ease forwards;animation-delay:var(--d)}
-    .ph-read{display:flex;align-items:center;justify-content:center;gap:8px;padding:9px;background:#f1f7f6;border-top:1px solid #d9ebe8;border-bottom:1px solid #d9ebe8;color:var(--primary);font-size:12px;font-weight:800}
-    .ph-read i{width:6px;height:6px;border-radius:50%;background:var(--primary);display:inline-block;animation:wldot 1s infinite}
-    .ph-read i:nth-child(3){animation-delay:.15s}.ph-read i:nth-child(4){animation-delay:.3s}
-    .ph-draft{padding:12px 14px 14px;background:#fff}
-    .ph-draft>b{display:block;margin-bottom:6px;font-size:12px;color:var(--primary)}
-    .dr{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--line);font-size:13px;opacity:0;transform:translateY(5px);animation:wlrow .45s ease forwards;animation-delay:var(--d)}
-    .dr span{color:var(--muted)}
-    .dr b{background:#e6f6ee;border-radius:6px;padding:0 6px}
-    .ph-ok{margin-top:8px;text-align:center;font-size:11.5px;color:var(--muted);opacity:0;animation:wlrow .4s ease forwards;animation-delay:var(--d)}
-    @keyframes wlmark{to{background-size:100% 100%}}
-    @keyframes wlrow{to{opacity:1;transform:none}}
-    @keyframes wldot{50%{opacity:.25}}
-    @media(prefers-reduced-motion:reduce){.m mark{animation:none;background-size:100% 100%}.dr,.ph-ok{animation:none;opacity:1;transform:none}.ph-read i{animation:none}}
-    @media(max-width:860px){
-      .wl{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "demo" "body";}.wl-head,.wl-body{align-self:auto;margin-top:0}.wl{padding:18px 14px;row-gap:16px;border-radius:18px}
-      .wl h2{font-size:20px}.wl-lead{font-size:13.5px;margin:0}
-      .wl-points{margin-bottom:16px}
-      .wl-cta{flex-direction:column;align-items:stretch;gap:6px}.wl-cta .btn{width:100%;padding:15px}
-      .wl-cta .wl-link{text-align:center;padding:10px}.wl-skip{display:block;margin:6px auto 0}
-      .m{font-size:12.5px}
-    }
-    .onboard:has(.wl){background:none;border:0;padding:0}
-    .onboard:has(.wl)~.quick{display:none!important}
     /* getting-started card */
     .onboard {
       background: linear-gradient(135deg, #f1f7f6, #fff);
@@ -3549,45 +3500,6 @@
       line-height: 1.8;
       margin: 0 0 8px
     }
-
-    /* ===== V8.4: mobile cleanup ===== */
-    .section-tabs{display:none!important}
-    .empty.rich{padding:30px 14px;display:grid;justify-items:center;gap:8px}
-    .empty.rich .e-ico{width:58px;height:58px;border-radius:18px;background:var(--primary2);color:var(--primary);display:grid;place-items:center}
-    .empty.rich strong{margin:6px 0 0;font-size:16px}
-    .empty.rich p{margin:0 0 6px;max-width:320px;line-height:2;font-size:13px}
-    .empty.rich .btn{padding:13px 22px}
-    #products .panel:has(.empty.rich) .panel-head>.btn{display:none}
-    @media(max-width:700px){
-      .main{padding-bottom:calc(120px + env(safe-area-inset-bottom))}
-      .topbar{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 10px;margin-bottom:14px}
-      .topbar .hello{grid-column:1;min-width:0}
-      .topbar .hello h1{font-size:22px;margin:0}
-      .topbar .top-actions{grid-column:2;grid-row:1;width:auto!important;display:flex;gap:8px;align-items:center}
-      .topbar .shop-chip{max-width:128px;padding:8px 10px;font-size:12px}
-      .topbar .help-btn{padding:8px 10px}
-      body:not([data-page="dashboard"]) #subheading,body:not([data-page="dashboard"]) .date-chip{display:none}
-      #orders>.panel{background:none;border:0;box-shadow:none;padding:0}
-      #orders .panel-head{display:none}
-      #orders .subpage-note>span:first-child{display:none}
-      #orders .subpage-note{margin-bottom:12px}
-      #orders .subpage-note>span:last-child{display:flex;gap:8px;width:100%}
-      #orders .subpage-note .btn{flex:1;min-height:46px;font-size:14px;justify-content:center}
-      #orders .toolbar{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:8px}
-      #orders .table tbody tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:12px 14px}
-      #orders .table tbody td{padding:0!important;border:0!important;min-height:0}
-      #orders .table tbody td::before{display:none}
-      #orders .table tbody td:nth-child(1){grid-column:1;grid-row:1;font-size:15px}
-      #orders .table tbody td:nth-child(5){grid-column:2;grid-row:1;justify-self:end;text-align:left}
-      #orders .table tbody td:nth-child(2){grid-column:1;grid-row:2;font-size:13px}
-      #orders .table tbody td:nth-child(3){grid-column:2;grid-row:2;justify-self:end;font-weight:800;font-size:13px}
-      #orders .table tbody td:nth-child(4){grid-column:1/-1;grid-row:3;color:var(--muted);font-size:12px}
-      #orders .table tbody td:nth-child(4)::before{display:inline;position:static;content:'موعد تحویل: ';width:auto}
-      #orders .table tbody td:nth-child(6){grid-column:1/-1;grid-row:4;margin-top:8px;display:flex;gap:8px}
-      #orders .table tbody td:nth-child(6) .act{flex:1;min-height:42px}
-      #orders .table tbody tr:has(td[colspan]){display:block;background:none;border:0;box-shadow:none;padding:0}
-      .table td[colspan]{padding:8px 0!important}
-    }
   </style>
 </head>
 
@@ -3608,16 +3520,16 @@
         <label for="auth-email">ایمیل</label><input class="field" id="auth-email" type="email" required
           autocomplete="email" placeholder="name@example.com">
         <label for="auth-password">رمز عبور</label><input class="field" id="auth-password" type="password" required
-          minlength="6" maxlength="64" autocomplete="current-password" placeholder="حداقل ۶ کاراکتر">
+          minlength="6" maxlength="6" autocomplete="current-password" placeholder="دقیقاً ۶ کاراکتر">
         <button class="btn" id="auth-submit" type="submit" style="width:100%;margin-top:14px">ورود به حساب</button>
       </form>
       <button class="auth-link" id="forgot-link" type="button" onclick="sendPasswordReset()">رمز عبورت را فراموش
         کرده‌ای؟</button>
       <form id="reset-password-form" class="auth-hidden" onsubmit="submitNewPassword(event)">
         <label for="new-password">رمز عبور جدید</label><input class="field" id="new-password" type="password" required
-          minlength="6" maxlength="64" autocomplete="new-password" placeholder="حداقل ۶ کاراکتر">
+          minlength="6" maxlength="6" autocomplete="new-password" placeholder="دقیقاً ۶ کاراکتر">
         <label for="confirm-password">تکرار رمز عبور جدید</label><input class="field" id="confirm-password"
-          type="password" required minlength="6" maxlength="64" autocomplete="new-password"
+          type="password" required minlength="6" maxlength="6" autocomplete="new-password"
           placeholder="رمز را دوباره وارد کن">
         <button class="btn" id="reset-submit" type="submit" style="width:100%;margin-top:14px">ذخیره رمز جدید</button>
       </form>
@@ -3641,7 +3553,6 @@
                 <path d="M5.5 10v9.5h13V10" />
                 <path d="M10 19.5v-5h4v5" />
               </svg></span><span class="lbl">خانه</span></button>
-          <button data-page="orders"><span class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2.5" /><path d="M9 4.5h6M9 10h6M9 14h6" /></svg></span><span class="lbl">سفارش‌ها</span></button>
           <button data-page="customers"><span class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"
                 stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="9" cy="8" r="3.2" />
@@ -3728,9 +3639,9 @@
               </svg></span><b>پیگیری‌ها</b><small>کارهای
               باقی‌مانده</small></button>
         </div>
-        <button id="dash-chat-btn" class="btn secondary" style="width:100%;margin:0 0 14px" onclick="openChatModal()">✦ گفتگوی دایرکت را بچسبان و
+        <button class="btn" style="width:100%;margin:0 0 14px" onclick="openChatModal()">✦ گفتگوی دایرکت را بچسبان و
           سفارش بساز</button>
-        <div class="stats" id="dash-stats">
+        <div class="stats">
           <div class="stat">
             <div class="stat-top"><span>کل سفارش‌ها</span><span class="stat-icon">▤</span></div><strong
               id="stat-total">۰</strong><small>همه سفارش‌های ثبت‌شده</small>
@@ -3751,7 +3662,7 @@
               id="stat-customers">۰</strong><small>مشتری یکتا</small>
           </div>
         </div>
-        <div class="content-grid" id="dash-grid">
+        <div class="content-grid">
           <div class="panel">
             <div class="panel-head">
               <h2>آخرین سفارش‌ها</h2><button class="btn secondary small" onclick="showPage('orders')">همه سفارش‌ها
@@ -3771,13 +3682,15 @@
       <section id="orders" class="page">
         <div class="section-tabs"><button type="button" onclick="showPage('customers')">مشتریان</button><button
             type="button" class="active" onclick="showPage('orders')">سفارش‌ها</button></div>
-        <div class="subpage-note"><span>سفارش‌ها بخشی از ارتباط با مشتریان هستند.</span><span><button class="btn small" onclick="openChatModal()">✦ از دایرکت</button> <button class="btn secondary small" onclick="openOrderModal()">＋ ثبت دستی</button></span></div>
+        <div class="subpage-note"><span>سفارش‌ها بخشی از ارتباط با مشتریان هستند.</span><span><button
+              class="btn secondary small" onclick="openChatModal()">✦ از گفتگو</button> <button
+              class="btn secondary small" onclick="openOrderModal()">＋ ثبت سفارش</button></span></div>
         <div class="panel">
           <div class="panel-head">
             <h2>همه سفارش‌ها</h2><span class="muted">مدیریت و پیگیری خریدها</span>
           </div>
           <div class="toolbar"><input class="field search" id="order-search"
-              placeholder="جست‌وجو در سفارش‌ها…" oninput="renderOrders()"><select class="field"
+              placeholder="جست‌وجوی نام، محصول یا شماره..." oninput="renderOrders()"><select class="field"
               id="status-filter" onchange="renderOrders()">
               <option value="">همه وضعیت‌ها</option>
               <option value="new">جدید</option>
@@ -4328,10 +4241,7 @@
     function statusPill(s) { return `<span class="pill s-${s}">${labels[s] || s}</span>` }
     function initials(n) { return (n || '؟').trim().split(/\s+/).slice(0, 2).map(x => x[0]).join('') }
     function toast(t) { let el = document.getElementById('toast'); el.textContent = t; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 2300) }
-    function showPage(p) { document.querySelectorAll('.page').forEach(x => x.classList.remove('active')); const page = document.getElementById(p); if (!page) return; page.classList.add('active'); const navPage = p === 'expenses' ? 'finance' : p === 'reminders' ? 'dashboard' : p; document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('active', x.dataset.page === navPage)); let titles = { dashboard: 'پیشخوان مشتری‌ها و سفارش‌های تو', orders: 'سفارش‌های مشتریان', customers: 'مشتریان و سابقه خرید', reminders: 'پیگیری‌های مهم فروشگاه', finance: 'تصویر مالی و تحلیل عملکرد فروشگاه', products: 'کاتالوگ محصولات', expenses: 'هزینه‌های عمومی فروشگاه' }; document.getElementById('subheading').textContent = titles[p] || titles.dashboard;
-      { const g = document.getElementById('greeting'), pt = { orders: 'سفارش‌ها', customers: 'مشتری‌ها', products: 'محصولات', finance: 'هوش مالی', reminders: 'پیگیری‌ها', expenses: 'هزینه‌ها' };
-        if (g) { if (!g.dataset.hello) g.dataset.hello = g.textContent; g.textContent = pt[p] || g.dataset.hello; }
-        document.body.dataset.page = p; } renderAll(); if (['finance', 'products', 'expenses'].includes(p)) loadFinancialData(); if (p === 'finance') applyFinanceTab('overview'); if (p === 'expenses') applyFinanceTab('expenses') }
+    function showPage(p) { document.querySelectorAll('.page').forEach(x => x.classList.remove('active')); const page = document.getElementById(p); if (!page) return; page.classList.add('active'); const navPage = p === 'orders' ? 'customers' : p === 'expenses' ? 'finance' : p === 'reminders' ? 'dashboard' : p; document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('active', x.dataset.page === navPage)); let titles = { dashboard: 'پیشخوان مشتری‌ها و سفارش‌های تو', orders: 'سفارش‌های مشتریان', customers: 'مشتریان و سابقه خرید', reminders: 'پیگیری‌های مهم فروشگاه', finance: 'تصویر مالی و تحلیل عملکرد فروشگاه', products: 'کاتالوگ محصولات', expenses: 'هزینه‌های عمومی فروشگاه' }; document.getElementById('subheading').textContent = titles[p] || titles.dashboard; renderAll(); if (['finance', 'products', 'expenses'].includes(p)) loadFinancialData(); if (p === 'finance') applyFinanceTab('overview'); if (p === 'expenses') applyFinanceTab('expenses') }
     function showCustomerTab(tab) { const list = tab === 'customers'; document.getElementById('customer-list-panel').style.display = list ? '' : 'none'; document.getElementById('customer-leads-panel').style.display = list ? 'none' : ''; document.getElementById('customer-tab-list').classList.toggle('active', list); document.getElementById('customer-tab-leads').classList.toggle('active', !list); if (!list) loadLeads(); }
     function applyFinanceTab(tab) { document.querySelectorAll('.finance-tabs [data-fin-tab]').forEach(b => b.classList.toggle('active', b.dataset.finTab === tab)); const overview = document.getElementById('finance-overview-panel'), settings = document.getElementById('finance-settings-panel'), learn = document.getElementById('finance-learn-panel'); if (overview) overview.style.display = tab === 'overview' ? '' : 'none'; if (settings) settings.style.display = tab === 'settings' ? '' : 'none'; if (learn) learn.style.display = tab === 'learn' ? '' : 'none' }
     function showFinanceTab(tab) { if (tab === 'expenses') { showPage('expenses'); return } showPage('finance'); applyFinanceTab(tab) }
@@ -4349,7 +4259,7 @@
       let rem = getReminders(), leadAttention = getLeadAttention(); document.getElementById('reminder-count').textContent = fa(rem.length + leadAttention.length) + ' مورد';
       const orderHtml = rem.slice(0, 4).map(r => `<div class="reminder"><div class="reminder-icon">!</div><div><b>${esc(r.name)} · ${esc(r.product)}</b><small>${r.reason} · ${dateFa(r.date)}</small></div></div>`).join(''); const leadHtml = leadAttention.slice(0, 4).map(r => `<div class="reminder"><div class="reminder-icon">♙</div><div style="flex:1"><b>${esc(r.name || r.instagram_username || 'مشتری بالقوه')}</b><small>${r.next_follow_up && r.next_follow_up <= future(0) ? 'موعد پیگیری رسیده' : r.next_follow_up ? 'یادآوری برنامه‌ریزی‌شده' : 'هنوز تاریخی تعیین نشده'} · ${esc(r.product_interest || leadChannelLabel(leadChannel(r)))}</small></div><button class="btn secondary small" onclick="addLeadNote('${r.id}')">ثبت یادداشت</button></div>`).join(''); document.getElementById('dash-reminders').innerHTML = orderHtml + leadHtml || '<div class="empty">عالیه! موردی برای پیگیری نداری</div>';
     }
-    function renderOrders() { let q = (document.getElementById('order-search')?.value || '').trim().toLowerCase(), st = document.getElementById('status-filter')?.value || ''; let arr = [...orders].sort((a, b) => b.created - a.created).filter(o => (!st || o.status === st) && [o.name, o.phone, o.product, o.notes, o.id].join(' ').toLowerCase().includes(q)); document.getElementById('orders-body').innerHTML = arr.length ? arr.map(o => `<tr><td><b>${esc(o.name)}</b><br><small class="muted">${esc(o.phone || 'بدون شماره')}</small></td><td>${esc(o.product)} <small class="muted">× ${fa(o.qty)}</small>${o.notes ? `<small class="note-line"><b>توضیحات:</b> ${esc(o.notes)}</small>` : ''}</td><td>${money(o.price)}</td><td>${dateFa(o.date)}</td><td>${statusPill(o.status)}${o.views ? '<small class="muted" style="display:block">مشتری لینک را دید</small>' : ''}</td><td><button class="act" onclick="editOrder('${o.id}')">ویرایش</button>${o.token ? ` <button class="act" onclick="copyStatusMessage('${o.id}')">لینک وضعیت</button>` : ''}</td></tr>`).join('') : (orders.length ? '<tr><td colspan="6"><div class="empty">سفارشی با این جست‌وجو پیدا نشد.</div></td></tr>' : '<tr><td colspan="6"><div class="empty rich"><div class="e-ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 4.5h6M9 10h6M9 14h4"/></svg></div><strong>هنوز سفارشی نداری</strong><p>گفتگوی دایرکت یک مشتری را بچسبان تا یارا اولین سفارشت را آماده کند.</p><button class="btn" type="button" onclick="openChatModal()">✦ ساخت سفارش از دایرکت</button><button class="wl-link" type="button" onclick="openOrderModal()">یا دستی ثبت کن</button></div></td></tr>'); { const tb = document.querySelector('#orders .toolbar'); if (tb) tb.style.display = orders.length ? '' : 'none'; const sn = document.querySelector('#orders .subpage-note'); if (sn) sn.style.display = orders.length ? '' : 'none' } }
+    function renderOrders() { let q = (document.getElementById('order-search')?.value || '').trim().toLowerCase(), st = document.getElementById('status-filter')?.value || ''; let arr = [...orders].sort((a, b) => b.created - a.created).filter(o => (!st || o.status === st) && [o.name, o.phone, o.product, o.notes, o.id].join(' ').toLowerCase().includes(q)); document.getElementById('orders-body').innerHTML = arr.length ? arr.map(o => `<tr><td><b>${esc(o.name)}</b><br><small class="muted">${esc(o.phone || 'بدون شماره')}</small></td><td>${esc(o.product)} <small class="muted">× ${fa(o.qty)}</small>${o.notes ? `<small class="note-line"><b>توضیحات:</b> ${esc(o.notes)}</small>` : ''}</td><td>${money(o.price)}</td><td>${dateFa(o.date)}</td><td>${statusPill(o.status)}${o.views ? '<small class="muted" style="display:block">مشتری لینک را دید</small>' : ''}</td><td><button class="act" onclick="editOrder('${o.id}')">ویرایش</button>${o.token ? ` <button class="act" onclick="copyStatusMessage('${o.id}')">لینک وضعیت</button>` : ''}</td></tr>`).join('') : '<tr><td colspan="6"><div class="empty">سفارشی پیدا نشد.</div></td></tr>' }
     function getCustomers() { let m = new Map(); orders.forEach(o => { let k = o.phone || o.name; if (!m.has(k)) m.set(k, { name: o.name, phone: o.phone, orders: [], last: o.created }); let c = m.get(k); c.orders.push(o); c.last = Math.max(c.last, o.created) }); return [...m.values()].sort((a, b) => b.last - a.last) }
     function renderCustomers() { let q = (document.getElementById('customer-search')?.value || '').toLowerCase(); let cs = getCustomers().filter(c => (c.name + ' ' + c.phone + ' ' + c.orders.map(o => o.notes || '').join(' ')).toLowerCase().includes(q)); document.getElementById('customer-count').textContent = fa(cs.length) + ' مشتری'; document.getElementById('customers-body').innerHTML = cs.length ? cs.map(c => { let noteList = [...c.orders].sort((a, b) => b.created - a.created).map(o => (o.notes || '').trim()).filter(Boolean); noteList = [...new Set(noteList)]; let key = c.phone || c.name; const isUuid = v => /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v || ''); let displayName = isUuid(c.name) ? 'نام ثبت نشده' : c.name, displayPhone = isUuid(c.phone) ? '—' : (c.phone || '—'); return `<tr><td><div class="customer-card"><div class="avatar">${esc(initials(displayName))}</div><b>${esc(displayName)}</b></div></td><td>${esc(displayPhone)}</td><td>${fa(c.orders.length)}</td><td>${noteList.length ? noteList.slice(0, 2).map(n => `<small class="note-line">${esc(n)}</small>`).join('') + (noteList.length > 2 ? `<small class="muted">و ${fa(noteList.length - 2)} توضیح دیگر…</small>` : '') : '<span class="muted">—</span>'}</td><td>${money(c.orders.reduce((s, o) => s + Number(o.price || 0), 0))}</td><td>${dateFa(new Date(c.last).toISOString().slice(0, 10))}</td><td><button class="delete-btn" onclick="deleteCustomer('${encodeURIComponent(key)}')">حذف مشتری</button></td></tr>` }).join('') : '<tr><td colspan="7"><div class="empty">مشتری‌ای پیدا نشد.</div></td></tr>' }
     function leadChannel(x) { const history = Array.isArray(x?.conversation_history) ? x.conversation_history : []; return history.find(h => h.source)?.source || 'instagram' }
@@ -4586,7 +4496,7 @@
       document.getElementById('forgot-link').classList.add('auth-hidden');
       document.getElementById('reset-password-form').classList.remove('auth-hidden');
       document.getElementById('back-login-link').classList.remove('auth-hidden');
-      document.getElementById('auth-hint').textContent = 'رمز عبور باید حداقل ۶ کاراکتر باشد.';
+      document.getElementById('auth-hint').textContent = 'رمز عبور باید دقیقاً ۶ کاراکتر باشد.';
       document.getElementById('new-password').focus();
     }
     function backToLogin() { recoveryMode = false; setAuthMode('login'); }
@@ -4607,7 +4517,7 @@
     async function submitNewPassword(e) {
       e.preventDefault(); if (!sb || authBusy) return;
       const password = document.getElementById('new-password').value, confirmPassword = document.getElementById('confirm-password').value;
-      if (password.length < 6) { toast('رمز عبور باید حداقل ۶ کاراکتر باشد.'); return }
+      if (password.length !== 6) { toast('رمز عبور باید دقیقاً ۶ کاراکتر باشد.'); return }
       if (password !== confirmPassword) { toast('تکرار رمز عبور با رمز جدید یکسان نیست.'); return }
       authBusy = true; const btn = document.getElementById('reset-submit'); btn.disabled = true;
       try {
@@ -4633,7 +4543,7 @@
       authBusy = true; const btn = document.getElementById('auth-submit'); btn.disabled = true;
       try {
         const email = document.getElementById('auth-email').value.trim(), password = document.getElementById('auth-password').value;
-        if (password.length < 6) { toast('رمز عبور باید حداقل ۶ کاراکتر باشد.'); return; }
+        if (password.length !== 6) { toast('رمز عبور باید دقیقاً ۶ کاراکتر باشد.'); return; }
         const result = authMode === 'signup'
           ? await sb.auth.signUp({ email, password })
           : await sb.auth.signInWithPassword({ email, password });
@@ -4668,7 +4578,7 @@
     // فهرست فروشگاه‌ها فقط برای کاربر واردشده بارگذاری می‌شود.
     async function loadShops() {
       const { data, error } = await sb.from('businesses').select('id,name').eq('user_id', user.id).order('created_at');
-      if (error) throw error; shops = (data || []).map(x => x.name === 'My Shop' ? { ...x, name: 'فروشگاه من' } : x);
+      if (error) throw error; shops = data || [];
       if (!shops.length) { const { data: created, error: createError } = await sb.from('businesses').insert({ user_id: user.id, name: 'فروشگاه من' }).select('id,name').single(); if (createError) throw createError; shops = [created]; }
       if (!shops.some(x => x.id === activeShopId)) activeShopId = shops[0].id;
       const select = document.getElementById('shop-select'); select.innerHTML = shops.map(x => `<option value="${x.id}">${esc(x.name)}</option>`).join(''); select.value = activeShopId; renderShopUI();
@@ -4712,7 +4622,7 @@
     function closeProfile() { document.getElementById('profile-modal').classList.remove('show') }
     async function saveProfile(e) { e.preventDefault(); const payload = { user_id: user.id, full_name: document.getElementById('profile-name').value.trim(), phone: document.getElementById('profile-phone').value.trim(), updated_at: new Date().toISOString() }; const { error } = await sb.from('profiles').upsert(payload, { onConflict: 'user_id' }); if (error) { toast(friendlyError(error.message)); return; } closeProfile(); toast('پروفایل ذخیره شد.'); }
     // پس از ورود، فروشگاه انتخاب‌شده و داده‌های همان فروشگاه بارگذاری می‌شوند.
-    async function afterLogin() { if (!user || lastLoadedUserId === user.id) return; lastLoadedUserId = user.id; orders = []; showApp(); try { await loadShops(); await loadOrders(); await loadLeads(); await loadFinancialData(); if (document.getElementById('expense-date')) document.getElementById('expense-date').dataset.iso = iso(new Date()); document.getElementById('expense-date').value = dateFa(document.getElementById('expense-date').dataset.iso); refreshHints(); renderOnboard();  } catch (err) { lastLoadedUserId = null; toast('آماده‌سازی فضای کار ناموفق بود: ' + friendlyError(err.message)); } }
+    async function afterLogin() { if (!user || lastLoadedUserId === user.id) return; lastLoadedUserId = user.id; orders = []; showApp(); try { await loadShops(); await loadOrders(); await loadLeads(); await loadFinancialData(); if (document.getElementById('expense-date')) document.getElementById('expense-date').dataset.iso = iso(new Date()); document.getElementById('expense-date').value = dateFa(document.getElementById('expense-date').dataset.iso); refreshHints(); renderOnboard(); setTimeout(() => startTour(false), 900); } catch (err) { lastLoadedUserId = null; toast('آماده‌سازی فضای کار ناموفق بود: ' + friendlyError(err.message)); } }
     async function loadOrders() {
       if (!sb || !user) return;
       const { data, error } = await sb.from('orders').select('*').eq('user_id', user.id).eq('shop_id', activeShopId).order('created_at', { ascending: false });
@@ -4780,7 +4690,7 @@
       if (note) note.innerHTML = known.length ? `${partial ? `فروش اقلام، مجموع سفارش‌های واجد شرایط است؛ اما سود محصولات و سود پس از هزینه سفارش فعلاً فقط برای ${fa(known.length)} سفارش با هزینه مشخص محاسبه شده. هزینه ${fa(unknown)} سفارش دیگر هنوز کامل نیست، پس سود نهایی کل فروشگاه نمایش داده نمی‌شود.` : `هزینه محصولات، ارسال و کمیسیون از فروش کم شده‌اند و سپس هزینه‌های عمومی ثبت‌شده کسر شده‌اند.`} ${partial ? 'برای کامل شدن گزارش، هزینه محصولات سفارش‌های باقی‌مانده را ثبت کن.' : 'این عدد یک برآورد بر اساس اطلاعات ثبت‌شده است.'}` : 'برای شروع محاسبه سود، هزینه خرید یا ساخت محصولات را در کاتالوگ وارد کن. سفارش‌هایی که هزینه‌شان مشخص نیست با حدس محاسبه نمی‌شوند.';
       renderMonthlyInsights();
       const pb = document.getElementById('products-body');
-      if (pb) pb.innerHTML = financialProducts.length ? financialProducts.map(p => { let c = productCost(p), profit = Number(p.sale_price || 0) - c, active = p.is_active !== false; return `<tr class="${active ? '' : 'product-inactive'}"><td><b>${esc(p.name)}</b>${Number(p.labor_minutes || 0) > 0 ? `<br><small class="muted">زمان ساخت: ${fmtMinutes(p.labor_minutes)}</small>` : ''}<br><span class="pill ${active ? 'status-active' : 'status-inactive'}">${active ? 'فعال' : 'غیرفعال'}</span></td><td>${finMoney(p.sale_price)}</td><td>${p.costs_complete ? finMoney(c) : 'ثبت نشده'}<br><small class="muted">${p.costs_complete ? 'هزینه ثبت شده' : 'هزینه نیاز به تکمیل دارد'}</small></td><td>${p.costs_complete ? finMoney(profit) + ' (' + (Number(p.sale_price) > 0 ? (profit / Number(p.sale_price) * 100).toFixed(1) + '٪' : '—') + ')' : '—'}</td><td><button class="act" onclick="editProduct('${p.id}')">ویرایش</button> ${active ? `<button class="delete-btn" onclick="deactivateProduct('${p.id}')">غیرفعال‌سازی</button>` : `<button class="act" onclick="reactivateProduct('${p.id}')">فعال‌سازی</button>`} <button class="delete-btn" onclick="permanentlyDeleteProduct('${p.id}')">حذف</button></td></tr>` }).join('') : '<tr><td colspan="5"><div class="empty rich"><div class="e-ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></div><strong>هنوز محصولی ثبت نکرده‌ای</strong><p>محصولاتت را یک بار ثبت کن. بعد در هر سفارش با یک انتخاب، قیمت خودکار پر می‌شود و یارا سود هر محصول را حساب می‌کند.</p><button class="btn" type="button" onclick="openProductForm()">＋ افزودن اولین محصول</button></div></td></tr>';
+      if (pb) pb.innerHTML = financialProducts.length ? financialProducts.map(p => { let c = productCost(p), profit = Number(p.sale_price || 0) - c, active = p.is_active !== false; return `<tr class="${active ? '' : 'product-inactive'}"><td><b>${esc(p.name)}</b>${Number(p.labor_minutes || 0) > 0 ? `<br><small class="muted">زمان ساخت: ${fmtMinutes(p.labor_minutes)}</small>` : ''}<br><span class="pill ${active ? 'status-active' : 'status-inactive'}">${active ? 'فعال' : 'غیرفعال'}</span></td><td>${finMoney(p.sale_price)}</td><td>${p.costs_complete ? finMoney(c) : 'ثبت نشده'}<br><small class="muted">${p.costs_complete ? 'هزینه ثبت شده' : 'هزینه نیاز به تکمیل دارد'}</small></td><td>${p.costs_complete ? finMoney(profit) + ' (' + (Number(p.sale_price) > 0 ? (profit / Number(p.sale_price) * 100).toFixed(1) + '٪' : '—') + ')' : '—'}</td><td><button class="act" onclick="editProduct('${p.id}')">ویرایش</button> ${active ? `<button class="delete-btn" onclick="deactivateProduct('${p.id}')">غیرفعال‌سازی</button>` : `<button class="act" onclick="reactivateProduct('${p.id}')">فعال‌سازی</button>`} <button class="delete-btn" onclick="permanentlyDeleteProduct('${p.id}')">حذف</button></td></tr>` }).join('') : '<tr><td colspan="5"><div class="empty"><strong>هنوز محصولی ثبت نکرده‌ای</strong>برای شروع، دکمه «＋ محصول جدید» را بزن.</div></td></tr>';
       const eb = document.getElementById('expenses-body'); if (eb) eb.innerHTML = financialExpenses.length ? financialExpenses.map(x => `<tr><td>${esc(x.title)}</td><td>${({ advertising: 'تبلیغات', fixed: 'هزینه ثابت', salary: 'حقوق', internet: 'اینترنت و قبوض', shipping: 'ارسال عمومی (غیرسفارشی)', equipment: 'تجهیزات', other: 'سایر' })[x.category] || x.category}</td><td>${finMoney(x.amount)}</td><td>${dateFa(x.expense_date)}</td><td>${x.expense_type === 'fixed' ? 'ثابت' : 'متغیر'}</td><td><button class="act" onclick="editExpense('${x.id}')">ویرایش</button> <button class="delete-btn" onclick="deleteExpense('${x.id}')">حذف</button></td></tr>`).join('') : '<tr><td colspan="6"><div class="empty">هزینه‌ای ثبت نشده است.</div></td></tr>';
     }
     function renderMonthlyInsights() { const host = document.getElementById('monthly-insights'); if (!host) return; const now = new Date(), year = now.getFullYear(), month = now.getMonth(), eligible = orders.filter(o => ['paid', 'making', 'ready', 'sent', 'done'].includes(o.status) && inFinMonth(o.created)); const period = document.getElementById('monthly-insight-period'); if (period) period.textContent = monthLabel(finMonthAnchor); if (!eligible.length) { host.textContent = 'هنوز سفارش پرداخت‌شده‌ای در این ماه ثبت نشده است. با ثبت سفارش‌ها، این بخش پرفروش‌ترین محصول و مشتریان تکراری را به تو نشان می‌دهد.'; return } const ids = new Set(eligible.map(o => o.id)), stats = new Map(), buyers = new Map(), withItems = new Set(); eligible.forEach(o => { const key = o.phone || o.name; buyers.set(key, (buyers.get(key) || 0) + 1) }); financialOrderItems.filter(x => ids.has(x.order_id)).forEach(x => { withItems.add(x.order_id); const name = x.product_name_snapshot || 'محصول بدون نام'; if (!stats.has(name)) stats.set(name, { qty: 0, revenue: 0, profit: 0, complete: true }); const a = stats.get(name), q = Number(x.quantity || 0), sale = Number(x.unit_sale_price || 0), cost = Number(x.unit_purchase_cost || 0) + Number(x.unit_production_cost || 0) + Number(x.unit_packaging_cost || 0) + Number(x.unit_labor_cost || 0); a.qty += q; a.revenue += q * sale; if (x.cost_recorded) a.profit += q * (sale - cost); else a.complete = false }); eligible.filter(o => !withItems.has(o.id)).forEach(o => { const name = o.product || 'محصول ثبت‌شده در سفارش قدیمی'; if (!stats.has(name)) stats.set(name, { qty: 0, revenue: 0, profit: 0, complete: false }); stats.get(name).qty += Number(o.qty || 1) }); const ranked = [...stats.entries()].sort((a, b) => b[1].qty - a[1].qty), top = ranked[0], profitable = [...stats.entries()].filter(x => x[1].complete).sort((a, b) => b[1].profit - a[1].profit)[0], repeat = [...buyers.values()].filter(n => n > 1).length, sales = eligible.reduce((a, o) => a + Number(o.price || 0), 0); host.innerHTML = `<div class="stats" style="margin:0 0 12px"><div class="stat"><div class="stat-top">فروش این ماه</div><strong>${finMoney(sales)}</strong><small>${fa(eligible.length)} سفارش پرداخت‌شده یا در حال انجام</small></div><div class="stat"><div class="stat-top">مشتریان تکراری</div><strong>${fa(repeat)}</strong><small>بیش از یک سفارش در این ماه</small></div><div class="stat"><div class="stat-top">پرفروش‌ترین محصول</div><strong style="font-size:18px">${top ? esc(top[0]) : '—'}</strong><small>${top ? fa(top[1].qty) + ' عدد' : 'هنوز اطلاعاتی نیست'}</small></div><div class="stat"><div class="stat-top">بیشترین سود محصول</div><strong style="font-size:18px">${profitable ? esc(profitable[0]) : '—'}</strong><small>${profitable ? finMoney(profitable[1].profit) : 'پس از ثبت هزینه محصولات مشخص می‌شود'}</small></div></div><div class="muted">این جمع‌بندی بر اساس سفارش‌های همین ماه است. سود محصول فقط وقتی نمایش داده می‌شود که هزینه‌های آن ثبت شده باشد.</div>` }
@@ -4896,61 +4806,8 @@
       const hasProduct = financialProducts.length > 0;
       const hasOrder = orders.length > 0;
 
-      const chatBtn = document.getElementById('dash-chat-btn'), statsEl = document.getElementById('dash-stats');
-      const gridEl = document.getElementById('dash-grid');
-      if (statsEl) statsEl.style.display = hasOrder ? '' : 'none';
-      if (gridEl) gridEl.style.display = (hasOrder || (typeof leads !== 'undefined' && leads.length)) ? '' : 'none';
       if (dismissed || (hasProduct && hasOrder)) {
-        box.style.display = 'none'; box.dataset.mode = '';
-        if (chatBtn) chatBtn.style.display = '';
-        return;
-      }
-      if (chatBtn) chatBtn.style.display = 'none';
-      if (hasProduct || hasOrder) box.dataset.mode = 'steps';
-      if (!hasProduct && !hasOrder) {
-        if (box.dataset.mode === 'welcome') { box.style.display = 'block'; return; }
-        const pt = t => `<li><i>✓</i><span>${t}</span></li>`;
-        box.innerHTML = `<div class="wl">
-          <div class="wl-head">
-            <h2>یارا، دستیار فروشگاه اینستاگرامی تو</h2>
-            <p class="wl-lead">اگر سفارش‌هایت لابه‌لای دایرکت‌ها گم می‌شود، یارا برای همین ساخته شده. مشتری‌ها، سفارش‌ها و پیگیری‌هایت را یک‌جا نگه می‌دارد تا بدانی چه کسی چه خواسته، چی آماده است و چی عقب مانده.</p>
-          </div>
-          <div class="wl-demo" aria-hidden="true">
-            <div class="wl-tag">نمونه از یک فروشگاه دستبند · این‌طوری کار می‌کند</div>
-            <div class="ph">
-              <div class="ph-top"><div class="ph-av"><span>👤</span></div><div><b>maryam.shell</b><small>دایرکت</small></div></div>
-              <div class="ph-chat">
-                <div class="m c">سلام وقت بخیر 👋 <mark style="--d:.4s">دستبند صدفی آبی</mark> دارید؟</div>
-                <div class="m s">سلام عزیزم، بله موجوده ✨ قیمتش ۲۶۰ هزار تومنه</div>
-                <div class="m c">عالیه! <mark style="--d:1.2s">دو تا</mark> لازم دارم. من <mark style="--d:1.8s">مریم</mark>ام، آدرسم <mark style="--d:2.4s">تهران، ونک</mark>، شمارهٔ <mark style="--d:3s">۰۹۱۲۱۲۳۴۵۶۷</mark></div>
-              </div>
-              <div class="ph-read"><i></i><i></i><i></i> یارا گفتگو را می‌خواند</div>
-              <div class="ph-draft"><b>پیش‌نویس سفارش</b>
-                <div class="dr" style="--d:3.6s"><span>مشتری</span><b>مریم</b></div>
-                <div class="dr" style="--d:3.9s"><span>محصول</span><b>دستبند صدفی آبی</b></div>
-                <div class="dr" style="--d:4.2s"><span>تعداد</span><b>۲</b></div>
-                <div class="dr" style="--d:4.5s"><span>تلفن</span><b>۰۹۱۲۱۲۳۴۵۶۷</b></div>
-                <div class="dr" style="--d:4.8s"><span>آدرس</span><b>تهران، ونک</b></div>
-                <div class="ph-ok" style="--d:5.2s">تو یک‌بار نگاه می‌کنی و ذخیره می‌کنی. بدون تایپ دوباره</div>
-              </div>
-            </div>
-          </div>
-          <div class="wl-body">
-            <ul class="wl-points">
-              ${pt('<b>گفتگوی دایرکت را بچسبان</b>؛ یارا اسم، محصول، تعداد و آدرس را درمی‌آورد و سفارش را آماده می‌کند.')}
-              ${pt('<b>برای مشتری لینک پیگیری بفرست</b> تا هر بار نپرسد «سفارشم کجاست؟».')}
-              ${pt('<b>سفارش‌های گیرکرده را ببین</b> قبل از اینکه مشتری ناراضی شود.')}
-            </ul>
-            <div class="wl-cta">
-              <button class="btn" type="button" onclick="openChatModal()">✦ یک گفتگوی دایرکت را امتحان کن</button>
-              <button class="wl-link" type="button" onclick="goAddProduct()">اول محصولاتم را اضافه می‌کنم</button>
-              <button class="wl-link" type="button" onclick="openOrderModal()">ثبت دستی سفارش</button>
-            </div>
-            <button class="wl-skip" type="button" onclick="dismissOnboard()">دیگر نشان نده</button>
-          </div>
-        </div>`;
-        box.dataset.mode = 'welcome';
-        box.style.display = 'block';
+        box.style.display = 'none';
         return;
       }
 
