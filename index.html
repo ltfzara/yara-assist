@@ -3072,7 +3072,10 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
  .panel-head .btn.secondary{border:0;background:transparent;color:var(--primary);min-height:36px;padding:0 4px;font-size:13px}
  .modal-actions .btn.secondary{flex:0 0 34%}
 }
-</style>
+.needs-check { background: #fff7e0 !important; border-color: #e0b24a !important }
+    .draft-banner { background: #fff7e0; border: 1px solid #f0d58a; color: #6b4e08; border-radius: 10px; padding: 9px 12px; font-size: 12.5px; line-height: 1.8; margin-bottom: 10px }
+    .chat-help { color: var(--muted); font-size: 12px; line-height: 1.8; margin: 0 0 8px }
+  </style>
 </head>
 
 <body>
@@ -3186,6 +3189,7 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
           <button onclick="showPage('reminders')"><span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><b>پیگیری‌ها</b><small>کارهای
               باقی‌مانده</small></button>
         </div>
+        <button class="btn" style="width:100%;margin:0 0 14px" onclick="openChatModal()">✦ گفتگوی دایرکت را بچسبان و سفارش بساز</button>
         <div class="stats">
           <div class="stat">
             <div class="stat-top"><span>کل سفارش‌ها</span><span class="stat-icon">▤</span></div><strong
@@ -3227,8 +3231,8 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
       <section id="orders" class="page">
         <div class="section-tabs"><button type="button" onclick="showPage('customers')">مشتریان</button><button
             type="button" class="active" onclick="showPage('orders')">سفارش‌ها</button></div>
-        <div class="subpage-note"><span>سفارش‌ها بخشی از ارتباط با مشتریان هستند.</span><button
-            class="btn secondary small" onclick="openOrderModal()">＋ ثبت سفارش</button></div>
+        <div class="subpage-note"><span>سفارش‌ها بخشی از ارتباط با مشتریان هستند.</span><span><button class="btn secondary small" onclick="openChatModal()">✦ از گفتگو</button> <button
+            class="btn secondary small" onclick="openOrderModal()">＋ ثبت سفارش</button></span></div>
         <div class="panel">
           <div class="panel-head">
             <h2>همه سفارش‌ها</h2><span class="muted">مدیریت و پیگیری خریدها</span>
@@ -3631,6 +3635,18 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
       </form>
     </div>
   </div>
+  <div class="modal-back" id="chat-modal" onclick="if(event.target===this)closeChatModal()">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>ساخت سفارش از گفتگوی دایرکت</h2><button class="close" onclick="closeChatModal()">×</button>
+      </div>
+      <p class="chat-help">گفتگوی مشتری را از دایرکت کپی کن و اینجا بچسبان. فقط بخش مربوط به سفارش کافی است. پیش‌نویس سفارش ساخته می‌شود و قبل از ذخیره خودت بررسی‌اش می‌کنی. متن گفتگو ذخیره نمی‌شود.</p>
+      <textarea class="field" id="chat-text" rows="9" maxlength="8000" placeholder="مثلاً: سلام دو تا شمع بزرگ یاس می‌خوام، آدرسم تهرانه…"></textarea>
+      <div id="chat-error" class="muted" style="color:var(--red);font-size:12.5px;min-height:20px;margin-top:6px"></div>
+      <div class="modal-actions"><button class="btn" id="chat-go" type="button" onclick="extractFromChat()">ساخت پیش‌نویس سفارش</button><button class="btn secondary" type="button" onclick="closeChatModal()">بستن</button></div>
+    </div>
+  </div>
+
   <div class="modal-back" id="lead-modal" onclick="if(event.target===this)closeLeadModal()">
     <div class="modal" style="max-width:620px">
       <div class="modal-head">
@@ -3773,7 +3789,7 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
     function applyFinanceTab(tab) { document.querySelectorAll('.finance-tabs [data-fin-tab]').forEach(b => b.classList.toggle('active', b.dataset.finTab === tab)); const overview = document.getElementById('finance-overview-panel'), settings = document.getElementById('finance-settings-panel'), learn = document.getElementById('finance-learn-panel'); if (overview) overview.style.display = tab === 'overview' ? '' : 'none'; if (settings) settings.style.display = tab === 'settings' ? '' : 'none'; if (learn) learn.style.display = tab === 'learn' ? '' : 'none' }
     function showFinanceTab(tab) { if (tab === 'expenses') { showPage('expenses'); return } showPage('finance'); applyFinanceTab(tab) }
     document.querySelectorAll('.nav button[data-page]').forEach(b => b.addEventListener('click', () => showPage(b.dataset.page)));
-    function getReminders() { let today = future(0); return orders.filter(o => !['done', 'cancel'].includes(o.status)).map(o => { let reason = '', priority = 2; if (o.date && o.date < today) { reason = 'موعد تحویل گذشته'; priority = 0 } else if (o.status === 'new') { reason = 'در انتظار بررسی / پرداخت'; priority = 1 } else if (o.date === today) { reason = 'موعد تحویل امروز'; priority = 0 } else if (o.status === 'sent' && !o.track) { reason = 'کد رهگیری ثبت نشده'; priority = 1 } else if (o.status === 'ready') { reason = 'آماده ارسال'; priority = 1 } return reason ? { ...o, reason, priority } : null }).filter(Boolean).sort((a, b) => a.priority - b.priority) }
+    function getReminders() { let today = future(0); return orders.filter(o => !['done', 'cancel'].includes(o.status)).map(o => { let reason = '', priority = 2; if (o.date && o.date < today) { reason = 'موعد تحویل گذشته'; priority = 0 } else if (['paid', 'making', 'ready'].includes(o.status) && o.statusChanged && Date.now() - o.statusChanged > 48 * 36e5) { reason = 'بیش از ۴۸ ساعت بدون تغییر وضعیت'; priority = 0 } else if (o.status === 'new') { reason = 'در انتظار بررسی / پرداخت'; priority = 1 } else if (o.date === today) { reason = 'موعد تحویل امروز'; priority = 0 } else if (o.status === 'sent' && !o.track) { reason = 'کد رهگیری ثبت نشده'; priority = 1 } else if (o.status === 'ready') { reason = 'آماده ارسال'; priority = 1 } return reason ? { ...o, reason, priority } : null }).filter(Boolean).sort((a, b) => a.priority - b.priority) }
     function getLeadReminders() { const today = future(0); return leads.filter(x => !['won', 'lost'].includes(x.status) && x.next_follow_up).sort((a, b) => String(a.next_follow_up).localeCompare(String(b.next_follow_up))).map(x => ({ ...x, followup_due: x.next_follow_up <= today })); }
     function getLeadAttention() { const today = future(0); return leads.filter(x => !['won', 'lost'].includes(x.status) && (x.status === 'new' || x.status === 'follow_up' || (x.next_follow_up && x.next_follow_up <= today))).sort((a, b) => { const ad = a.next_follow_up && a.next_follow_up <= today ? 0 : 1, bd = b.next_follow_up && b.next_follow_up <= today ? 0 : 1; if (ad !== bd) return ad - bd; const ap = a.status === 'follow_up' ? 0 : 1, bp = b.status === 'follow_up' ? 0 : 1; if (ap !== bp) return ap - bp; return String(b.updated_at || b.created_at || '').localeCompare(String(a.updated_at || a.created_at || '')) }); }
     function renderDashboard() {
@@ -3786,7 +3802,7 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
       let rem = getReminders(), leadAttention = getLeadAttention(); document.getElementById('reminder-count').textContent = fa(rem.length + leadAttention.length) + ' مورد';
       const orderHtml = rem.slice(0, 4).map(r => `<div class="reminder"><div class="reminder-icon">!</div><div><b>${esc(r.name)} · ${esc(r.product)}</b><small>${r.reason} · ${dateFa(r.date)}</small></div></div>`).join(''); const leadHtml = leadAttention.slice(0, 4).map(r => `<div class="reminder"><div class="reminder-icon">♙</div><div style="flex:1"><b>${esc(r.name || r.instagram_username || 'مشتری بالقوه')}</b><small>${r.next_follow_up && r.next_follow_up <= future(0) ? 'موعد پیگیری رسیده' : r.next_follow_up ? 'یادآوری برنامه‌ریزی‌شده' : 'هنوز تاریخی تعیین نشده'} · ${esc(r.product_interest || leadChannelLabel(leadChannel(r)))}</small></div><button class="btn secondary small" onclick="addLeadNote('${r.id}')">ثبت یادداشت</button></div>`).join(''); document.getElementById('dash-reminders').innerHTML = orderHtml + leadHtml || '<div class="empty">عالیه! موردی برای پیگیری نداری</div>';
     }
-    function renderOrders() { let q = (document.getElementById('order-search')?.value || '').trim().toLowerCase(), st = document.getElementById('status-filter')?.value || ''; let arr = [...orders].sort((a, b) => b.created - a.created).filter(o => (!st || o.status === st) && [o.name, o.phone, o.product, o.notes, o.id].join(' ').toLowerCase().includes(q)); document.getElementById('orders-body').innerHTML = arr.length ? arr.map(o => `<tr><td><b>${esc(o.name)}</b><br><small class="muted">${esc(o.phone || 'بدون شماره')}</small></td><td>${esc(o.product)} <small class="muted">× ${fa(o.qty)}</small>${o.notes ? `<small class="note-line"><b>توضیحات:</b> ${esc(o.notes)}</small>` : ''}</td><td>${money(o.price)}</td><td>${dateFa(o.date)}</td><td>${statusPill(o.status)}</td><td><button class="act" onclick="editOrder('${o.id}')">ویرایش</button></td></tr>`).join('') : '<tr><td colspan="6"><div class="empty">سفارشی پیدا نشد.</div></td></tr>' }
+    function renderOrders() { let q = (document.getElementById('order-search')?.value || '').trim().toLowerCase(), st = document.getElementById('status-filter')?.value || ''; let arr = [...orders].sort((a, b) => b.created - a.created).filter(o => (!st || o.status === st) && [o.name, o.phone, o.product, o.notes, o.id].join(' ').toLowerCase().includes(q)); document.getElementById('orders-body').innerHTML = arr.length ? arr.map(o => `<tr><td><b>${esc(o.name)}</b><br><small class="muted">${esc(o.phone || 'بدون شماره')}</small></td><td>${esc(o.product)} <small class="muted">× ${fa(o.qty)}</small>${o.notes ? `<small class="note-line"><b>توضیحات:</b> ${esc(o.notes)}</small>` : ''}</td><td>${money(o.price)}</td><td>${dateFa(o.date)}</td><td>${statusPill(o.status)}${o.views ? '<small class="muted" style="display:block">مشتری لینک را دید</small>' : ''}</td><td><button class="act" onclick="editOrder('${o.id}')">ویرایش</button>${o.token ? ` <button class="act" onclick="copyStatusMessage('${o.id}')">لینک وضعیت</button>` : ''}</td></tr>`).join('') : '<tr><td colspan="6"><div class="empty">سفارشی پیدا نشد.</div></td></tr>' }
     function getCustomers() { let m = new Map(); orders.forEach(o => { let k = o.phone || o.name; if (!m.has(k)) m.set(k, { name: o.name, phone: o.phone, orders: [], last: o.created }); let c = m.get(k); c.orders.push(o); c.last = Math.max(c.last, o.created) }); return [...m.values()].sort((a, b) => b.last - a.last) }
     function renderCustomers() { let q = (document.getElementById('customer-search')?.value || '').toLowerCase(); let cs = getCustomers().filter(c => (c.name + ' ' + c.phone + ' ' + c.orders.map(o => o.notes || '').join(' ')).toLowerCase().includes(q)); document.getElementById('customer-count').textContent = fa(cs.length) + ' مشتری'; document.getElementById('customers-body').innerHTML = cs.length ? cs.map(c => { let noteList = [...c.orders].sort((a, b) => b.created - a.created).map(o => (o.notes || '').trim()).filter(Boolean); noteList = [...new Set(noteList)]; let key = c.phone || c.name; const isUuid = v => /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v || ''); let displayName = isUuid(c.name) ? 'نام ثبت نشده' : c.name, displayPhone = isUuid(c.phone) ? '—' : (c.phone || '—'); return `<tr><td><div class="customer-card"><div class="avatar">${esc(initials(displayName))}</div><b>${esc(displayName)}</b></div></td><td>${esc(displayPhone)}</td><td>${fa(c.orders.length)}</td><td>${noteList.length ? noteList.slice(0, 2).map(n => `<small class="note-line">${esc(n)}</small>`).join('') + (noteList.length > 2 ? `<small class="muted">و ${fa(noteList.length - 2)} توضیح دیگر…</small>` : '') : '<span class="muted">—</span>'}</td><td>${money(c.orders.reduce((s, o) => s + Number(o.price || 0), 0))}</td><td>${dateFa(new Date(c.last).toISOString().slice(0, 10))}</td><td><button class="delete-btn" onclick="deleteCustomer('${encodeURIComponent(key)}')">حذف مشتری</button></td></tr>` }).join('') : '<tr><td colspan="7"><div class="empty">مشتری‌ای پیدا نشد.</div></td></tr>' }
     function leadChannel(x) { const history = Array.isArray(x?.conversation_history) ? x.conversation_history : []; return history.find(h => h.source)?.source || 'instagram' }
@@ -3868,6 +3884,71 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
       const leadHtml = lr.map(x => `<div class="reminder"><div class="reminder-icon">♙</div><div style="flex:1"><b>${esc(x.name || 'مخاطب بدون نام')} · <span dir="ltr">@${esc(x.instagram_username || '')}</span></b><small>${x.next_follow_up ? (x.next_follow_up <= future(0) ? 'موعد پیگیری رسیده' : 'پیگیری برنامه‌ریزی‌شده') + ' · ' + dateFa(x.next_follow_up) : (x.status === 'follow_up' ? 'نیازمند پیگیری تو' : 'مخاطب جدید؛ نیازمند بررسی')}</small></div><button class="btn secondary small" onclick="editLead('${x.id}')">ویرایش</button><button class="btn secondary small" onclick="deleteLead('${x.id}')">حذف</button>${x.next_follow_up ? `<button class="btn secondary small" onclick="completeLeadFollowUp('${x.id}')">انجام شد</button>` : ''}</div>`).join('');
       document.getElementById('all-reminders').innerHTML = orderHtml + leadHtml || '<div class="empty">همه‌چیز مرتب است؛ موردی برای پیگیری نداری</div>';
     }
+
+    // ===== V8: status link + paste-chat draft =====
+    function clearDraftMarks() { document.getElementById('draft-banner')?.remove(); document.querySelectorAll('#order-form .needs-check').forEach(e => e.classList.remove('needs-check')) }
+    async function copyText(s) {
+      try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(s); return true } } catch (e) { }
+      try { const ta = document.createElement('textarea'); ta.value = s; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;opacity:0'; document.body.appendChild(ta); ta.select(); const ok = document.execCommand('copy'); ta.remove(); return ok } catch (e) { return false }
+    }
+    function statusMessage(o) {
+      const first = (o.name || '').trim().split(/\s+/)[0] || '';
+      return [`سلام ${first} 🌷`.replace('  ', ' '), 'وضعیت سفارشت را از این لینک ببین:', location.origin + '/s/' + o.token, o.track ? 'کد رهگیری: ' + o.track : ''].filter(Boolean).join('\n')
+    }
+    async function copyStatusMessage(id) {
+      const o = orders.find(x => x.id === id); if (!o) return;
+      if (!o.token) { toast('لینک این سفارش هنوز آماده نیست؛ مهاجرت V8 را اجرا کن.'); return }
+      const ok = await copyText(statusMessage(o));
+      toast(ok ? 'پیام وضعیت کپی شد؛ در دایرکت بچسبان.' : 'کپی نشد؛ دوباره امتحان کن.');
+      if (ok) sb.from('orders').update({ link_copied_at: new Date().toISOString() }).eq('id', id).eq('user_id', user.id).eq('shop_id', activeShopId).then(() => { }, () => { })
+    }
+    let chatBusy = false;
+    function openChatModal() { document.getElementById('chat-text').value = ''; document.getElementById('chat-error').textContent = ''; document.getElementById('chat-modal').classList.add('show'); setTimeout(() => document.getElementById('chat-text').focus(), 60) }
+    function closeChatModal() { document.getElementById('chat-modal').classList.remove('show') }
+    async function extractFromChat() {
+      if (chatBusy) return;
+      const text = document.getElementById('chat-text').value.trim(), err = document.getElementById('chat-error'), btn = document.getElementById('chat-go');
+      err.textContent = '';
+      if (text.length < 10) { err.textContent = 'متن گفتگو را اینجا بچسبان.'; return }
+      if (text.length > 8000) { err.textContent = 'متن خیلی بلند است؛ فقط بخش مربوط به سفارش را بچسبان.'; return }
+      chatBusy = true; btn.disabled = true; btn.textContent = 'در حال خواندن گفتگو…';
+      try {
+        const { data: sess } = await sb.auth.getSession(); const token = sess?.session?.access_token; if (!token) throw new Error('ابتدا وارد حساب شو');
+        const r = await fetch('/api/extract', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token }, body: JSON.stringify({ text, products: financialProducts.filter(p => p.is_active).map(p => p.name).slice(0, 80) }) });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) throw new Error(j.error || 'خطا در خواندن گفتگو');
+        closeChatModal(); applyChatDraft(j.draft);
+      } catch (e) { err.textContent = 'نشد: ' + (e.message || 'خطای ناشناخته') + ' — می‌توانی سفارش را دستی ثبت کنی.' }
+      finally { chatBusy = false; btn.disabled = false; btn.textContent = 'ساخت پیش‌نویس سفارش' }
+    }
+    function applyChatDraft(d) {
+      d = d || {}; openOrderModal();
+      const set = (id, v) => { const el = document.getElementById(id); if (el && v != null && v !== '') el.value = v };
+      set('f-name', d.customer_name); set('f-phone', d.phone);
+      set('f-notes', [d.address ? 'آدرس: ' + d.address : '', d.instagram_username ? 'آیدی اینستاگرام: @' + d.instagram_username : '', d.deadline_text ? 'مهلت گفته‌شده: ' + d.deadline_text : '', d.notes || ''].filter(Boolean).join('\n'));
+      if (d.paid === true) set('f-status', 'paid');
+      const norm = s => String(s || '').replace(/ي/g, 'ی').replace(/ك/g, 'ک').replace(/\s+/g, ' ').trim();
+      const lines = (d.items || []).map(it => {
+        const p = it.matched_product ? financialProducts.find(x => x.is_active && norm(x.name) === norm(it.matched_product)) : null;
+        const price = Number.isFinite(it.unit_price_toman) ? it.unit_price_toman : (p ? Number(p.sale_price || 0) : '');
+        return { product_id: p?.id || null, product_name_snapshot: p ? p.name : it.name, quantity: it.quantity || 1, unit_sale_price: price }
+      });
+      renderOrderLines(lines.length ? lines : [{ quantity: 1, unit_sale_price: '' }]);
+      // highlight what the seller must check
+      const mark = el => el && el.classList.add('needs-check'), u = d.uncertain || [];
+      if (!d.customer_name || u.includes('customer_name')) mark(document.getElementById('f-name'));
+      if (u.includes('phone')) mark(document.getElementById('f-phone'));
+      document.querySelectorAll('#order-lines .order-line').forEach(row => {
+        const price = row.querySelector('.order-unit-price'), custom = row.querySelector('.order-custom-name'), qty = row.querySelector('.order-qty');
+        if (price.value.trim() === '' || u.includes('price')) mark(price);
+        if (custom && custom.style.display !== 'none' && (custom.value.trim() === '' || u.includes('items'))) mark(custom);
+        if (u.includes('quantity')) mark(qty);
+      });
+      document.getElementById('modal-title').textContent = 'پیش‌نویس سفارش از گفتگو';
+      const form = document.getElementById('order-form');
+      form.insertAdjacentHTML('afterbegin', '<div id="draft-banner" class="draft-banner">این پیش‌نویس را هوش مصنوعی از گفتگو ساخته؛ ممکن است اشتباه باشد. فیلدهای زردرنگ را حتماً بررسی کن، بعد ذخیره کن.</div>');
+      updateOrderTotals();
+    }
     function renderAll() { renderDashboard(); renderOrders(); renderCustomers(); renderReminders() }
     function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])) }
     function orderLineHtml(item = {}, index = 0) {
@@ -3882,8 +3963,8 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
     function onOrderProductChange(select) { const row = select.closest('.order-line'), custom = row.querySelector('.order-custom-name'), price = row.querySelector('.order-unit-price'); if (select.value === '__custom__') { custom.style.display = ''; custom.focus() } else { const p = financialProducts.find(x => x.id === select.value); custom.style.display = 'none'; custom.value = ''; if (p) price.value = String(p.sale_price ?? 0) } updateOrderTotals() }
     function orderLineValues() { return [...document.querySelectorAll('#order-lines .order-line')].map(row => { const productId = row.querySelector('.order-product').value; const p = productId === '__custom__' ? null : financialProducts.find(x => x.id === productId); return { row, product: p, product_id: p?.id || null, name: p?.name || row.querySelector('.order-custom-name').value.trim(), quantity: Math.max(1, Math.floor(Number(normalizeNumberString(row.querySelector('.order-qty').value)) || 1)), unit_sale_price: Number(normalizeNumberString(row.querySelector('.order-unit-price').value) || 0), price_entered: row.querySelector('.order-unit-price').value.trim() !== '', existing_id: row.dataset.existingId || '' } }) }
     function updateOrderTotals() { const vals = orderLineValues(); let subtotal = 0; vals.forEach(v => { const total = v.quantity * v.unit_sale_price; subtotal += total; const el = v.row.querySelector('.line-total'); if (el) el.textContent = money(total) }); const chargeEl = document.getElementById('f-shipping-charged'), raw = chargeEl?.value.trim() || '', charged = raw === '' ? Number(shopFinancialDefaults.shipping_charged || 0) : numericValue('f-shipping-charged'), grand = subtotal + charged; const a = document.getElementById('order-items-total'), b = document.getElementById('order-grand-total'); if (a) a.textContent = money(subtotal); if (b) b.textContent = money(grand); }
-    function openOrderModal() { document.getElementById('order-form').reset(); document.getElementById('edit-id').value = ''; editingOrderItemRecords = []; editingLegacyOrder = false; document.getElementById('f-shipping-cost').value = ''; document.getElementById('f-shipping-charged').value = ''; document.getElementById('f-commission').value = ''; document.querySelector('#order-form .order-extra').open = false; renderOrderLines([{ quantity: 1, unit_sale_price: 0 }]); document.getElementById('f-date').value = ''; document.getElementById('f-date').dataset.iso = ''; document.getElementById('modal-title').textContent = 'ثبت سفارش جدید'; const note = document.getElementById('order-default-cost-note'); if (note) note.textContent = `ارسال پرداختی: ${finMoney(shopFinancialDefaults.shipping_cost)} · ارسال دریافتی: ${finMoney(shopFinancialDefaults.shipping_charged)} · کمیسیون طبق تنظیمات فروشگاه`; updateOrderTotals(); document.getElementById('order-modal').classList.add('show') }
-    function closeOrderModal() { document.getElementById('order-modal').classList.remove('show'); convertingLeadId = null }
+    function openOrderModal() { clearDraftMarks(); document.getElementById('order-form').reset(); document.getElementById('edit-id').value = ''; editingOrderItemRecords = []; editingLegacyOrder = false; document.getElementById('f-shipping-cost').value = ''; document.getElementById('f-shipping-charged').value = ''; document.getElementById('f-commission').value = ''; document.querySelector('#order-form .order-extra').open = false; renderOrderLines([{ quantity: 1, unit_sale_price: 0 }]); document.getElementById('f-date').value = ''; document.getElementById('f-date').dataset.iso = ''; document.getElementById('modal-title').textContent = 'ثبت سفارش جدید'; const note = document.getElementById('order-default-cost-note'); if (note) note.textContent = `ارسال پرداختی: ${finMoney(shopFinancialDefaults.shipping_cost)} · ارسال دریافتی: ${finMoney(shopFinancialDefaults.shipping_charged)} · کمیسیون طبق تنظیمات فروشگاه`; updateOrderTotals(); document.getElementById('order-modal').classList.add('show') }
+    function closeOrderModal() { document.getElementById('order-modal').classList.remove('show'); convertingLeadId = null; clearDraftMarks() }
     async function editOrder(id) {
       let o = orders.find(x => x.id === id); if (!o) return; document.getElementById('edit-id').value = o.id; document.getElementById('modal-title').textContent = 'ویرایش سفارش'; let map = { 'name': 'name', 'phone': 'phone', 'status': 'status', 'track': 'track', 'notes': 'notes' }; Object.entries(map).forEach(([f, k]) => document.getElementById('f-' + f).value = o[k] ?? ''); document.getElementById('f-shipping-cost').value = String(o.shipping_cost || 0); document.getElementById('f-shipping-charged').value = String(o.shipping_charged || 0); document.getElementById('f-commission').value = String(o.commission_amount || 0); document.querySelector('#order-form .order-extra').open = true; document.getElementById('f-date').dataset.iso = o.date || ''; document.getElementById('f-date').value = o.date ? dateFa(o.date) : '';
       const { data, error } = await sb.from('order_items').select('*').eq('order_id', id).eq('shop_id', activeShopId).eq('user_id', user.id).order('created_at'); if (error) { toast(friendlyError(error.message)); return } editingOrderItemRecords = data || []; editingLegacyOrder = !editingOrderItemRecords.length;
@@ -4093,7 +4174,8 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
         id: row.id, name: row.customer_name || '', phone: row.customer_phone || '', product: row.product_name || '',
         category: row.category || 'سایر', price: Number(row.price || 0), qty: Number(row.quantity || 1),
         date: row.due_date || '', status: row.status || 'new', track: row.tracking_code || '', notes: row.notes || '', shipping_cost: Number(row.shipping_cost || 0), shipping_charged: Number(row.shipping_charged || 0), commission_amount: Number(row.commission_amount || 0),
-        created: row.created_at ? new Date(row.created_at).getTime() : Date.now()
+        created: row.created_at ? new Date(row.created_at).getTime() : Date.now(),
+        token: row.public_token || '', statusChanged: row.status_changed_at ? new Date(row.status_changed_at).getTime() : 0, views: Number(row.link_views || 0)
       }));
       renderAll();
     }
