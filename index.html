@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
-  <title>یارا | همراه کسب‌وکار خانگی — نسخه ۸٫۱</title>
+  <title>یارا | همراه کسب‌وکار خانگی — نسخه ۸٫۲</title>
   <style>
     @font-face {
       font-family: 'Vazirmatn';
@@ -2159,6 +2159,31 @@
       color: #f5f8f7
     }
 
+
+    /* V8.2: welcome screen for a brand-new shop */
+    .wl{display:grid;grid-template-columns:1.05fr 1fr;gap:26px;align-items:center;background:linear-gradient(135deg,#eef6f5,#fff 70%);border:1px solid #d9ebe8;border-radius:20px;padding:28px;margin-bottom:20px}
+    .wl h2{margin:0 0 8px;font-size:23px;line-height:1.5}
+    .wl .wl-lead{margin:0 0 16px;color:#4a5566;font-size:14px;line-height:2}
+    .wl-points{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:9px}
+    .wl-points li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.8}
+    .wl-points i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--primary2);color:var(--primary);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;margin-top:2px}
+    .wl-cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+    .wl-cta .btn{padding:13px 22px;font-size:15px}
+    .wl-link{background:none;color:var(--primary);font-weight:700;font-size:13px;padding:6px 2px;text-decoration:underline;text-underline-offset:4px}
+    .wl-demo{display:grid;gap:10px;justify-items:stretch}
+    .wl-tag{font-size:11px;color:var(--muted);text-align:center}
+    .wl-bubble{background:#fff;border:1px solid var(--line);border-radius:16px 16px 16px 4px;padding:12px 14px;font-size:13px;line-height:1.9;box-shadow:var(--shadow)}
+    .wl-bubble small{display:block;color:var(--muted);font-size:11px;margin-bottom:2px}
+    .wl-arrow{justify-self:center;background:var(--primary);color:#fff;border-radius:999px;padding:4px 13px;font-size:12px;font-weight:700}
+    .wl-draft{background:#fff;border:1.5px solid var(--primary);border-radius:14px;padding:12px 14px;font-size:13px;box-shadow:var(--shadow)}
+    .wl-draft b.t{display:block;margin-bottom:6px;font-size:12px;color:var(--primary)}
+    .wl-draft div.r{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid var(--line)}
+    .wl-draft div.r span{color:var(--muted)}
+    .wl-skip{margin-top:12px;background:none;color:var(--muted);font-size:12px;padding:4px 0}
+    @media(max-width:860px){.wl{grid-template-columns:1fr;padding:18px;gap:18px}.wl h2{font-size:20px}.wl-cta .btn{width:100%}}
+
+    .onboard:has(.wl){background:none;border:0;padding:0}
+    .onboard:has(.wl)~.quick{display:none}
     /* getting-started card */
     .onboard {
       background: linear-gradient(135deg, #f1f7f6, #fff);
@@ -3640,9 +3665,9 @@
               </svg></span><b>پیگیری‌ها</b><small>کارهای
               باقی‌مانده</small></button>
         </div>
-        <button class="btn secondary" style="width:100%;margin:0 0 14px" onclick="openChatModal()">✦ گفتگوی دایرکت را بچسبان و
+        <button id="dash-chat-btn" class="btn secondary" style="width:100%;margin:0 0 14px" onclick="openChatModal()">✦ گفتگوی دایرکت را بچسبان و
           سفارش بساز</button>
-        <div class="stats">
+        <div class="stats" id="dash-stats">
           <div class="stat">
             <div class="stat-top"><span>کل سفارش‌ها</span><span class="stat-icon">▤</span></div><strong
               id="stat-total">۰</strong><small>همه سفارش‌های ثبت‌شده</small>
@@ -4579,7 +4604,7 @@
     // فهرست فروشگاه‌ها فقط برای کاربر واردشده بارگذاری می‌شود.
     async function loadShops() {
       const { data, error } = await sb.from('businesses').select('id,name').eq('user_id', user.id).order('created_at');
-      if (error) throw error; shops = data || [];
+      if (error) throw error; shops = (data || []).map(x => x.name === 'My Shop' ? { ...x, name: 'فروشگاه من' } : x);
       if (!shops.length) { const { data: created, error: createError } = await sb.from('businesses').insert({ user_id: user.id, name: 'فروشگاه من' }).select('id,name').single(); if (createError) throw createError; shops = [created]; }
       if (!shops.some(x => x.id === activeShopId)) activeShopId = shops[0].id;
       const select = document.getElementById('shop-select'); select.innerHTML = shops.map(x => `<option value="${x.id}">${esc(x.name)}</option>`).join(''); select.value = activeShopId; renderShopUI();
@@ -4807,8 +4832,42 @@
       const hasProduct = financialProducts.length > 0;
       const hasOrder = orders.length > 0;
 
+      const chatBtn = document.getElementById('dash-chat-btn'), statsEl = document.getElementById('dash-stats');
+      if (statsEl) statsEl.style.display = hasOrder ? '' : 'none';
       if (dismissed || (hasProduct && hasOrder)) {
         box.style.display = 'none';
+        if (chatBtn) chatBtn.style.display = '';
+        return;
+      }
+      if (chatBtn) chatBtn.style.display = 'none';
+      if (!hasProduct && !hasOrder) {
+        const pt = t => `<li><i>✓</i><span>${t}</span></li>`;
+        box.innerHTML = `<div class="wl"><div>
+            <h2>یارا، دستیار فروشگاه اینستاگرامی تو</h2>
+            <p class="wl-lead">اگر سفارش‌هایت لابه‌لای دایرکت‌ها گم می‌شود، یارا برای همین ساخته شده. مشتری‌ها، سفارش‌ها و پیگیری‌هایت را یک‌جا نگه می‌دارد تا بدانی چه کسی چه خواسته، چی آماده است و چی عقب مانده.</p>
+            <ul class="wl-points">
+              ${pt('<b>گفتگوی دایرکت را بچسبان</b>؛ یارا اسم، محصول، تعداد و آدرس را از آن درمی‌آورد و سفارش را آماده می‌کند.')}
+              ${pt('<b>برای مشتری لینک پیگیری بفرست</b> تا هر بار نپرسد «سفارشم کجاست؟».')}
+              ${pt('<b>سفارش‌های گیرکرده را ببین</b> قبل از اینکه مشتری ناراضی شود.')}
+            </ul>
+            <div class="wl-cta">
+              <button class="btn" type="button" onclick="openChatModal()">✦ یک گفتگوی دایرکت را امتحان کن</button>
+              <button class="wl-link" type="button" onclick="goAddProduct()">اول محصولاتم را اضافه می‌کنم</button>
+              <button class="wl-link" type="button" onclick="openOrderModal()">ثبت دستی سفارش</button>
+            </div>
+            <button class="wl-skip" type="button" onclick="dismissOnboard()">دیگر نشان نده</button>
+          </div>
+          <div class="wl-demo" aria-hidden="true">
+            <div class="wl-tag">نمونه: فروشگاه دستبند</div>
+            <div class="wl-bubble"><small>مشتری در دایرکت</small>سلام 👋 دو تا دستبند صدفی آبی می‌خواستم. آدرسم تهران، ونک. شماره‌ام ۰۹۱۲۱۲۳۴۵۶۷، مریم هستم.</div>
+            <div class="wl-arrow">✦ یارا می‌خواند</div>
+            <div class="wl-draft"><b class="t">پیش‌نویس سفارش، تو بررسی و ذخیره می‌کنی</b>
+              <div class="r"><span>مشتری</span><b>مریم</b></div>
+              <div class="r"><span>محصول</span><b>دستبند صدفی آبی × ۲</b></div>
+              <div class="r"><span>تلفن</span><b>۰۹۱۲۱۲۳۴۵۶۷</b></div>
+              <div class="r"><span>آدرس</span><b>تهران، ونک</b></div>
+            </div></div></div>`;
+        box.style.display = 'block';
         return;
       }
 
