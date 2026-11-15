@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
-  <title>یارا | همراه کسب‌وکار خانگی — نسخه ۸</title>
+  <title>یارا | همراه کسب‌وکار خانگی — نسخه ۸٫۱</title>
   <style>
     @font-face {
       font-family: 'Vazirmatn';
@@ -2967,114 +2967,539 @@
       font-size: 11px;
       font-weight: 700
     }
-  
-/* ===== V8 design layer ===== */
-:root{--bg:#f3f5f3;--panel:#fff;--ink:#1b2a2d;--muted:#5b6b6e;--line:#dfe5e3;--primary:#0b6e6e;--primary2:#e0f0ee;--shadow:none}
-body{font-size:15px;line-height:1.7;color:var(--ink)}
-:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:6px}
-.btn{box-shadow:none;border-radius:10px;min-height:42px}
-.btn:hover{filter:none;background:#095a5a}
-.btn.secondary:hover{background:var(--primary2);color:var(--primary)}
-.sidebar{border-left:1px solid var(--line)}
-.nav button{min-height:44px;font-size:14px}
-.nav button.active{box-shadow:inset -3px 0 0 var(--primary)}
-.side-note{background:transparent;border:0;border-top:1px solid var(--line);border-radius:0;color:var(--muted);padding:14px 8px 0}
-.hello h1{font-size:24px;font-weight:800;letter-spacing:0}
-.date-chip{display:inline-block;margin-top:8px;background:transparent;border:0;padding:0;font-size:13px}
-.panel{box-shadow:none;border-radius:14px}
-.panel-head h2{font-size:16px}
-.stats{gap:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.stat{background:transparent;border:0;border-radius:0;box-shadow:none;padding:18px 22px}
-.stat+.stat{border-inline-start:1px solid var(--line)}
-.stat-icon{display:none}
-.stat-top{font-size:13px;color:var(--muted)}
-.stat strong{font-size:28px;font-weight:800}
-.stat small{font-size:12px}
-.quick button{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;min-height:68px;padding:12px 16px;border-radius:14px}
-.quick button:hover{border-color:var(--primary);background:#fff}
-.quick span{grid-row:span 2;margin:0;color:var(--primary);display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--primary2)}
-.quick b{font-size:14px;align-self:end}
-.quick small{font-size:12px;margin:0;align-self:start}
-.quick .main-action{background:var(--primary);border-color:var(--primary);color:#fff}
-.quick .main-action:hover{background:#095a5a}
-.quick .main-action span{background:#ffffff26;color:#fff}
-.quick .main-action small{color:#cfe8e5}
-.pill{font-size:12px;padding:4px 10px}
-.auth-card{box-shadow:none;border-radius:18px}
-.auth-card label{font-size:13px}
-.auth-card>p{font-size:13px}
-.toast{box-shadow:none;background:var(--ink)}
-@media(max-width:700px){
- .stats{grid-template-columns:repeat(2,1fr)}
- .stat{padding:14px}
- .stat:nth-child(3){border-inline-start:0}
- .stat:nth-child(n+3){border-top:1px solid var(--line)}
- .quick button{min-height:64px;padding:10px 12px}
- .quick b{font-size:13px}.quick small{font-size:11px}
- input:not([type=checkbox],[type=radio],[type=range]),select,textarea,.field{font-size:16px;min-height:44px}
- .nav button,.btn{min-height:44px}
-}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-/* V8.1 order form + autofill */
-input:-webkit-autofill,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 40px #fff inset!important;-webkit-text-fill-color:var(--ink)!important}
-.modal{border-radius:16px;box-shadow:0 20px 60px #0f1f2233}
-.modal-head h2{font-size:19px}
-.order-line{background:#f5f8f7;grid-template-columns:92px 1fr 150px;gap:10px 12px;padding:14px;border-radius:12px;align-items:start}
-.order-line .product-choice{grid-column:1/-1}
-.order-line>div:nth-child(4){display:grid;gap:4px;align-content:start}
-.order-line .line-total{font-size:15px;padding-top:6px}
-.order-line .remove-line{background:transparent;color:var(--red);padding:4px 0;text-align:start;font-weight:600;min-height:0}
-.order-summary{background:var(--primary2);border-radius:12px;padding:14px 16px}
-@media(max-width:700px){
- .order-line{grid-template-columns:84px 1fr;padding:12px}
- .order-line>div:nth-child(4){grid-column:1/-1;display:flex;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:10px}
- .order-line .line-total{padding:0}
- .order-line .remove-line{margin-inline-start:auto;min-height:44px;padding:0 8px}
-}
 
-/* V8.2 phone fixes */
-.quick button.main-action{box-shadow:none}
-@media(max-width:700px){
- .nav button.active{box-shadow:none}
- #dashboard .quick{display:block!important;margin:0 0 14px}
- #dashboard .quick button:not(.main-action){display:none}
- #dashboard .quick button.main-action{display:flex;width:100%;min-height:56px;justify-content:center;align-items:center;gap:10px;padding:10px 16px}
- #dashboard .quick .main-action span{width:auto;height:auto;background:none;display:inline-grid;margin:0}
- #dashboard .quick .main-action small{display:none}
- #dashboard .quick .main-action b{font-size:16px}
- #dashboard>.stats .stat{border-top:0}
- #dashboard>.stats .stat:nth-child(3){border-inline-start:1px solid var(--line)}
-}
+    /* ===== V8 design layer ===== */
+    :root {
+      --bg: #f3f5f3;
+      --panel: #fff;
+      --ink: #1b2a2d;
+      --muted: #5b6b6e;
+      --line: #dfe5e3;
+      --primary: #0b6e6e;
+      --primary2: #e0f0ee;
+      --shadow: none
+    }
 
-/* V8.3 header + account access (desktop) */
-.nav button.active{box-shadow:none}
-.nav button:focus-visible{outline-offset:-2px}
-#dashboard>.stats{grid-template-columns:repeat(2,1fr)}
-@media(min-width:701px){
- .nav .nav-account{display:flex}
- .top-actions{gap:8px}
- .top-actions #shop-select{display:none!important}
- .top-actions .shop-chip,body.single-shop .shop-chip{display:inline-flex;align-items:center;height:42px;min-width:0;max-width:240px;padding:0 14px;border-radius:10px;background:#fff;border:1px solid var(--line);font-weight:600;font-size:14px}
- .top-actions .shop-chip:hover{border-color:var(--primary)}
- .top-actions .help-btn{width:42px;min-width:42px;height:42px;padding:0;border-radius:10px;display:grid;place-items:center;background:transparent;border-color:transparent;color:var(--muted)}
- .top-actions .help-btn:hover{background:var(--primary2);color:var(--primary)}
- .top-actions .help-btn .hl{display:none}
- .top-actions #new-order-btn{height:42px;padding:0 18px;border-radius:10px;box-shadow:none}
-}
+    body {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink)
+    }
 
-/* V8.4 phone polish */
-#dashboard>.stats .stat:nth-child(2){border-inline-start:0}
-select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-start:38px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b6b6e' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat left 14px center/14px}
-@media(max-width:700px){
- #dashboard>.stats .stat{text-align:center;padding:14px 10px}
- #dashboard>.stats .stat strong{min-height:38px;display:flex;align-items:center;justify-content:center;margin:6px 0 0}
- #stat-sales{font-size:16px}
- .panel-head .btn.secondary{border:0;background:transparent;color:var(--primary);min-height:36px;padding:0 4px;font-size:13px}
- .modal-actions .btn.secondary{flex:0 0 34%}
-}
-.needs-check { background: #fff7e0 !important; border-color: #e0b24a !important }
-    .draft-banner { background: #fff7e0; border: 1px solid #f0d58a; color: #6b4e08; border-radius: 10px; padding: 9px 12px; font-size: 12.5px; line-height: 1.8; margin-bottom: 10px }
-    .chat-help { color: var(--muted); font-size: 12px; line-height: 1.8; margin: 0 0 8px }
+    :focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+      border-radius: 6px
+    }
+
+    .btn {
+      box-shadow: none;
+      border-radius: 10px;
+      min-height: 42px
+    }
+
+    .btn:hover {
+      filter: none;
+      background: #095a5a
+    }
+
+    .btn.secondary:hover {
+      background: var(--primary2);
+      color: var(--primary)
+    }
+
+    .sidebar {
+      border-left: 1px solid var(--line)
+    }
+
+    .nav button {
+      min-height: 44px;
+      font-size: 14px
+    }
+
+    .nav button.active {
+      box-shadow: inset -3px 0 0 var(--primary)
+    }
+
+    .side-note {
+      background: transparent;
+      border: 0;
+      border-top: 1px solid var(--line);
+      border-radius: 0;
+      color: var(--muted);
+      padding: 14px 8px 0
+    }
+
+    .hello h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0
+    }
+
+    .date-chip {
+      display: inline-block;
+      margin-top: 8px;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      font-size: 13px
+    }
+
+    .panel {
+      box-shadow: none;
+      border-radius: 14px
+    }
+
+    .panel-head h2 {
+      font-size: 16px
+    }
+
+    .stats {
+      gap: 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden
+    }
+
+    .stat {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 18px 22px
+    }
+
+    .stat+.stat {
+      border-inline-start: 1px solid var(--line)
+    }
+
+    .stat-icon {
+      display: none
+    }
+
+    .stat-top {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .stat strong {
+      font-size: 28px;
+      font-weight: 800
+    }
+
+    .stat small {
+      font-size: 12px
+    }
+
+    .quick button {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 12px;
+      align-items: center;
+      min-height: 68px;
+      padding: 12px 16px;
+      border-radius: 14px
+    }
+
+    .quick button:hover {
+      border-color: var(--primary);
+      background: #fff
+    }
+
+    .quick span {
+      grid-row: span 2;
+      margin: 0;
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--primary2)
+    }
+
+    .quick b {
+      font-size: 14px;
+      align-self: end
+    }
+
+    .quick small {
+      font-size: 12px;
+      margin: 0;
+      align-self: start
+    }
+
+    .quick .main-action {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff
+    }
+
+    .quick .main-action:hover {
+      background: #095a5a
+    }
+
+    .quick .main-action span {
+      background: #ffffff26;
+      color: #fff
+    }
+
+    .quick .main-action small {
+      color: #cfe8e5
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 4px 10px
+    }
+
+    .auth-card {
+      box-shadow: none;
+      border-radius: 18px
+    }
+
+    .auth-card label {
+      font-size: 13px
+    }
+
+    .auth-card>p {
+      font-size: 13px
+    }
+
+    .toast {
+      box-shadow: none;
+      background: var(--ink)
+    }
+
+    @media(max-width:700px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .stat {
+        padding: 14px
+      }
+
+      .stat:nth-child(3) {
+        border-inline-start: 0
+      }
+
+      .stat:nth-child(n+3) {
+        border-top: 1px solid var(--line)
+      }
+
+      .quick button {
+        min-height: 64px;
+        padding: 10px 12px
+      }
+
+      .quick b {
+        font-size: 13px
+      }
+
+      .quick small {
+        font-size: 11px
+      }
+
+      input:not([type=checkbox], [type=radio], [type=range]),
+      select,
+      textarea,
+      .field {
+        font-size: 16px;
+        min-height: 44px
+      }
+
+      .nav button,
+      .btn {
+        min-height: 44px
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+
+    /* V8.1 order form + autofill */
+    input:-webkit-autofill,
+    input:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0 40px #fff inset !important;
+      -webkit-text-fill-color: var(--ink) !important
+    }
+
+    .modal {
+      border-radius: 16px;
+      box-shadow: 0 20px 60px #0f1f2233
+    }
+
+    .modal-head h2 {
+      font-size: 19px
+    }
+
+    .order-line {
+      background: #f5f8f7;
+      grid-template-columns: 92px 1fr 150px;
+      gap: 10px 12px;
+      padding: 14px;
+      border-radius: 12px;
+      align-items: start
+    }
+
+    .order-line .product-choice {
+      grid-column: 1/-1
+    }
+
+    .order-line>div:nth-child(4) {
+      display: grid;
+      gap: 4px;
+      align-content: start
+    }
+
+    .order-line .line-total {
+      font-size: 15px;
+      padding-top: 6px
+    }
+
+    .order-line .remove-line {
+      background: transparent;
+      color: var(--red);
+      padding: 4px 0;
+      text-align: start;
+      font-weight: 600;
+      min-height: 0
+    }
+
+    .order-summary {
+      background: var(--primary2);
+      border-radius: 12px;
+      padding: 14px 16px
+    }
+
+    @media(max-width:700px) {
+      .order-line {
+        grid-template-columns: 84px 1fr;
+        padding: 12px
+      }
+
+      .order-line>div:nth-child(4) {
+        grid-column: 1/-1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-top: 1px solid var(--line);
+        padding-top: 10px
+      }
+
+      .order-line .line-total {
+        padding: 0
+      }
+
+      .order-line .remove-line {
+        margin-inline-start: auto;
+        min-height: 44px;
+        padding: 0 8px
+      }
+    }
+
+    /* V8.2 phone fixes */
+    .quick button.main-action {
+      box-shadow: none
+    }
+
+    @media(max-width:700px) {
+      .nav button.active {
+        box-shadow: none
+      }
+
+      #dashboard .quick {
+        display: block !important;
+        margin: 0 0 14px
+      }
+
+      #dashboard .quick button:not(.main-action) {
+        display: none
+      }
+
+      #dashboard .quick button.main-action {
+        display: flex;
+        width: 100%;
+        min-height: 56px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px
+      }
+
+      #dashboard .quick .main-action span {
+        width: auto;
+        height: auto;
+        background: none;
+        display: inline-grid;
+        margin: 0
+      }
+
+      #dashboard .quick .main-action small {
+        display: none
+      }
+
+      #dashboard .quick .main-action b {
+        font-size: 16px
+      }
+
+      #dashboard>.stats .stat {
+        border-top: 0
+      }
+
+      #dashboard>.stats .stat:nth-child(3) {
+        border-inline-start: 1px solid var(--line)
+      }
+    }
+
+    /* V8.3 header + account access (desktop) */
+    .nav button.active {
+      box-shadow: none
+    }
+
+    .nav button:focus-visible {
+      outline-offset: -2px
+    }
+
+    #dashboard>.stats {
+      grid-template-columns: repeat(2, 1fr)
+    }
+
+    @media(min-width:701px) {
+      .nav .nav-account {
+        display: flex
+      }
+
+      .top-actions {
+        gap: 8px
+      }
+
+      .top-actions #shop-select {
+        display: none !important
+      }
+
+      .top-actions .shop-chip,
+      body.single-shop .shop-chip {
+        display: inline-flex;
+        align-items: center;
+        height: 42px;
+        min-width: 0;
+        max-width: 240px;
+        padding: 0 14px;
+        border-radius: 10px;
+        background: #fff;
+        border: 1px solid var(--line);
+        font-weight: 600;
+        font-size: 14px
+      }
+
+      .top-actions .shop-chip:hover {
+        border-color: var(--primary)
+      }
+
+      .top-actions .help-btn {
+        width: 42px;
+        min-width: 42px;
+        height: 42px;
+        padding: 0;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        background: transparent;
+        border-color: transparent;
+        color: var(--muted)
+      }
+
+      .top-actions .help-btn:hover {
+        background: var(--primary2);
+        color: var(--primary)
+      }
+
+      .top-actions .help-btn .hl {
+        display: none
+      }
+
+      .top-actions #new-order-btn {
+        height: 42px;
+        padding: 0 18px;
+        border-radius: 10px;
+        box-shadow: none
+      }
+    }
+
+    /* V8.4 phone polish */
+    #dashboard>.stats .stat:nth-child(2) {
+      border-inline-start: 0
+    }
+
+    select.field {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 50px;
+      padding-inline-start: 38px;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b6b6e' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat left 14px center/14px
+    }
+
+    @media(max-width:700px) {
+      #dashboard>.stats .stat {
+        text-align: center;
+        padding: 14px 10px
+      }
+
+      #dashboard>.stats .stat strong {
+        min-height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 6px 0 0
+      }
+
+      #stat-sales {
+        font-size: 16px
+      }
+
+      .panel-head .btn.secondary {
+        border: 0;
+        background: transparent;
+        color: var(--primary);
+        min-height: 36px;
+        padding: 0 4px;
+        font-size: 13px
+      }
+
+      .modal-actions .btn.secondary {
+        flex: 0 0 34%
+      }
+    }
+
+    .needs-check {
+      background: #fff7e0 !important;
+      border-color: #e0b24a !important
+    }
+
+    .draft-banner {
+      background: #fff7e0;
+      border: 1px solid #f0d58a;
+      color: #6b4e08;
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-size: 12.5px;
+      line-height: 1.8;
+      margin-bottom: 10px
+    }
+
+    .chat-help {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+      margin: 0 0 8px
+    }
   </style>
 </head>
 
@@ -3095,16 +3520,16 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
         <label for="auth-email">ایمیل</label><input class="field" id="auth-email" type="email" required
           autocomplete="email" placeholder="name@example.com">
         <label for="auth-password">رمز عبور</label><input class="field" id="auth-password" type="password" required
-          minlength="6" maxlength="6" autocomplete="current-password" placeholder="دقیقاً ۶ کاراکتر">
+          minlength="6" maxlength="64" autocomplete="current-password" placeholder="حداقل ۶ کاراکتر">
         <button class="btn" id="auth-submit" type="submit" style="width:100%;margin-top:14px">ورود به حساب</button>
       </form>
       <button class="auth-link" id="forgot-link" type="button" onclick="sendPasswordReset()">رمز عبورت را فراموش
         کرده‌ای؟</button>
       <form id="reset-password-form" class="auth-hidden" onsubmit="submitNewPassword(event)">
         <label for="new-password">رمز عبور جدید</label><input class="field" id="new-password" type="password" required
-          minlength="6" maxlength="6" autocomplete="new-password" placeholder="دقیقاً ۶ کاراکتر">
+          minlength="6" maxlength="64" autocomplete="new-password" placeholder="حداقل ۶ کاراکتر">
         <label for="confirm-password">تکرار رمز عبور جدید</label><input class="field" id="confirm-password"
-          type="password" required minlength="6" maxlength="6" autocomplete="new-password"
+          type="password" required minlength="6" maxlength="64" autocomplete="new-password"
           placeholder="رمز را دوباره وارد کن">
         <button class="btn" id="reset-submit" type="submit" style="width:100%;margin-top:14px">ذخیره رمز جدید</button>
       </form>
@@ -3128,6 +3553,7 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
                 <path d="M5.5 10v9.5h13V10" />
                 <path d="M10 19.5v-5h4v5" />
               </svg></span><span class="lbl">خانه</span></button>
+          <button data-page="orders"><span class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2.5" /><path d="M9 4.5h6M9 10h6M9 14h6" /></svg></span><span class="lbl">سفارش‌ها</span></button>
           <button data-page="customers"><span class="ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"
                 stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="9" cy="8" r="3.2" />
@@ -3175,21 +3601,47 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
               <path d="M5.5 12.5V20h13v-7.5" />
             </svg><span id="shop-chip-name"></span></button><select class="field shop-select" id="shop-select"
             aria-label="انتخاب فروشگاه" onchange="switchShop(this.value)"></select><button
-            class="btn secondary help-btn" type="button" onclick="startTour(true)" aria-label="راهنمای استفاده"><span aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.2 1-1.2 1.9M12 17h.01"/></svg></span><span class="hl"> راهنما</span></button><button class="btn" id="new-order-btn"
+            class="btn secondary help-btn" type="button" onclick="startTour(true)" aria-label="راهنمای استفاده"><span
+              aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M9.6 9.4a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.2 1-1.2 1.9M12 17h.01" />
+              </svg></span><span class="hl"> راهنما</span></button><button class="btn" id="new-order-btn"
             onclick="openOrderModal()">＋ سفارش جدید</button></div>
       </header>
       <section id="dashboard" class="page active">
         <div id="onboard-card" class="onboard" style="display:none"></div>
         <div class="quick">
-          <button class="main-action" onclick="openOrderModal()"><span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><b>ثبت سفارش جدید</b><small>وقتی مشتری
+          <button class="main-action" onclick="openOrderModal()"><span><svg viewBox="0 0 24 24" width="22" height="22"
+                fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                <path d="M12 5v14M5 12h14" />
+              </svg></span><b>ثبت سفارش جدید</b><small>وقتی مشتری
               خرید کرد</small></button>
-          <button onclick="goAddProduct()"><span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></span><b>افزودن محصول</b><small>نام و قیمت کالا</small></button>
-          <button onclick="showPage('customers')"><span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.3 2.9-5 5.5-5s4.9 1.7 5.5 5"/><path d="M16 5.2a3.1 3.1 0 0 1 0 5.6M17.5 14.3c1.8.5 3 2 3.4 4.7"/></svg></span><b>مشتریان من</b><small>لیست و سابقه
+          <button onclick="goAddProduct()"><span><svg viewBox="0 0 24 24" width="22" height="22" fill="none"
+                stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                <path d="M12 3 4 7v10l8 4 8-4V7z" />
+                <path d="M4 7l8 4 8-4M12 11v10" />
+              </svg></span><b>افزودن محصول</b><small>نام و قیمت کالا</small></button>
+          <button onclick="showPage('customers')"><span><svg viewBox="0 0 24 24" width="22" height="22" fill="none"
+                stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                <circle cx="9" cy="8" r="3.2" />
+                <path d="M3.5 19c.6-3.3 2.9-5 5.5-5s4.9 1.7 5.5 5" />
+                <path d="M16 5.2a3.1 3.1 0 0 1 0 5.6M17.5 14.3c1.8.5 3 2 3.4 4.7" />
+              </svg></span><b>مشتریان من</b><small>لیست و سابقه
               خرید</small></button>
-          <button onclick="showPage('reminders')"><span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><b>پیگیری‌ها</b><small>کارهای
+          <button onclick="showPage('reminders')"><span><svg viewBox="0 0 24 24" width="22" height="22" fill="none"
+                stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="8.5" />
+                <path d="M12 7.5V12l3 2" />
+              </svg></span><b>پیگیری‌ها</b><small>کارهای
               باقی‌مانده</small></button>
         </div>
-        <button class="btn" style="width:100%;margin:0 0 14px" onclick="openChatModal()">✦ گفتگوی دایرکت را بچسبان و سفارش بساز</button>
+        <button class="btn secondary" style="width:100%;margin:0 0 14px" onclick="openChatModal()">✦ گفتگوی دایرکت را بچسبان و
+          سفارش بساز</button>
         <div class="stats">
           <div class="stat">
             <div class="stat-top"><span>کل سفارش‌ها</span><span class="stat-icon">▤</span></div><strong
@@ -3231,8 +3683,9 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
       <section id="orders" class="page">
         <div class="section-tabs"><button type="button" onclick="showPage('customers')">مشتریان</button><button
             type="button" class="active" onclick="showPage('orders')">سفارش‌ها</button></div>
-        <div class="subpage-note"><span>سفارش‌ها بخشی از ارتباط با مشتریان هستند.</span><span><button class="btn secondary small" onclick="openChatModal()">✦ از گفتگو</button> <button
-            class="btn secondary small" onclick="openOrderModal()">＋ ثبت سفارش</button></span></div>
+        <div class="subpage-note"><span>سفارش‌ها بخشی از ارتباط با مشتریان هستند.</span><span><button
+              class="btn secondary small" onclick="openChatModal()">✦ از گفتگو</button> <button
+              class="btn secondary small" onclick="openOrderModal()">＋ ثبت سفارش</button></span></div>
         <div class="panel">
           <div class="panel-head">
             <h2>همه سفارش‌ها</h2><span class="muted">مدیریت و پیگیری خریدها</span>
@@ -3587,7 +4040,8 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
           <div class="form-item"><label>شماره تماس</label><input class="field" id="f-phone" inputmode="tel"
               placeholder="09xxxxxxxxx"></div>
           <div class="form-item full"><label>محصولات سفارش *</label>
-            <div class="order-help">محصول را از کاتالوگ انتخاب کن تا قیمت خودکار پر شود، یا نام و قیمتش را خودت بنویس.</div>
+            <div class="order-help">محصول را از کاتالوگ انتخاب کن تا قیمت خودکار پر شود، یا نام و قیمتش را خودت بنویس.
+            </div>
             <div id="order-lines" class="order-lines"></div><button type="button" class="btn secondary small"
               onclick="addOrderLine()">＋ افزودن محصول دیگر</button>
             <div class="order-summary"><span>جمع اقلام سفارش</span><strong id="order-items-total">۰ تومان</strong></div>
@@ -3640,10 +4094,14 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
       <div class="modal-head">
         <h2>ساخت سفارش از گفتگوی دایرکت</h2><button class="close" onclick="closeChatModal()">×</button>
       </div>
-      <p class="chat-help">گفتگوی مشتری را از دایرکت کپی کن و اینجا بچسبان. فقط بخش مربوط به سفارش کافی است. پیش‌نویس سفارش ساخته می‌شود و قبل از ذخیره خودت بررسی‌اش می‌کنی. متن گفتگو ذخیره نمی‌شود.</p>
-      <textarea class="field" id="chat-text" rows="9" maxlength="8000" placeholder="مثلاً: سلام دو تا شمع بزرگ یاس می‌خوام، آدرسم تهرانه…"></textarea>
+      <p class="chat-help">گفتگوی مشتری را از دایرکت کپی کن و اینجا بچسبان. فقط بخش مربوط به سفارش کافی است. پیش‌نویس
+        سفارش ساخته می‌شود و قبل از ذخیره خودت بررسی‌اش می‌کنی. متن گفتگو ذخیره نمی‌شود.</p>
+      <textarea class="field" id="chat-text" rows="9" maxlength="8000"
+        placeholder="مثلاً: سلام دو تا شمع بزرگ یاس می‌خوام، آدرسم تهرانه…"></textarea>
       <div id="chat-error" class="muted" style="color:var(--red);font-size:12.5px;min-height:20px;margin-top:6px"></div>
-      <div class="modal-actions"><button class="btn" id="chat-go" type="button" onclick="extractFromChat()">ساخت پیش‌نویس سفارش</button><button class="btn secondary" type="button" onclick="closeChatModal()">بستن</button></div>
+      <div class="modal-actions"><button class="btn" id="chat-go" type="button" onclick="extractFromChat()">ساخت
+          پیش‌نویس سفارش</button><button class="btn secondary" type="button" onclick="closeChatModal()">بستن</button>
+      </div>
     </div>
   </div>
 
@@ -3784,7 +4242,7 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
     function statusPill(s) { return `<span class="pill s-${s}">${labels[s] || s}</span>` }
     function initials(n) { return (n || '؟').trim().split(/\s+/).slice(0, 2).map(x => x[0]).join('') }
     function toast(t) { let el = document.getElementById('toast'); el.textContent = t; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 2300) }
-    function showPage(p) { document.querySelectorAll('.page').forEach(x => x.classList.remove('active')); const page = document.getElementById(p); if (!page) return; page.classList.add('active'); const navPage = p === 'orders' ? 'customers' : p === 'expenses' ? 'finance' : p === 'reminders' ? 'dashboard' : p; document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('active', x.dataset.page === navPage)); let titles = { dashboard: 'پیشخوان مشتری‌ها و سفارش‌های تو', orders: 'سفارش‌های مشتریان', customers: 'مشتریان و سابقه خرید', reminders: 'پیگیری‌های مهم فروشگاه', finance: 'تصویر مالی و تحلیل عملکرد فروشگاه', products: 'کاتالوگ محصولات', expenses: 'هزینه‌های عمومی فروشگاه' }; document.getElementById('subheading').textContent = titles[p] || titles.dashboard; renderAll(); if (['finance', 'products', 'expenses'].includes(p)) loadFinancialData(); if (p === 'finance') applyFinanceTab('overview'); if (p === 'expenses') applyFinanceTab('expenses') }
+    function showPage(p) { document.querySelectorAll('.page').forEach(x => x.classList.remove('active')); const page = document.getElementById(p); if (!page) return; page.classList.add('active'); const navPage = p === 'expenses' ? 'finance' : p === 'reminders' ? 'dashboard' : p; document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('active', x.dataset.page === navPage)); let titles = { dashboard: 'پیشخوان مشتری‌ها و سفارش‌های تو', orders: 'سفارش‌های مشتریان', customers: 'مشتریان و سابقه خرید', reminders: 'پیگیری‌های مهم فروشگاه', finance: 'تصویر مالی و تحلیل عملکرد فروشگاه', products: 'کاتالوگ محصولات', expenses: 'هزینه‌های عمومی فروشگاه' }; document.getElementById('subheading').textContent = titles[p] || titles.dashboard; renderAll(); if (['finance', 'products', 'expenses'].includes(p)) loadFinancialData(); if (p === 'finance') applyFinanceTab('overview'); if (p === 'expenses') applyFinanceTab('expenses') }
     function showCustomerTab(tab) { const list = tab === 'customers'; document.getElementById('customer-list-panel').style.display = list ? '' : 'none'; document.getElementById('customer-leads-panel').style.display = list ? 'none' : ''; document.getElementById('customer-tab-list').classList.toggle('active', list); document.getElementById('customer-tab-leads').classList.toggle('active', !list); if (!list) loadLeads(); }
     function applyFinanceTab(tab) { document.querySelectorAll('.finance-tabs [data-fin-tab]').forEach(b => b.classList.toggle('active', b.dataset.finTab === tab)); const overview = document.getElementById('finance-overview-panel'), settings = document.getElementById('finance-settings-panel'), learn = document.getElementById('finance-learn-panel'); if (overview) overview.style.display = tab === 'overview' ? '' : 'none'; if (settings) settings.style.display = tab === 'settings' ? '' : 'none'; if (learn) learn.style.display = tab === 'learn' ? '' : 'none' }
     function showFinanceTab(tab) { if (tab === 'expenses') { showPage('expenses'); return } showPage('finance'); applyFinanceTab(tab) }
@@ -4039,7 +4497,7 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
       document.getElementById('forgot-link').classList.add('auth-hidden');
       document.getElementById('reset-password-form').classList.remove('auth-hidden');
       document.getElementById('back-login-link').classList.remove('auth-hidden');
-      document.getElementById('auth-hint').textContent = 'رمز عبور باید دقیقاً ۶ کاراکتر باشد.';
+      document.getElementById('auth-hint').textContent = 'رمز عبور باید حداقل ۶ کاراکتر باشد.';
       document.getElementById('new-password').focus();
     }
     function backToLogin() { recoveryMode = false; setAuthMode('login'); }
@@ -4060,7 +4518,7 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
     async function submitNewPassword(e) {
       e.preventDefault(); if (!sb || authBusy) return;
       const password = document.getElementById('new-password').value, confirmPassword = document.getElementById('confirm-password').value;
-      if (password.length !== 6) { toast('رمز عبور باید دقیقاً ۶ کاراکتر باشد.'); return }
+      if (password.length < 6) { toast('رمز عبور باید حداقل ۶ کاراکتر باشد.'); return }
       if (password !== confirmPassword) { toast('تکرار رمز عبور با رمز جدید یکسان نیست.'); return }
       authBusy = true; const btn = document.getElementById('reset-submit'); btn.disabled = true;
       try {
@@ -4086,7 +4544,7 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
       authBusy = true; const btn = document.getElementById('auth-submit'); btn.disabled = true;
       try {
         const email = document.getElementById('auth-email').value.trim(), password = document.getElementById('auth-password').value;
-        if (password.length !== 6) { toast('رمز عبور باید دقیقاً ۶ کاراکتر باشد.'); return; }
+        if (password.length < 6) { toast('رمز عبور باید حداقل ۶ کاراکتر باشد.'); return; }
         const result = authMode === 'signup'
           ? await sb.auth.signUp({ email, password })
           : await sb.auth.signInWithPassword({ email, password });
@@ -4165,7 +4623,7 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
     function closeProfile() { document.getElementById('profile-modal').classList.remove('show') }
     async function saveProfile(e) { e.preventDefault(); const payload = { user_id: user.id, full_name: document.getElementById('profile-name').value.trim(), phone: document.getElementById('profile-phone').value.trim(), updated_at: new Date().toISOString() }; const { error } = await sb.from('profiles').upsert(payload, { onConflict: 'user_id' }); if (error) { toast(friendlyError(error.message)); return; } closeProfile(); toast('پروفایل ذخیره شد.'); }
     // پس از ورود، فروشگاه انتخاب‌شده و داده‌های همان فروشگاه بارگذاری می‌شوند.
-    async function afterLogin() { if (!user || lastLoadedUserId === user.id) return; lastLoadedUserId = user.id; orders = []; showApp(); try { await loadShops(); await loadOrders(); await loadLeads(); await loadFinancialData(); if (document.getElementById('expense-date')) document.getElementById('expense-date').dataset.iso = iso(new Date()); document.getElementById('expense-date').value = dateFa(document.getElementById('expense-date').dataset.iso); refreshHints(); renderOnboard(); setTimeout(() => startTour(false), 900); } catch (err) { lastLoadedUserId = null; toast('آماده‌سازی فضای کار ناموفق بود: ' + friendlyError(err.message)); } }
+    async function afterLogin() { if (!user || lastLoadedUserId === user.id) return; lastLoadedUserId = user.id; orders = []; showApp(); try { await loadShops(); await loadOrders(); await loadLeads(); await loadFinancialData(); if (document.getElementById('expense-date')) document.getElementById('expense-date').dataset.iso = iso(new Date()); document.getElementById('expense-date').value = dateFa(document.getElementById('expense-date').dataset.iso); refreshHints(); renderOnboard();  } catch (err) { lastLoadedUserId = null; toast('آماده‌سازی فضای کار ناموفق بود: ' + friendlyError(err.message)); } }
     async function loadOrders() {
       if (!sb || !user) return;
       const { data, error } = await sb.from('orders').select('*').eq('user_id', user.id).eq('shop_id', activeShopId).order('created_at', { ascending: false });
@@ -4340,27 +4798,27 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
     function renderOnboard() {
       const box = document.getElementById('onboard-card');
       if (!box) return;
-    
+
       let dismissed = false;
       try {
         dismissed = localStorage.getItem('yara_onboard_off_' + (user?.id || '')) === '1';
-      } catch (e) {}
-    
+      } catch (e) { }
+
       const hasProduct = financialProducts.length > 0;
       const hasOrder = orders.length > 0;
-    
+
       if (dismissed || (hasProduct && hasOrder)) {
         box.style.display = 'none';
         return;
       }
-    
+
       const step = (n, done, title, sub, btn, fn) =>
         `<div class="ob-step ${done ? 'done' : ''}">
           <span class="ob-num">${done ? '✓' : fa(n)}</span>
           <div><b>${title}</b><small>${sub}</small></div>
           ${done ? '' : `<button class="btn small" type="button" onclick="${fn}">${btn}</button>`}
         </div>`;
-    
+
       box.innerHTML =
         `<h2>از اینجا شروع کن</h2>
          <p>برای ثبت اولین سفارش، این مراحل را انجام بده:</p>` +
@@ -4374,10 +4832,10 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
           'اگر خواستی، اطلاعات مشتری و سفارش را خودت وارد کن.',
           'ثبت سفارش دستی', 'openOrderModal()') +
         `<button class="ob-close" type="button" onclick="dismissOnboard()">دیگر نشان نده</button>`;
-    
+
       box.style.display = 'block';
     }
-      
+
     function dismissOnboard() { try { localStorage.setItem('yara_onboard_off_' + (user?.id || ''), '1') } catch (e) { } renderOnboard() }
     ['renderDashboard', 'renderFinancial'].forEach(n => { const f = window[n]; if (typeof f !== 'function') return; window[n] = function (...a) { const r = f.apply(this, a); try { renderOnboard() } catch (e) { } return r } });
 
@@ -4424,7 +4882,7 @@ select.field{-webkit-appearance:none;appearance:none;height:50px;padding-inline-
         title: '۷. همه‌چیز از خانه',
         text: 'در صفحه خانه وضعیت کلی فروشگاه و کارهایی را که نیاز به توجه دارند می‌بینی. هر وقت خواستی این راهنما را دوباره ببینی، دکمه راهنما بالای صفحه را بزن.'
       }
-    ];  
+    ];
     let tourIdx = 0;
     function tourKey() { return 'yara_tour_done_v3_' + (user?.id || '') }
     function startTour(force) {
